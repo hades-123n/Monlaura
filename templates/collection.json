@@ -1,0 +1,219 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_with_text_overlay_Wmnyge": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "button_rTYexF": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button text",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "button_UDfgnj": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button text",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "button_zyKHY6": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button text",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "button_phV7Nn": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button text",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "button_rTYexF",
+        "button_UDfgnj",
+        "button_zyKHY6",
+        "button_phV7Nn"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".image-overlay--bg-shadow:not(.text-overlay-parent--mobile-stack) .text-overlay__button.btn {border: 0 !important; background-color: #ffffffa6; border-radius: 68px; color: #000;}"
+      ],
+      "name": "Image with text overlay",
+      "settings": {
+        "image": "shopify://shop_images/Monlaura_cocktail_banner_3_028e2a85-d967-4c2a-807d-1b3625ec6124.jpg",
+        "height": "fixed",
+        "height_desktop": 480,
+        "height_mobile": 320,
+        "image_link": "",
+        "full_width": true,
+        "text_alignment": "bottom center",
+        "mobile_overlay_under": false,
+        "overlay_style": "shadow"
+      }
+    },
+    "17674957496f5c6aff": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_cc94567_C9cVwG": {
+          "type": "ai_gen_block_cc94567",
+          "name": "Collection breadcrumb",
+          "settings": {
+            "home_text": "Home",
+            "separator": "/",
+            "font_size": 14,
+            "spacing": 8,
+            "text_color": "#232323",
+            "link_color": "#232323",
+            "link_hover_color": "#5c5c5c",
+            "current_color": "#232323",
+            "separator_color": "#5c5c5c",
+            "padding_top": 16,
+            "padding_bottom": 4
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_cc94567_C9cVwG"
+      ],
+      "settings": {}
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "show_title": true,
+        "show_image_behind_heading": true,
+        "heading_image_height": "medium",
+        "overlay_style": "shadow",
+        "coll_desc_pos": "above",
+        "coll_num_per_page_int": 40,
+        "grid": 4,
+        "show_vendor": false,
+        "show_total": true,
+        "prod_thumb_shape": "portrait-34",
+        "enable_filtering": true,
+        "collapse_tag_sidebar_by_default": true,
+        "collapse_filters_method": "over-12",
+        "show_filter_counts": true,
+        "filter_two_columns": false,
+        "button_grid_filter_name": "Size,Taille,Größe",
+        "auto_apply_hide_unavailable": true,
+        "enable_sticky_filter": true,
+        "show_sort": true,
+        "sort_show_featured": true,
+        "sort_show_best": true,
+        "sort_show_alpha": true,
+        "sort_show_price": true,
+        "sort_show_date": true,
+        "related_collections": [],
+        "related_collections_style": "buttons",
+        "rel_coll_gall_aspect_ratio": "1",
+        "image_position": "center center",
+        "rel_coll_gall_enable_margin": true,
+        "rel_coll_gall_full_width": false,
+        "rel_coll_gall_overlay_style": "shadow",
+        "rel_coll_gall_text_alignment": "center center",
+        "rel_coll_grid_mobile": "2"
+      }
+    },
+    "rich_text_bwUikh": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_TNidbz": {
+          "type": "heading",
+          "settings": {
+            "title": "Customer Moment",
+            "use_h1": false
+          }
+        },
+        "button_9BdtV3": {
+          "type": "button",
+          "settings": {
+            "button_label": "View More",
+            "button_link": "shopify://pages/style-gallery",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_TNidbz",
+        "button_9BdtV3"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "height": "small",
+        "text_alignment": "center",
+        "full_width": false,
+        "color_scheme": "default"
+      }
+    },
+    "apps_ABeGRg": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_3xhVLY": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": false,
+            "reviews_selection": "product_reviews",
+            "products": [],
+            "star_rating": "4_to_5_star",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 13,
+            "review_length": "large",
+            "text_size": "small",
+            "image_ratio": "1.33",
+            "reviews_shown": 5,
+            "show_reviewer_name": false,
+            "show_product_name": false,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1600,
+            "corner_styling": "square",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#f9f9f9",
+            "stars_color": "#600000",
+            "arrows_color": "#000000",
+            "transition_speed": 3,
+            "header_text": "",
+            "show_average_rating": false
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_3xhVLY"
+      ],
+      "custom_css": [],
+      "settings": {
+        "full_width": true,
+        "show_space": false
+      }
+    }
+  },
+  "order": [
+    "image_with_text_overlay_Wmnyge",
+    "17674957496f5c6aff",
+    "main",
+    "rich_text_bwUikh",
+    "apps_ABeGRg"
+  ]
+}

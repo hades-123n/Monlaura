@@ -1,0 +1,494 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_installments": false,
+            "show_tax_and_shipping": false,
+            "enable_product_reviews_by_price": true
+          }
+        },
+        "divider": {
+          "type": "divider",
+          "settings": {
+            "show_in_quickbuy": false
+          }
+        },
+        "custom_liquid_z6Mgbq": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-discount-tips' %}",
+            "variant_content": false,
+            "show_in_quickbuy": false
+          }
+        },
+        "infinite_options_app_block_itWwJy": {
+          "type": "shopify://apps/infinite-options/blocks/app-block/7e73b6f9-82b0-45f5-9b9b-04f446ba1a9b",
+          "settings": {}
+        },
+        "custom_liquid_78UmKj": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-similar-style' %}",
+            "variant_content": false,
+            "show_in_quickbuy": false
+          }
+        },
+        "variant-picker": {
+          "type": "variant-picker",
+          "settings": {
+            "show_single": true,
+            "selector_style": "dropdown",
+            "dynamic_availability": "show",
+            "enable_size_chart": false,
+            "size_chart_label": "Size guide",
+            "size_chart_variant": "Size",
+            "size_chart_page": ""
+          }
+        },
+        "custom_liquid_aFML8q": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-size-selector' %}",
+            "variant_content": false,
+            "show_in_quickbuy": false
+          }
+        },
+        "event_date_selector_DeA7NE": {
+          "type": "event_date_selector",
+          "settings": {}
+        },
+        "buy-buttons": {
+          "type": "buy-buttons",
+          "settings": {
+            "show_quantity_selector": false,
+            "enable_payment_button": true,
+            "show_backorder_text": false,
+            "show_pickup_availability": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "custom_liquid_RBmeVc": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-delivery-tips' %}",
+            "variant_content": false,
+            "show_in_quickbuy": false
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "show_in_tab": true,
+            "open_tab": false,
+            "icon": "heart",
+            "show_in_quickbuy": false
+          }
+        },
+        "accordion_NRYQm8": {
+          "type": "accordion",
+          "settings": {
+            "title": "Return Policy",
+            "icon": "lock",
+            "content": "<p>Collapsible tab content</p>",
+            "page": "return-and-refund-policy",
+            "custom_liquid": "",
+            "open": false,
+            "variant_content": false,
+            "show_in_quickbuy": false
+          }
+        },
+        "accordion_fYGwA9": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping & Delivery",
+            "icon": "plane",
+            "content": "<p>Collapsible tab content</p>",
+            "page": "shipping-policy",
+            "custom_liquid": "",
+            "open": false,
+            "variant_content": false,
+            "show_in_quickbuy": false
+          }
+        },
+        "accordion_3LzPC9": {
+          "type": "accordion",
+          "settings": {
+            "title": "Size Chart",
+            "icon": "ruler",
+            "content": "",
+            "page": "",
+            "custom_liquid": "{% render 'size-chart' %}",
+            "open": false,
+            "variant_content": false,
+            "show_in_quickbuy": false
+          }
+        },
+        "sharing_PFhFU3": {
+          "type": "sharing",
+          "settings": {
+            "show_twitter": false,
+            "show_facebook": true,
+            "show_pinterest": true
+          }
+        },
+        "judge_me_reviews_preview_badge_TNyBGp": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "divider",
+        "custom_liquid_z6Mgbq",
+        "infinite_options_app_block_itWwJy",
+        "custom_liquid_78UmKj",
+        "variant-picker",
+        "custom_liquid_aFML8q",
+        "event_date_selector_DeA7NE",
+        "buy-buttons",
+        "custom_liquid_RBmeVc",
+        "description",
+        "accordion_NRYQm8",
+        "accordion_fYGwA9",
+        "accordion_3LzPC9",
+        "sharing_PFhFU3",
+        "judge_me_reviews_preview_badge_TNyBGp"
+      ],
+      "settings": {
+        "show_breadcrumbs": true,
+        "select_first_variant": true,
+        "show_location_underneath": false,
+        "inventory_transfers_enable": false,
+        "enable_sticky_columns": true,
+        "enable_sticky_atc": false,
+        "sticky_atc_position": "end",
+        "sticky_atc_mobile": true,
+        "sticky_atc_behavior": "add_to_cart",
+        "sticky_atc_button_style": "secondary",
+        "gallery_size": "medium",
+        "gallery_layout": "carousel-beside",
+        "enable_zoom": true,
+        "show_alt_text": false,
+        "alt_text_icon": "",
+        "show_variant_media_label": true,
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "enable_media_grouping": false,
+        "media_grouping_option": "Color,Colour,Couleur,Farbe"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "title": "You may also like",
+        "show_vendor": false,
+        "grid": 4
+      }
+    },
+    "rich_text_Tr4TgM": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Fm9Mkj": {
+          "type": "heading",
+          "settings": {
+            "title": "Customer Moment",
+            "use_h1": false
+          }
+        },
+        "button_EULYbL": {
+          "type": "button",
+          "settings": {
+            "button_label": "View More",
+            "button_link": "shopify://pages/style-gallery",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Fm9Mkj",
+        "button_EULYbL"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "height": "small",
+        "text_alignment": "center",
+        "full_width": false,
+        "color_scheme": "default"
+      }
+    },
+    "apps_Xcd77J": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_jT9NTX": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": false,
+            "reviews_selection": "product_reviews",
+            "products": [],
+            "star_rating": "4_to_5_star",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 13,
+            "review_length": "large",
+            "text_size": "small",
+            "image_ratio": "1.33",
+            "reviews_shown": 5,
+            "show_reviewer_name": false,
+            "show_product_name": false,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1600,
+            "corner_styling": "square",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#f9f9f9",
+            "stars_color": "#600000",
+            "arrows_color": "#000000",
+            "transition_speed": 3,
+            "header_text": "",
+            "show_average_rating": false,
+            "rating_display": "default"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_jT9NTX"
+      ],
+      "custom_css": [],
+      "settings": {
+        "full_width": true,
+        "show_space": false
+      }
+    },
+    "17667580995ba73db9": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_xwnfXj": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_xwnfXj"
+      ],
+      "settings": {
+        "full_width": false,
+        "show_space": false
+      }
+    },
+    "collection_list_Y3D3hm": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_nGGUNA": {
+          "type": "collection",
+          "settings": {
+            "collection": "mother-of-the-bride-dresses",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_d4pFNj": {
+          "type": "collection",
+          "settings": {
+            "collection": "prom-dresses",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_aAVwtz": {
+          "type": "collection",
+          "settings": {
+            "collection": "wedding-guest-dresses",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_q8BbRr": {
+          "type": "collection",
+          "settings": {
+            "collection": "evening-dresses",
+            "subheading": "",
+            "button_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_nGGUNA",
+        "collection_d4pFNj",
+        "collection_aAVwtz",
+        "collection_q8BbRr"
+      ],
+      "disabled": true,
+      "name": "Collection list",
+      "settings": {
+        "title": "Best Selling Collections",
+        "enable_carousel": true,
+        "grid": 4,
+        "color_scheme": "default",
+        "full_width": true,
+        "coll_grid_image_shape": "shortest",
+        "coll_grid_image_position": "center center",
+        "coll_thumb_mob_per_row": "2",
+        "coll_grid_show_count": false,
+        "coll_text_position": "below",
+        "coll_text_position_under_mobile": false,
+        "coll_thumb_text_align_x": "center",
+        "coll_thumb_text_align_y": "center",
+        "coll_button_style": "primary"
+      }
+    },
+    "image_with_text_8QAqbn": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_cj4QDe": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "title": "Image with text",
+            "use_h1": false
+          }
+        },
+        "text_FwyYQh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Monlarua creates all occasion dresses with care, detail, and purpose.<br/>From fabric selection to final stitching, every gown is thoughtfully made for your life’s important moments.<br/></p>",
+            "enlarge_text": false
+          }
+        },
+        "button_WEWmM8": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "Button text",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cj4QDe",
+        "text_FwyYQh",
+        "button_WEWmM8"
+      ],
+      "disabled": true,
+      "name": "Image with text",
+      "settings": {
+        "image": "shopify://shop_images/c0e3fa131e9e0e031619651900932eb8.png",
+        "image_2": "shopify://shop_images/bd7a236f80ef13d8d0465ef1a7088488_8b5a0f21-eb22-4de2-a110-2bd5b2df801b.png",
+        "image_width": 700,
+        "image_link": "",
+        "image_position": "left",
+        "text_alignment": "left",
+        "color_scheme": "default"
+      }
+    },
+    "image_with_text_Yk4m9L": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_PpMybb": {
+          "type": "heading",
+          "settings": {
+            "title": "Image with text",
+            "use_h1": false
+          }
+        },
+        "text_wH8xqr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to give customers insight into your brand. Tell a story, explain a product detail, or describe a new promotion.</p>",
+            "enlarge_text": false
+          }
+        },
+        "button_bHQqEP": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button text",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PpMybb",
+        "text_wH8xqr",
+        "button_bHQqEP"
+      ],
+      "disabled": true,
+      "name": "Image with text",
+      "settings": {
+        "image_width": 400,
+        "image_link": "",
+        "image_position": "left",
+        "text_alignment": "left",
+        "color_scheme": "default"
+      }
+    },
+    "17661325905ad784ca": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_91eb257_GEqftR": {
+          "type": "ai_gen_block_91eb257",
+          "name": "Back to collection",
+          "settings": {
+            "prefix_text": "Back to",
+            "show_icon": false,
+            "icon_size": 26,
+            "font_size": 14,
+            "padding_vertical": 8,
+            "padding_horizontal": 16,
+            "border_radius": 4,
+            "border_thickness": 1,
+            "background_color": "#ffffff",
+            "text_color": "#000000",
+            "border_color": "#e0e0e0",
+            "hover_background_color": "#f5f5f5",
+            "hover_text_color": "#000000",
+            "hover_border_color": "#cccccc"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_91eb257_GEqftR"
+      ],
+      "custom_css": [],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "rich_text_Tr4TgM",
+    "apps_Xcd77J",
+    "17667580995ba73db9",
+    "collection_list_Y3D3hm",
+    "image_with_text_8QAqbn",
+    "image_with_text_Yk4m9L",
+    "17661325905ad784ca"
+  ]
+}

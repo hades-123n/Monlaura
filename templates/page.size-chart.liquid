@@ -1,0 +1,21 @@
+<div class="page-width page-content size-chart-page container">
+  <header>
+    <h1 class="main-page-title page-title h0 scroll-trigger animate--fade-in">{{ page.title }}</h1>
+  </header>
+<style>
+h1.main-page-title {
+    text-align: center;
+    margin-top: 20px;
+}
+  @media (min-width: 768px) {
+  }
+  @media (max-width: 767px) {
+    }
+</style>
+  <div class="rte rte--nomargin">
+    {{ page.content }}
+  <div class="size-chart-content">
+    {% render 'size-chart' %}
+  </div>      
+  </div>
+</div>

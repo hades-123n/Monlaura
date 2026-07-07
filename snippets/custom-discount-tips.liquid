@@ -1,0 +1,319 @@
+<div class="custom-discount-tips">
+  <div class="discount-tips-container">
+    <!-- Discount Offer 1 -->
+    <div class="discount-offer">
+      <div class="discount-left">
+        <div class="discount-percentage">-10%</div>
+        <div class="discount-threshold">First Order</div>
+      </div>
+      <div class="custom-discount-coupon">
+        <svg class="coupon-scissors" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"></circle>
+          <circle cx="6" cy="18" r="3"></circle>
+          <line x1="6" y1="9" x2="6" y2="15"></line>
+          <line x1="20.4" y1="6.4" x2="11.6" y2="15.2"></line>
+          <line x1="20.4" y1="17.6" x2="11.6" y2="8.8"></line>
+        </svg>
+        <span class="discount-coupon-code">F10</span>
+      </div>
+    </div>
+    
+    <!-- Divider -->
+    <div class="discount-divider"></div>
+    
+    <!-- Discount Offer 2 -->
+    <div class="discount-offer">
+      <div class="discount-left">
+        <div class="discount-percentage">-$30</div>
+        <div class="discount-threshold">Over $299</div>
+      </div>
+      <div class="custom-discount-coupon">
+        <svg class="coupon-scissors" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"></circle>
+          <circle cx="6" cy="18" r="3"></circle>
+          <line x1="6" y1="9" x2="6" y2="15"></line>
+          <line x1="20.4" y1="6.4" x2="11.6" y2="15.2"></line>
+          <line x1="20.4" y1="17.6" x2="11.6" y2="8.8"></line>
+        </svg>
+        <span class="discount-coupon-code">MRA30</span>
+      </div>
+    </div>
+    
+    <!-- Divider -->
+    <div class="discount-divider"></div>
+    
+    <!-- Discount Offer 3 -->
+    <div class="discount-offer">
+      <div class="discount-left">
+        <div class="discount-percentage">-$50</div>
+        <div class="discount-threshold">Over $399</div>
+      </div>
+      <div class="custom-discount-coupon">
+        <svg class="coupon-scissors" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"></circle>
+          <circle cx="6" cy="18" r="3"></circle>
+          <line x1="6" y1="9" x2="6" y2="15"></line>
+          <line x1="20.4" y1="6.4" x2="11.6" y2="15.2"></line>
+          <line x1="20.4" y1="17.6" x2="11.6" y2="8.8"></line>
+        </svg>
+        <span class="discount-coupon-code">MRA50</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-discount-tips {
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  .discount-tips-container {
+    background: #f5f0e8; /* Light beige background */
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 0;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .discount-offer {
+    background: #ffffff;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    flex: 1 1 calc(33.333% - 0.5rem); /* Set flex-basis to approximately 1/3 width to ensure uniform wrapping */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1px;
+    position: relative;
+    min-width: 0; /* Allow flex items to shrink below content size */
+    overflow: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .discount-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+    flex-shrink: 0; /* Prevent left section from shrinking */
+    min-width: 0;
+    max-width: 100%;
+    min-width: 60px;
+  }
+
+  .discount-percentage {
+    color: #b86b0b; /* Warm orange-brown color */
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .discount-threshold {
+    color: #999999; /* Light gray */
+    font-size: 0.65rem;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .custom-discount-coupon {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    border: 1.5px dashed #b86b0b; /* Dashed orange-brown border */
+    border-radius: 0.2rem;
+    padding: 1px 2px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-width: 70px; /* Set uniform minimum width to ensure consistent wrapping behavior */
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .custom-discount-coupon:hover {
+    opacity: 0.7;
+  }
+
+  .coupon-scissors {
+    color: #b86b0b;
+    display: inline-block;
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+  }
+
+  .discount-coupon-code {
+    color: #000000;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .discount-divider {
+    width: 1px;
+    height: 60%;
+    background: #d6d6d6;
+    flex-shrink: 0;
+    margin: 0 0.25rem;
+  }
+
+  /* Responsive design */
+  @media (min-width: 768px) and (max-width: 1039px) {
+    .discount-offer {
+      flex-wrap: wrap;
+    }
+  }
+  @media (max-width: 767px) {
+    .custom-discount-tips {
+      overflow: hidden;
+    }
+
+    .discount-tips-container {
+      padding: 0.75rem;
+
+      transform-origin: center;
+      width: 100%;
+    }
+
+    .discount-offer {
+      padding: 0.75rem;
+      gap: 0.5rem;
+    }
+
+    .discount-percentage {
+      font-size: 1.25rem;
+    }
+
+    .discount-threshold {
+      font-size: 0.7rem;
+    }
+
+    .discount-coupon {
+      padding: 0.3rem 0.5rem;
+    }
+
+    .discount-coupon-code {
+      font-size: 0.75rem;
+    }
+
+    .coupon-scissors {
+      width: 12px;
+      height: 12px;
+    }
+
+    .discount-divider {
+      height: 50%;
+    }
+  }
+
+  @media (min-width: 568px) and (max-width: 767px) {
+    .discount-offer {
+      flex-wrap: nowrap;
+    }
+  }
+  @media (max-width: 567px) {
+    .discount-offer {
+      flex-wrap: wrap;
+    }
+  }
+
+  /* Copy toast notification styles */
+  .copy-toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #323232;
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-size: 13px;
+    z-index: 10000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+  }
+
+  .copy-toast.show {
+    opacity: 0.75;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .discount-coupon-code {
+    user-select: none;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Create toast notification element
+    const toast = document.createElement('div');
+    toast.className = 'copy-toast';
+    toast.textContent = 'Copied, use it at checkout page.';
+    document.body.appendChild(toast);
+
+    // Get all discount coupon elements
+    const couponElements = document.querySelectorAll('.custom-discount-coupon');
+
+    couponElements.forEach(function(couponElement) {
+      couponElement.addEventListener('click', function() {
+        // Find the coupon code within this element
+        const codeElement = this.querySelector('.discount-coupon-code');
+        if (!codeElement) return;
+        
+        const couponCode = codeElement.textContent.trim();
+        
+        // Copy to clipboard
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(couponCode).then(function() {
+            showToast();
+          }).catch(function(err) {
+            // Fallback for older browsers
+            fallbackCopyToClipboard(couponCode);
+          });
+        } else {
+          // Fallback for older browsers
+          fallbackCopyToClipboard(couponCode);
+        }
+      });
+    });
+
+    function showToast() {
+      toast.classList.add('show');
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    function fallbackCopyToClipboard(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        showToast();
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+      }
+      
+      document.body.removeChild(textArea);
+    }
+  });
+</script>

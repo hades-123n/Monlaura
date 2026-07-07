@@ -1,0 +1,1157 @@
+{{ content_for_header }}
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: #fff;
+  }
+  .reviews-container {
+    /* max-width: 1400px; */
+    margin: 1% 0 30px 0;
+    padding: 0 20px;
+  }
+  /* 分类标签样式 */
+  .category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 10px;
+  }
+  .category-tab {
+    padding: 8px 20px;
+    margin: 0 4px 8px 4px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #666;
+    border-radius: 30px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .category-tab:hover {
+    color: #3d4754;
+    border-color: #3d4754;
+  }
+  .category-tab.active {
+    color: #fff;
+    background: #3d4754;
+    border-color: #3d4754;
+  }
+  .category-skeleton {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .category-skeleton-item {
+    width: 100px;
+    height: 40px;
+    background: #e2e8f0;
+    border-radius: 30px;
+    animation: skeleton-pulse 1.2s ease-in-out infinite;
+  }
+  @media screen and (max-width: 1600px) {
+    .reviews-container {
+      padding: 0;
+    }
+
+    .category-tabs {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      justify-content: flex-start !important;
+      align-items: center;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      gap: 22px;
+      width: 100%;
+      height:3rem;
+      margin-bottom: 16px;
+      padding: 0 14px;
+      border-bottom: 1px solid #e6e6e6;
+      background: #fff;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .category-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-tab {
+      flex: 0 0 auto !important;
+      display: block;
+      width: auto !important;
+      min-width: max-content;
+      margin: 0 !important;
+      padding: 12px 0 10px !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      color: #777;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .category-tab:hover {
+      color: #222;
+      border-color: transparent;
+    }
+
+    .category-tab.active {
+      color: #222;
+      background: transparent !important;
+      border-color: transparent !important;
+      font-weight: 500;
+    }
+
+    .category-tab.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: #222;
+    }
+
+    .category-skeleton {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: hidden;
+      gap: 18px;
+      width: 100%;
+    }
+
+    .category-skeleton-item {
+      flex: 0 0 80px;
+      height: 36px;
+      border-radius: 0;
+    }
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  @media screen and (max-width: 768px) {
+    .reviews-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      padding: 0 10px;
+      margin-top: 12px;
+    }
+  }
+  .review-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+  .review-card-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    background: #fafafa;
+  }
+  .empty-state-card {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    font-size: 1rem;
+    color: #999;
+  }
+  .empty-state-card.error {
+    color: #0d0d0d;
+  }
+  /* 模态框样式 */
+  .myModal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255 255 255 / 20%);
+    backdrop-filter: blur(2px);
+  }
+  .myModal-container {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  @media (max-width: 768px) {
+    .myModal-container {
+      flex-direction: column;
+      width: 95%;
+      margin: 20px auto;
+      top: auto;
+      transform: none;
+    }
+  }
+  
+
+  /* .reviews-container{
+      margin-top: -4em;
+    }
+      @media (min-width: 768px) {
+      .reviews-container{
+      margin-top: -4em;
+    }
+    } */
+  .myModal-image {
+    flex: 1.2;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .myModal-main-image {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    min-height: 300px;
+  }
+  .myModal-main-image img {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+  }
+  .myModal-thumbnails {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    overflow-x: auto;
+    justify-content: center;
+    background: rgba(255, 255, 255);
+    flex-wrap: nowrap;
+  }
+  .myModal-thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    transition: 0.2s;
+    flex-shrink: 0;
+  }
+  .myModal-thumbnail:hover {
+    border-color: #fff;
+    transform: scale(1.05);
+  }
+  .myModal-thumbnail.active {
+    border-color: #5e7089;
+    box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.3);
+  }
+  .myModal-details {
+    flex: 0.8;
+    padding: 24px;
+    background: #fff;
+    overflow-y: auto;
+    max-height: 70vh;
+  }
+  /* 产品信息容器：图片和标题放在同一个盒子，标题超出隐藏且图片也可点击 */
+  .product-info {
+    margin-bottom: 15px;
+    display: inline-block;
+    max-width: 30%;
+  }
+  .product-info a {
+    display: inline-block;
+    max-width: 100%;
+    text-decoration: none;
+  }
+  .myModal-product-image {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+  }
+  .myModal-product {
+    /* font-size: 1rem;
+    font-weight: 600; */
+    margin-top: 8px;
+    color: #000000;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  .myModal-price {
+    /* font-size: 1.1rem; */
+      font-weight: 600;
+    color: #000000;
+  
+    margin-bottom: 12px;
+  }
+  .myModal-rating {
+    margin: 12px 0;
+    font-size: 1rem;
+  }
+  .myModal-reviewer {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  .myModal-body {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    margin: 16px 0;
+    white-space: pre-wrap;
+  }
+  .myModal-date {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 20px;
+  }
+  .myModal-close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    color: #fff;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10001;
+    background: rgba(0, 0, 0, 0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+  }
+  .myModal-close:hover {
+    background: rgba(0, 0, 0, 0.8);
+    color: #ccc;
+  }
+  @media (max-width: 768px) {
+    .myModal-details {
+      max-height: 50vh;
+    }
+    .myModal-main-image img {
+      max-height: 40vh;
+    }
+    .myModal-thumbnail {
+      width: 45px;
+      height: 45px;
+    }
+  }
+  .reviews-grid.skeleton-loading {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media (max-width: 900px) {
+    .reviews-grid.skeleton-loading {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+    @media (max-width: 600px) {
+    .reviews-grid.skeleton-loading {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .skeleton-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+  .skeleton-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: #e2e8f0;
+  }
+  .skeleton-image,
+  .category-skeleton-item {
+    animation: skeleton-pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes skeleton-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  .load-more-trigger {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-size: 0.85rem;
+  }
+  .modal-prev,
+  .modal-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 15px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    z-index: 10002;
+    transition: 0.2s;
+  }
+  .modal-prev {
+    left: 20px;
+  }
+  .modal-next {
+    right: 20px;
+  }
+  .modal-prev:hover,
+  .modal-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  @media (max-width: 768px) {
+    .modal-prev,
+    .modal-next {
+      width: 40px;
+      height: 40px;
+      font-size: 28px;
+      line-height: 40px;
+    }
+  }
+  .category-tabs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    align-items: center;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    gap: 22px;
+    width: 100%;
+    /* height: 3rem; */
+    margin-bottom: 16px;
+    padding: 0 14px;
+    border-bottom: 1px solid #e6e6e6;
+    background: #fff;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .category-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-tab {
+    flex: 0 0 auto !important;
+    display: block;
+    width: auto !important;
+    min-width: max-content;
+    margin: 0 !important;
+    padding: 12px 0 10px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #777;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .category-tab:hover {
+    color: #222;
+    border-color: transparent !important;
+  }
+
+  .category-tab.active {
+    color: #222;
+    background: transparent !important;
+    border-color: transparent !important;
+    font-weight: 500;
+  }
+
+  .category-tab.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: #222;
+  }
+
+  .category-skeleton {
+    flex-wrap: nowrap;
+    justify-content: center;
+    overflow-x: hidden;
+    gap: 18px;
+    width: 100%;
+  }
+
+  .category-skeleton-item {
+    flex: 0 0 80px;
+    height: 36px;
+    border-radius: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .category-tabs {
+      justify-content: flex-start !important;
+    }
+
+    .category-skeleton {
+      justify-content: flex-start;
+    }
+  }
+</style>
+
+<main class="reviews-container">
+  <div id="category-tabs" class="category-tabs">
+    <div class="category-skeleton">
+      <div class="category-skeleton-item"></div>
+      <div class="category-skeleton-item"></div>
+      <div class="category-skeleton-item"></div>
+      <div class="category-skeleton-item"></div>
+      <div class="category-skeleton-item"></div>
+    </div>
+  </div>
+  <div id="reviews-grid" class="reviews-grid skeleton-loading">
+    <!-- 12个骨架卡片 -->
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+    <div class="skeleton-card"><div class="skeleton-image"></div></div>
+  </div>
+</main>
+
+<!-- 模态框 -->
+<div id="reviewmyModal" class="myModal">
+  <span class="myModal-close">&times;</span>
+  <div class="myModal-container">
+    <div class="myModal-image">
+      <div class="myModal-main-image">
+        <img
+          id="myModalImage"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+          alt="Review image"
+        >
+      </div>
+      <div id="myModalThumbnails" class="myModal-thumbnails"></div>
+      <button class="modal-prev">‹</button>
+    </div>
+    <div class="myModal-details">
+      <div class="myModal-reviewer" id="myModalReviewer"></div>
+      <div class="myModal-rating" id="myModalRating"></div>
+      <div class="myModal-body" id="myModalBody"></div>
+      <div class="myModal-date" id="myModalDate"></div>
+      <!-- 产品信息容器：图片和标题放在同一个链接内，点击均可跳转 -->
+      <div class="product-info">
+        <a id="myModalProductLink" target="_blank" rel="noopener">
+          <img id="myModalProductImage" class="myModal-product-image" alt="Product image">
+          <div class="myModal-product" id="myModalProduct"></div>
+          <div class="myModal-price" id="myModalPrice"></div>
+        </a>
+        <button class="modal-next">›</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const STORE_NAME = '{{ shop.permanent_domain }}';
+  const API_BASE = 'https://reviews-plus.lightingrid.com';
+
+  const PAGE_LIMIT = 12;
+const EXCLUDED_REVIEW_IDS = [1203475468];
+  let currentPage = 1;
+  let isLoading = false;
+  let hasMore = true;
+  let currentType = 'all';
+  let dynamicCategories = [];
+  let currentCategoryKey = null;
+  let allReviewsData = [];
+  let currentVisibleReviews = [];
+  let currentModalIndex = -1;
+  let scrollThrottle = false;
+
+  // 产品信息缓存（仅用于降级）
+  const productInfoCache = {};
+
+  // ========== 工具函数 ==========
+  function renderStars(rating) {
+    const full = Math.floor(rating);
+    const half = rating % 1 >= 0.5;
+    let stars = '';
+    for (let i = 0; i < full; i++) stars += '<span class="star">★</span>';
+    if (half) stars += '<span class="star">½</span>';
+    for (let i = full + (half ? 1 : 0); i < 5; i++) stars += '<span class="star-empty">★</span>';
+    return stars;
+  }
+
+  function getProductUrl(handle) {
+    if (!handle) return '#';
+    return `https://${STORE_NAME}/products/${handle}`;
+  }
+
+  function getReviewImage(review) {
+    if (!review.pictures || !review.pictures.length) return null;
+    const first = review.pictures[0];
+    const url = first.urls?.original || first.original || first.url || (typeof first === 'string' ? first : null);
+    return url && url.startsWith('http') ? url : null;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, (m) => {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  // 降级方案：通过 handle 获取产品信息（仅在 API 未提供 product_image/price 时使用）
+  async function fetchProductInfoByHandle(handle) {
+    if (!handle) return null;
+    if (productInfoCache[handle]) return productInfoCache[handle];
+    try {
+      const response = await fetch(`/products/${handle}.js`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const product = await response.json();
+      const info = {
+        title: product.title,
+        imageUrl: product.featured_image || '',
+        price: product.price ? `$${parseFloat(product.price).toFixed(2)}` : '',
+      };
+      productInfoCache[handle] = info;
+      return info;
+    } catch (error) {
+      console.error(`Failed to fetch product info for handle ${handle}:`, error);
+      return null;
+    }
+  }
+
+  function showEmptyStateCard(message, isError = false) {
+    const container = document.getElementById('reviews-grid');
+    container.classList.remove('skeleton-loading');
+    container.innerHTML = `<div class="empty-state-card ${isError ? 'error' : ''}">${escapeHtml(message)}</div>`;
+  }
+
+  function showErrorOnSkeleton(message) {
+    const container = document.getElementById('reviews-grid');
+    const existingError = container.querySelector('.skeleton-error-card');
+    if (existingError) existingError.remove();
+    const errorCard = document.createElement('div');
+    errorCard.className = 'skeleton-error-card';
+    errorCard.style.cssText =
+      'grid-column: 1 / -1; text-align: center; padding: 20px; background: #fff; border-radius: 12px; margin-bottom: 20px; color: #000;';
+    errorCard.innerHTML = ` ${escapeHtml(message)}`;
+    container.insertBefore(errorCard, container.firstChild);
+  }
+
+  function removeSkeletonErrorCard() {
+    const container = document.getElementById('reviews-grid');
+    const errorCard = container.querySelector('.skeleton-error-card');
+    if (errorCard) errorCard.remove();
+  }
+
+  function appendErrorMessage(message, onRetry) {
+    const container = document.getElementById('reviews-grid');
+    const existingError = container.querySelector('.error-toast');
+    if (existingError) existingError.remove();
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-toast';
+    errorDiv.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; background: #fff3f3; padding: 12px 16px; border-radius: 8px; margin: 20px 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
+        <span style="color: #d32f2f;">⚠️ ${escapeHtml(message)}</span>
+        <div>
+          <button class="retry-btn" style="background: #3d4754; color: white; border: none; padding: 6px 16px; border-radius: 20px; cursor: pointer; margin-right: 10px;">Retry</button>
+          <button class="close-error" style="background: none; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+        </div>
+      </div>
+    `;
+    container.appendChild(errorDiv);
+    errorDiv.querySelector('.retry-btn').addEventListener('click', () => {
+      errorDiv.remove();
+      if (onRetry) onRetry();
+    });
+    errorDiv.querySelector('.close-error').addEventListener('click', () => {
+      errorDiv.remove();
+    });
+  }
+
+  // ========== 模态框内容更新 ==========
+  async function updateModalContent(index) {
+    if (!currentVisibleReviews.length || index < 0 || index >= currentVisibleReviews.length) return;
+    const review = currentVisibleReviews[index];
+    if (!review) return;
+
+    // 评论图片部分
+    let allImages = [];
+    if (review.pictures && Array.isArray(review.pictures)) {
+      allImages = review.pictures
+        .map((p) => p.urls?.original || p.original || p.url || (typeof p === 'string' ? p : null))
+        .filter((url) => url && url.startsWith('http'));
+    }
+    if (allImages.length === 0) allImages = ['https://via.placeholder.com/600x600?text=No+Image'];
+
+    const mainImg = document.getElementById('myModalImage');
+    const thumbnailsContainer = document.getElementById('myModalThumbnails');
+    let currentImgIndex = 0;
+    mainImg.src = allImages[0];
+
+    thumbnailsContainer.innerHTML = '';
+    allImages.forEach((imgUrl, idx) => {
+      const thumb = document.createElement('img');
+      thumb.src = imgUrl;
+      thumb.className = 'myModal-thumbnail';
+      if (idx === currentImgIndex) thumb.classList.add('active');
+      thumb.addEventListener('click', () => {
+        mainImg.src = imgUrl;
+        document.querySelectorAll('.myModal-thumbnail').forEach((t, i) => {
+          if (i === idx) t.classList.add('active');
+          else t.classList.remove('active');
+        });
+        currentImgIndex = idx;
+      });
+      thumbnailsContainer.appendChild(thumb);
+    });
+    thumbnailsContainer.style.display = allImages.length <= 1 ? 'none' : 'flex';
+
+    // 评论文字信息（不含产品标题）
+    document.getElementById('myModalRating').innerHTML = renderStars(review.rating || 0);
+    document.getElementById('myModalReviewer').textContent = `By ${review.reviewer?.name || 'Anonymous'}`;
+    document.getElementById('myModalBody').textContent = review.body || '';
+    document.getElementById('myModalDate').textContent = review.created_at
+      ? new Date(review.created_at).toLocaleDateString()
+      : '';
+
+    // 产品信息：链接、图片、标题、价格
+    const productLinkElem = document.getElementById('myModalProductLink');
+    const productImgElem = document.getElementById('myModalProductImage');
+    const productTitleElem = document.getElementById('myModalProduct');
+    const priceElem = document.getElementById('myModalPrice');
+
+    const productHandle = review.product_handle || '';
+    const productTitle = review.product_title || 'Product';
+    let productUrl = getProductUrl(productHandle);
+
+    // 优先使用 API 返回的产品图片和价格
+    let productImage = review.product_image || null;
+    let productPrice = review.product_price || null;
+
+    // 如果 API 缺少图片或价格，尝试降级获取（仅当没有时才请求，避免过多请求）
+    let info = null;
+    if ((!productImage || !productPrice) && productHandle) {
+      info = await fetchProductInfoByHandle(productHandle);
+      if (info) {
+        if (!productImage) productImage = info.imageUrl;
+        if (!productPrice) productPrice = info.price;
+      }
+    }
+
+    // 更新外层链接（产品图片和标题共用此链接）
+    productLinkElem.href = productUrl;
+
+    // 产品图片
+   if (productImage) {
+  productImgElem.src = productImage;
+  productImgElem.style.display = 'block';
+} else {
+  productImgElem.src = '';          // 清空 src，阻止缓存泄露
+  productImgElem.style.display = 'none';
+}
+
+    productTitleElem.innerText = productTitle;
+
+    function formatPrice(priceStr) {
+      if (!priceStr) return '';
+      const raw = String(priceStr).trim();
+      // 提取字符串中的数字部分（支持整数或小数）
+      const match = raw.match(/(\d+(?:\.\d+)?)/);
+      if (!match) return raw; // 没有数字，返回原字符串
+
+      let num = parseFloat(match[1]);
+      if (isNaN(num)) return raw;
+
+      // 如果原始字符串不含小数点且数值较大（认为是分单位），则除以100
+      // console.log(num, raw, 'cj');
+
+      if (!raw.includes('.') && num > 10000) {
+        num = num / 100;
+        // console.log(`$${num}/100`, num, 001);
+      }
+      if (num >= 10000) {
+        num = num / 100;
+        return `$${num.toFixed(2)}`;
+      }
+
+      return `$${num.toFixed(2)}`;
+    }
+
+    priceElem.textContent = formatPrice(productPrice);
+
+    // 左右按钮禁用状态
+    const prevBtn = document.querySelector('.modal-prev');
+    const nextBtn = document.querySelector('.modal-next');
+    if (prevBtn) index <= 0 ? prevBtn.setAttribute('disabled', 'disabled') : prevBtn.removeAttribute('disabled');
+    if (nextBtn)
+      index >= currentVisibleReviews.length - 1
+        ? nextBtn.setAttribute('disabled', 'disabled')
+        : nextBtn.removeAttribute('disabled');
+  }
+
+  function openModalWithReview(review, index) {
+    if (!review) return;
+    currentModalIndex = index;
+    updateModalContent(currentModalIndex);
+    const modal = document.getElementById('reviewmyModal');
+    if (modal) modal.style.display = 'block';
+  }
+
+  // ========== 图片网格渲染 ==========
+  function renderGridFull(reviews) {
+    const container = document.getElementById('reviews-grid');
+    const reviewsWithImage = reviews.filter((r) => getReviewImage(r) !== null);
+    currentVisibleReviews = reviewsWithImage;
+    if (reviewsWithImage.length === 0) {
+      showEmptyStateCard('No customer images found for this category.', false);
+      return;
+    }
+    let html = '';
+    reviewsWithImage.forEach((review, idx) => {
+      let imgUrl = getReviewImage(review);
+      if (!imgUrl) imgUrl = 'https://via.placeholder.com/600x800?text=No+Image';
+      html += `<div class="review-card" data-index="${idx}">
+                <img class="review-card-image" src="${escapeHtml(imgUrl)}" alt="${escapeHtml(
+        review.product_title || 'Product'
+      )}" loading="lazy">
+              </div>`;
+    });
+    container.innerHTML = html;
+    container.classList.remove('skeleton-loading');
+    document.querySelectorAll('.review-card').forEach((card) => {
+      card.addEventListener('click', (e) => {
+        const idx = parseInt(card.getAttribute('data-index'), 10);
+        const review = currentVisibleReviews[idx];
+        if (review) openModalWithReview(review, idx);
+      });
+    });
+  }
+
+  function appendGridCards(newReviews) {
+    const container = document.getElementById('reviews-grid');
+    const newWithImage = newReviews.filter((r) => getReviewImage(r) !== null);
+    if (newWithImage.length === 0) return;
+    const startIndex = currentVisibleReviews.length;
+    currentVisibleReviews = [...currentVisibleReviews, ...newWithImage];
+    let html = '';
+    newWithImage.forEach((review, idx) => {
+      let imgUrl = getReviewImage(review);
+      if (!imgUrl) imgUrl = 'https://via.placeholder.com/600x800?text=No+Image';
+      const globalIndex = startIndex + idx;
+      html += `<div class="review-card" data-index="${globalIndex}">
+                <img class="review-card-image" src="${escapeHtml(imgUrl)}" alt="${escapeHtml(
+        review.product_title || 'Product'
+      )}" loading="lazy">
+              </div>`;
+    });
+    container.insertAdjacentHTML('beforeend', html);
+    container.querySelectorAll('.review-card').forEach((card) => {
+      if (card.dataset.listener) return;
+      card.dataset.listener = 'true';
+      const idxAttr = card.getAttribute('data-index');
+      if (idxAttr !== null) {
+        card.addEventListener('click', () => {
+          const idx = parseInt(idxAttr, 10);
+          const review = currentVisibleReviews[idx];
+          if (review) openModalWithReview(review, idx);
+        });
+      }
+    });
+  }
+
+  // ========== 请求评论 ==========
+  async function fetchReviewsByType(type, page = 1, append = false) {
+  if (isLoading) return;
+
+  isLoading = true;
+
+  const container = document.getElementById('reviews-grid');
+
+  if (!append) {
+    container.classList.add('skeleton-loading');
+    container.innerHTML = Array(12)
+      .fill()
+      .map(() => `<div class="skeleton-card"><div class="skeleton-image"></div></div>`)
+      .join('');
+
+    removeSkeletonErrorCard();
+
+    currentPage = 1;
+    hasMore = true;
+    currentType = type;
+    allReviewsData = [];
+    currentVisibleReviews = [];
+  }
+
+  const url = `${API_BASE}/api/reviews-by-product-type?store=${STORE_NAME}&page=${page}&type=${encodeURIComponent(
+    type
+  )}`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const result = await response.json();
+
+    if (!result.success || !result.data?.[0]?.reviews) {
+      throw new Error('Invalid data structure');
+    }
+
+    const newReviews = result.data[0].reviews.filter((review) => {
+      return !EXCLUDED_REVIEW_IDS.includes(Number(review.id));
+    });
+
+    if (newReviews.length < PAGE_LIMIT) {
+      hasMore = false;
+    } else {
+      hasMore = true;
+    }
+
+    if (append) {
+      if (newReviews.length === 0) {
+        hasMore = false;
+
+        const endMsg = document.createElement('div');
+        endMsg.className = 'load-more-trigger';
+        endMsg.innerText = 'You have reached the end.';
+        container.appendChild(endMsg);
+      } else {
+        allReviewsData = [...allReviewsData, ...newReviews];
+        appendGridCards(newReviews);
+      }
+    } else {
+      if (newReviews.length === 0) {
+        showErrorOnSkeleton('No reviews found for this category.');
+        hasMore = false;
+      } else {
+        removeSkeletonErrorCard();
+        allReviewsData = newReviews;
+        renderGridFull(allReviewsData);
+      }
+    }
+  } catch (error) {
+    console.error('Fetch error:', error);
+
+    if (append) {
+      appendErrorMessage('Failed to load more reviews. Please check your network.', () => {
+        if (currentPage > 1) currentPage--;
+        loadMore();
+      });
+    } else {
+      showErrorOnSkeleton('Failed to load reviews. Please refresh the page or try again later.');
+      hasMore = false;
+    }
+  } finally {
+    isLoading = false;
+    scrollThrottle = false;
+  }
+}
+
+  async function loadMore() {
+    if (!hasMore || isLoading) return;
+    if (currentType === null) return;
+    currentPage++;
+    await fetchReviewsByType(currentType, currentPage, true);
+  }
+
+  function handleScroll() {
+    if (scrollThrottle) return;
+    scrollThrottle = true;
+    requestAnimationFrame(() => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      if (scrollTop + windowHeight >= documentHeight - 300) {
+        if (!isLoading && hasMore) loadMore();
+      }
+      scrollThrottle = false;
+    });
+  }
+
+  function renderTabs() {
+    const container = document.getElementById('category-tabs');
+    if (!dynamicCategories.length) {
+      container.innerHTML = `<div class="category-skeleton">${Array(5)
+        .fill('<div class="category-skeleton-item"></div>')
+        .join('')}</div>`;
+      return;
+    }
+    let html = '';
+    for (const cat of dynamicCategories) {
+      const activeClass = cat.key === currentCategoryKey ? 'active' : '';
+      html += `<div class="category-tab ${activeClass}" data-key="${cat.key}">${escapeHtml(cat.label)}</div>`;
+    }
+    container.innerHTML = html;
+    document.querySelectorAll('.category-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const key = tab.getAttribute('data-key');
+        if (key === currentCategoryKey) return;
+        currentCategoryKey = key;
+        const selectedCat = dynamicCategories.find((c) => c.key === key);
+        if (selectedCat) {
+          window.removeEventListener('scroll', handleScroll);
+          currentPage = 1;
+          hasMore = true;
+          isLoading = false;
+          currentType = selectedCat.type;
+          allReviewsData = [];
+          currentVisibleReviews = [];
+          renderTabs();
+          fetchReviewsByType(selectedCat.type, 1, false).then(() => {
+            window.addEventListener('scroll', handleScroll);
+          });
+        }
+      });
+    });
+  }
+
+  async function initialize() {
+    const initUrl = `${API_BASE}/api/reviews-by-product-type?store=${STORE_NAME}&type=all`;
+    try {
+      const response = await fetch(initUrl);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const result = await response.json();
+      let productTypes = result.product_types;
+      if (!productTypes || !Array.isArray(productTypes)) {
+        console.warn('API did not return product_types, using fallback');
+        productTypes = ['all', 'Prom Dresses', 'Wedding Guest Dresses', 'Mother of the Bride Dresses', 'Other'];
+      }
+      dynamicCategories = productTypes.map((type) => ({
+        key: type,
+        label: type === 'all' ? 'View all' : type,
+        type: type === 'all' ? 'all' : type,
+      }));
+      currentCategoryKey = dynamicCategories[0]?.key || 'all';
+      renderTabs();
+      const defaultType = dynamicCategories.find((c) => c.key === currentCategoryKey)?.type || 'all';
+      await fetchReviewsByType(defaultType, 1, false);
+      window.addEventListener('scroll', handleScroll);
+    } catch (error) {
+      console.error('Init error:', error);
+      showErrorOnSkeleton('Failed to load reviews. Please refresh the page.');
+      hasMore = false;
+    }
+  }
+
+  const modal = document.getElementById('reviewmyModal');
+  const closeBtn = document.querySelector('.myModal-close');
+  if (closeBtn)
+    closeBtn.onclick = () => {
+      modal.style.display = 'none';
+    };
+  window.onclick = (e) => {
+    if (e.target === modal) modal.style.display = 'none';
+  };
+
+  function bindModalNav() {
+    const prevBtn = document.querySelector('.modal-prev');
+    const nextBtn = document.querySelector('.modal-next');
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (currentModalIndex > 0) {
+          currentModalIndex--;
+          updateModalContent(currentModalIndex);
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', async () => {
+        // 检查是否有下一条评论
+        if (currentModalIndex < currentVisibleReviews.length - 3) {
+          console.log(currentModalIndex,currentVisibleReviews.length,'cj');
+          currentModalIndex++;
+          updateModalContent(currentModalIndex);
+          return;
+        }
+        const nextBtnEl = document.querySelector('.modal-next');
+        const originalText = nextBtnEl.innerHTML;
+        nextBtnEl.innerHTML = 'X';
+        nextBtnEl.disabled = true;
+
+        await loadMore();
+
+        // 恢复按钮状态
+        nextBtnEl.innerHTML = originalText;
+        nextBtnEl.disabled = false;
+
+        // 加载后，检查是否有新数据（currentVisibleReviews 长度是否增加）
+        if (currentModalIndex  < currentVisibleReviews.length) {
+          // 有新数据，切换到下一个
+          currentModalIndex++;
+          updateModalContent(currentModalIndex);
+        } 
+      });
+    }
+  }
+
+  bindModalNav();
+  initialize();
+</script>

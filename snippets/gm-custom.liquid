@@ -1,0 +1,8 @@
+<script>
+  window.addEventListener("globoMenuRenderCompleted", () => {
+    const targets = document.querySelectorAll(".gm-target");
+    targets.forEach((item) => {
+      item.removeAttribute("title");
+    });
+  });
+</script>

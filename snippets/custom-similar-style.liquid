@@ -1,0 +1,244 @@
+{% if product.metafields.custom.similar_style %}
+    <div class="tag-group" id="similar-tag-group"></div>
+
+    <script type="application/json" id="similar-style-data">
+      {{ product.metafields.custom.similar_style }}
+    </script>
+  
+   <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const styleDataElement = document.getElementById('similar-style-data');
+    const container = document.getElementById('similar-tag-group');
+    const currentProductHandle = {{ product.handle | json }};
+
+    if (!styleDataElement || !container) return;
+
+    let data;
+
+    try {
+      data = JSON.parse(styleDataElement.textContent);
+    } catch (error) {
+      console.error('similar_style JSON parse error:', error);
+      return;
+    }
+
+    if (!data.list || !Array.isArray(data.list) || data.list.length === 0) return;
+
+    const storageKey = `similar_style_order_${data.name || 'default'}`;
+
+    function getSavedOrder() {
+      try {
+        const saved = sessionStorage.getItem(storageKey);
+        return saved ? JSON.parse(saved) : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveCurrentOrder(list) {
+      const handles = list.map(item => item.handle).filter(Boolean);
+      sessionStorage.setItem(storageKey, JSON.stringify(handles));
+    }
+
+    function applySavedOrder(list) {
+      const savedOrder = getSavedOrder();
+
+      if (!savedOrder.length) {
+        return list;
+      }
+
+      const itemMap = new Map();
+
+      list.forEach(item => {
+        if (item.handle) {
+          itemMap.set(item.handle, item);
+        }
+      });
+
+      const orderedList = savedOrder
+        .map(handle => itemMap.get(handle))
+        .filter(Boolean);
+
+      const missingItems = list.filter(item => {
+        return !item.handle || !savedOrder.includes(item.handle);
+      });
+
+      return [...orderedList, ...missingItems];
+    }
+
+    data.list = applySavedOrder(data.list);
+
+    let currentIndex = data.list.findIndex(item => item.handle === currentProductHandle);
+
+    if (currentIndex === -1) {
+      currentIndex = data.list.findIndex(item => Number(item.current) === 1);
+    }
+
+    if (currentIndex === -1) {
+      currentIndex = 0;
+    }
+
+    const currentItem = data.list[currentIndex];
+
+    container.innerHTML = `
+      <div class="tag-label">
+        <span style="font-weight: bold; font-size: 15px;">${data.name}:</span>
+        <span class="current-style-name" style="margin-left: 5px; font-size: 13px;">${currentItem ? currentItem.name : ''}</span>
+        <span class="loading-spinner"></span>
+      </div>
+      <div class="tag-list"></div>
+    `;
+
+    const tagList = container.querySelector('.tag-list');
+    const currentStyleName = container.querySelector('.current-style-name');
+
+    data.list.forEach((item, index) => {
+      const tag = document.createElement('span');
+
+      const textSpan = document.createElement('span');
+      textSpan.textContent = item.name;
+      textSpan.classList.add('tag-text');
+      tag.appendChild(textSpan);
+
+      if (item.image && typeof item.image === 'string' && item.image.trim() !== '') {
+        const imgWrapper = document.createElement('span');
+        imgWrapper.classList.add('tag-image-wrapper');
+
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.alt = item.name;
+        img.classList.add('tag-image');
+
+        img.onerror = function() {
+          imgWrapper.style.display = 'none';
+        };
+
+        imgWrapper.appendChild(img);
+        tag.appendChild(imgWrapper);
+      }
+
+      tag.classList.add('tag-item');
+
+      if (index === currentIndex) {
+        tag.classList.add('active');
+      }
+
+      tag.addEventListener('click', () => {
+        if (index === currentIndex) return;
+
+        saveCurrentOrder(data.list);
+
+        tagList.querySelectorAll('.tag-item').forEach(el => {
+          el.classList.remove('active');
+        });
+
+        tag.classList.add('active');
+
+        if (currentStyleName) {
+          currentStyleName.textContent = item.name;
+        }
+
+        if (item.handle) {
+          const url = item.handle.startsWith('http') ? item.handle : '/products/' + item.handle;
+          const separator = url.includes('?') ? '&' : '?';
+          const spinner = container.querySelector('.loading-spinner');
+
+          if (spinner) {
+            spinner.classList.add('show');
+          }
+
+          window.location.href = url + separator + 'ref=similarstyle';
+        }
+      });
+
+      tagList.appendChild(tag);
+    });
+
+    saveCurrentOrder(data.list);
+  });
+</script>
+  <style>
+  .tag-group {
+    margin: 10px 0 !important;
+  }
+  
+  .tag-label {
+    display: block;
+    margin-bottom: 3px;
+    {% comment %} text-transform: uppercase; {% endcomment %}
+  }
+  
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .tag-item {
+      padding: 3px 6px;
+      border: 1px solid #e8e8e1;
+      background: none;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      display: inline-block;
+      border-radius: 5px;
+      position: relative;
+      color: rgb(var(--color-foreground));
+      display: flex;
+      align-items: center;
+      gap: 5px;
+  }
+  .loading-spinner {
+    display: none;
+    width: 12px;
+    height: 12px;
+    margin-left: 5px;
+    border: 2px solid #000;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+  }
+  .tag-item.active {
+    background: #000;
+    color: #fff;
+    box-shadow: 0 0 0 1px #000;
+  }
+  
+  .tag-item:not(.active):hover {
+    border-color: #ccc;
+  }
+  .loading-spinner.show {
+    display: inline-block;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .tag-image-wrapper {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 5px;
+  }
+  
+  .tag-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    width: 30px;
+  }
+  
+  .tag-text {
+    display: inline-block;
+  }
+  </style>
+  {% endif %}

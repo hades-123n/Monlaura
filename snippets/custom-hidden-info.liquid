@@ -1,0 +1,30 @@
+{%- assign product_form_id = 'product-form-' | append: section.id -%}
+{% if product.metafields.custom.pocessing_days %}
+<input form="{{ product_form_id }}" type="hidden" name="properties[_ptime]" value="{{ product.metafields.custom.pocessing_days }}">
+{% endif %}
+
+<div class="fvts" style="display:none;">
+  <input form="{{ product_form_id }}" readonly id="fvts" type="text" name="attributes[FVTS]" value="{{ cart.attributes["FVTS"] }}" style="border: 0; border-radius: 4px; cursor: default; background: inherit;">
+  <script>
+    // get all cookies
+    var cookieArr = document.cookie.split('; ');
+    // define firsttsValue
+    var firsttsValue;
+    // foreach cookie & find firstts
+    for (var i = 0; i < cookieArr.length; i++) {
+      var firsttscookie = cookieArr[i];
+      if (firsttscookie.indexOf('firstts=') == 0) {
+        firsttsValue = firsttscookie.slice('firstts='.length);
+        break;
+      }
+    }
+    // if no firsttsValue
+    if (typeof firsttsValue === 'undefined') {
+      firsttsValue = '';
+    }
+    // get timestamp input
+    var firsttsinput = document.getElementById('fvts');
+    // assign firsttsValue to firsttsinput
+    firsttsinput.value = firsttsValue;
+  </script>
+</div>

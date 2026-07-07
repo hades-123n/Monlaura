@@ -1,0 +1,110 @@
+{%- liquid
+  unless background_position
+    assign background_position = 'center center'
+  endunless
+
+  assign collection_image = blank
+
+  if collection != blank
+    if settings.collection_grid_image == 'collection' and collection.image
+      assign collection_image = collection.image
+    elsif collection.products.first.featured_media.preview_image
+      assign collection_image = collection.products.first.featured_media.preview_image
+    endif
+  endif
+
+  if block.settings.title != blank
+    assign title_output = block.settings.title
+  else
+    if collection == blank
+      assign title_output = 'collection_title' 
+    else
+      assign title_output = collection.title | escape
+    endif
+  endif
+-%}
+
+<div class="grid__item" {{ block.shopify_attributes }} style="min-width: 60px;">
+  <a
+    href="{{ collection.url }}"
+    class="collection-item--{{ settings.collection_grid_style }}"
+    style="width: 100%;"
+    data-aos="row-of-{{ per_row }}"
+  >
+    {%- if collection == blank or collection_image == blank -%}
+      {%- capture placeholder -%}collection-{% cycle 1, 2, 3, 4, 5, 6 %}{%- endcapture -%}
+
+      <div
+        class="collection-image-square collection-image--placeholder"
+       style="aspect-ratio: 1 / 1; overflow: hidden; width: 100%; border-radius: 50%;"
+      >
+        {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {%- else -%}
+      <div
+        class="collection-image-square image-wrap"
+      style="aspect-ratio: 1 / 1; overflow: hidden; width: 100%; border-radius: 50%;"
+      >
+        {% assign indicator = block.id %}
+        {% if block == blank %}
+          {% assign indicator = collection.id %}
+        {% endif %}
+
+        {% style %}
+          .collection-image--{{ indicator }} {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: {{ background_position }};
+            display: block;
+          }
+
+          .collection-image-square image-element {
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+        {% endstyle %}
+
+        {% assign classes = 'collection-image--' | append: indicator %}
+
+        {%- render 'image-element',
+          img: collection_image,
+          widths: '360, 540, 720, 900',
+          classes: classes,
+          sizes: sizes,
+          sizeVariable: sizeVariable,
+          fallback: fallback
+        -%}
+      </div>
+    {%- endif -%}
+
+    <div style="display: flex; justify-content: center; width: 100%; text-align: center; font-size: 14px; color: #333;">
+      {{ title_output }}
+    </div>
+  </a>
+</div>
+{% style %}
+  .collection-image--{{ indicator }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ background_position }};
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .collection-image-square {
+    overflow: hidden;
+  }
+
+  .collection-image-square:hover .collection-image--{{ indicator }} {
+    transform: scale(1.08);
+  }
+
+  .collection-image-square image-element {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+{% endstyle %}

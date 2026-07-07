@@ -1,0 +1,882 @@
+      {%- assign size_chart_page ='/pages/size-chart' -%}
+	  {%- assign measurement_guide_page ='/pages/measurement-guide' -%}
+
+      {%- assign general_size-table_headers = 'Size,Bust,Waist,Hips,Hollow to Floor' | split: ',' -%}
+      {%- assign general_size-inch_data = 'US00|US00:30.5:23.5:33.75:57,US0|US0:31.5:24.5:34.75:57,US2|US2:32.5:25.5:35.75:57.75,US4|US4:33.5:26.5:36.75:57.75,US6|US6:34.5:27.5:37.75:59,US8|US8:35.5:28.5:38.75:59,US10|US10:36.5:29.5:39.75:59.75,US12|US12:38:31:41.25:59.75,US14|US14:39.5:32.5:42.75:61,US16|US16:41:34:44.25:61,US16W|US16W:43:36.25:45.5:61,US18W|US18W:45:38.5:47.5:61,US20W|US20W:47:40.75:49.5:61,US22W|US22W:49:43:51.5:61,US24W|US24W:51:45.25:53.5:61,US26W|US26W:53:47.5:55.5:61,US28W|US28W:55:49.5:57.5:61,US30W|US30W:57.5:52:60:61,US32W|US32W:60.5:55:63:61' | split: ',' -%}
+      {%- assign general_size-cm_data = 'US00|US00:77.5:59.5:85.5:145,US0|US0:80:62:88.5:145,US2|US2:82.5:65:91:147,US4|US4:85:67.5:93.5:147,US6|US6:87.5:70:96:150,US8|US8:90:72.5:98.5:150,US10|US10:92.5:75:101:152,US12|US12:96.5:78.5:105:152,US14|US14:100.5:82.5:108.5:155,US16|US16:104:86.5:112.5:155,US16W|US16W:109:92:115.5:155,US18W|US18W:114.5:98:120.5:155,US20W|US20W:119.5:103.5:125.5:155,US22W|US22W:124.5:109:131:155,US24W|US24W:129.5:115:136:155,US26W|US26W:134.5:120.5:141:155,US28W|US28W:139.5:125.5:146:155,US30W|US30W:146:132:152.5:155,US32W|US32W:153.5:139.5:160:155' | split: ',' -%}
+
+      {% comment %} {%- assign flower_girl_size-table_headers = 'Size,Chest,Waist,Hips,Hollow to Floor,Age' | split: ',' -%}
+      {%- assign flower_girl_size-inch_data = 'C1|C1:20:19:19:26.8:1-2,C2|C2:21:20:20:29.5:2-3,C3|C3:22:21:21:32.3:2-3,C4|C4:23:22:22:34.6:4-5,C5|C5:24:23:23:36.6:4-5,C6|C6:25:24:25:38.6:6-7,C7|C7:26:25:27:40.2:6-7,C8|C8:27:26:28:42:8-9,C9|C9:28:27:29:43.7:8-9,C10|C10:29:28:31:45.3:10-11,C11|C11:30.5:29:33:47.2:10-11,C12|C12:32:30:34:49.2:12-13,C13|C13:33:31:34.5:50.8:12-13,C14|C14:34:32:35:52:14-15' | split: ',' -%}
+      {%- assign flower_girl_size-cm_data = 'C1|C1:51:48.5:48.5:68:1-2,C2|C2:53.5:51:51:75:2-3,C3|C3:56:53.5:53.5:82:2-3,C4|C4:58.5:56:56:88:4-5,C5|C5:61:58.5:58.5:93:4-5,C6|C6:63.5:61:63.5:98:6-7,C7|C7:66:63.5:68.5:102:6-7,C8|C8:68.5:66:71:107:8-9,C9|C9:71:68.5:74:111:8-9,C10|C10:74:71:79:115:10-11,C11|C11:77.5:74:84:120:10-11,C12|C12:81:76:86.5:125:12-13,C13|C13:84:79:87.5:129:12-13,C14|C14:86.5:81:89:132:14-15' | split: ',' -%} {% endcomment %}
+
+      {%- assign flower_girl_size-table_headers = 'Size,Chest,Waist,Hips,Hollow to Floor,Age' | split: ',' -%}
+      {%- assign flower_girl_size-inch_data = 'C1|C1/1Y:20:19:19:26.8:1-2,C2|C2/2Y:21:20:20:29.5:2-3,C3|C3/3Y:22:21:21:32.3:2-3,C4|C4/4Y:23:22:22:34.6:4-5,C5|C5/5Y:24:23:23:36.6:4-5,C6|C6/6Y:25:24:25:38.6:6-7,C7|C7/7Y:26:25:27:40.2:6-7,C8|C8/8Y:27:26:28:42:8-9,C9|C9/9Y:28:27:29:43.7:8-9,C10|C10/10Y:29:28:31:45.3:10-11,C11|C11/11Y:30.5:29:33:47.2:10-11,C12|C12/12Y:32:30:34:49.2:12-13,C13|C13/13Y:33:31:34.5:50.8:12-13,C14|C14/14Y:34:32:35:52:14-15' | split: ',' -%}
+      {%- assign flower_girl_size-cm_data = 'C1|C1/1Y:51:48.5:48.5:68:1-2,C2|C2/2Y:53.5:51:51:75:2-3,C3|C3/3Y:56:53.5:53.5:82:2-3,C4|C4/4Y:58.5:56:56:88:4-5,C5|C5/5Y:61:58.5:58.5:93:4-5,C6|C6/6Y:63.5:61:63.5:98:6-7,C7|C7/7Y:66:63.5:68.5:102:6-7,C8|C8/8Y:68.5:66:71:107:8-9,C9|C9/9Y:71:68.5:74:111:8-9,C10|C10/10Y:74:71:79:115:10-11,C11|C11/11Y:77.5:74:84:120:10-11,C12|C12/12Y:81:76:86.5:125:12-13,C13|C13/13Y:84:79:87.5:129:12-13,C14|C14/14Y:86.5:81:89:132:14-15' | split: ',' -%}
+
+      {%- assign flower_girl_new_size-table_headers = 'Size,Chest,Waist,Hips,Hollow to Floor,Age' | split: ',' -%}
+      {%- assign flower_girl_new_size-inch_data = '1Y|1Y:20:19:19:26.8:1-2,2Y|2Y:21:20:20:29.5:2-3,3Y|3Y:22:21:21:32.3:2-3,4Y|4Y:23:22:22:34.6:4-5,5Y|5Y:24:23:23:36.6:4-5,6Y|6Y:25:24:25:38.6:6-7,7Y|7Y:26:25:27:40.2:6-7,8Y|8Y:27:26:28:42:8-9,9Y|9Y:28:27:29:43.7:8-9,10Y|10Y:29:28:31:45.3:10-11,11Y|11Y:30.5:29:33:47.2:10-11,12Y|12Y:32:30:34:49.2:12-13,13Y|13Y:33:31:34.5:50.8:12-13,14Y|14Y:34:32:35:52:14-15' | split: ',' -%}
+      {%- assign flower_girl_new_size-cm_data = '1Y|1Y:51:48.5:48.5:68:1-2,2Y|2Y:53.5:51:51:75:2-3,3Y|3Y:56:53.5:53.5:82:2-3,4Y|4Y:58.5:56:56:88:4-5,5Y|5Y:61:58.5:58.5:93:4-5,6Y|6Y:63.5:61:63.5:98:6-7,7Y|7Y:66:63.5:68.5:102:6-7,8Y|8Y:68.5:66:71:107:8-9,9Y|9Y:71:68.5:74:111:8-9,10Y|10Y:74:71:79:115:10-11,11Y|11Y:77.5:74:84:120:10-11,12Y|12Y:81:76:86.5:125:12-13,13Y|13Y:84:79:87.5:129:12-13,14Y|14Y:86.5:81:89:132:14-15' | split: ',' -%}
+
+      {%- assign junior_bridesmaid_size-table_headers = 'Size,Chest,Waist,Hips,Hollow to Floor' | split: ',' -%}
+      {%- assign junior_bridesmaid_size-inch_data = 'J4|J4:22:20:25:42,J6|J6:24:22:27:45,J8|J8:26:24:29:48,J10|J10:28:26:31:50,J12|J12:30:28:33:51,J14|J14:32:30:35:53,J16|J16:34:32:37:55' | split: ',' -%}
+      {%- assign junior_bridesmaid_size-cm_data = 'J4|J4:56:51:63.5:107,J6|J6:61:56:68.5:114.5,J8|J8:66:61:74:122,J10|J10:71:66:79:127,J12|J12:76:71:84:129.5,J14|J14:81:76:89:134.5,J16|J16:86.5:81:94:139.5' | split: ',' -%}
+
+      {%- assign rings_size-table_headers = 'Our Size,US Size,Circumference,Diameter' | split: ',' -%}
+      {%- assign rings_size-inch_data = 'R5|R5:US5:19.42:6.18,R6|R6:US6:20.41:6.5,R7|R7:US7:21.39:6.81,R8|R8:US8:22.51:7.17,R9|R9:US9:23.37:7.44,R10|R10:US10:24.49:7.8,R11|R11:US11:25.48:8.11,R12|R12:US12:26.34:8.39,R13|R13:US13:27.46:8.74' | split: ',' -%}
+      {%- assign rings_size-cm_data = 'R5|R5:US5:49.32:15.7,R6|R6:US6:51.83:16.5,R7|R7:US7:54.34:17.3,R8|R8:US8:57.17:18.2,R9|R9:US9:59.37:18.9,R10|R10:US10:62.2:19.8,R11|R11:US11:64.71:20.6,R12|R12:US12:66.91:21.3,R13|R13:US13:69.74:22.2' | split: ',' -%}
+
+      {%- assign shoes_size-table_headers = 'Our Size,EU,US,UK,CN,Foot Length,Foot Width' | split: ',' -%}
+      {%- assign shoes_size-inch_data = 'S35|S35:35:5:3:225:8.7-8.8:3.3,S36|S36:36:6:4:230:9.0-9.1:3.3-3.5,S37|S37:37:6.5-7:4.5-5:235:9.2-9.3:3.5,S38|S38:38:7.5:5.5:240:9.5-9.6:3.5-3.7,S39|S39:39:8.5:6.5:250:9.7-9.8:3.7,S40|S40:40:9:7.5-8:255:10.0-10.1:3.7-3.9,S41|S41:41:9.5-10:8.5:260:10.3-10.4:3.9,S42|S42:42:10.5:9.5:270:10.6-10.7:3.9-4.1,S43|S43:43:11.5-12:10:275:10.8-11:4.1-4.3' | split: ',' -%}
+      {%- assign shoes_size-cm_data = 'S35|S35:35:5:3:225:22.1-22.3:8.5,S36|S36:36:6:4:230:22.8-23.1:8.5-9.0,S37|S37:37:6.5-7:4.5-5:235:23.4-23.7:9.0,S38|S38:38:7.5:5.5:240:24.1-24.3:9.0-9.5,S39|S39:39:8.5:6.5:250:24.7-25.0:9.5,S40|S40:40:9:7.5-8:255:25.3-25.6:9.5-10.0,S41|S41:41:9.5-10:8.5:260:26.2-26.4:10.0,S42|S42:42:10.5:9.5:270:26.9-27.1:10.0-10.5,S43|S43:43:11-11.5:10:275:27.5-27.8:10.5-11' | split: ',' -%}
+
+      {%- assign suits_size-table_headers = 'Size,Chest,Waist,Hips,Jacket Length,Sleeve Length,Shoulder Width,Jacket Waist,Pant Length' | split: ',' -%}
+      {%- assign suits_size-inch_data = 'XS|XS:37:28.25:35.5:27.5:23.5:17:33.75:40.5,S|S:38.5:30:37:28.25:24:17.25:35.5:41,M|M:40.25:31.5:38.5:28.25:24.75:17.5:37:41.25,L|L:41.75:33:40:29.25:24.75:18:38.5:41.75,XL|XL:43.25:34.5:41.75:29.25:25.25:18.25:40.25:43,2XL|2XL:45:36.5:43.5:30:26.25:18.5:41.75:43,3XL|3XL:46.5:38.5:45.5:30.25:27.25:19:43.25:43.25,4XL|4XL:48:40.5:47.5:30.75:27.5:20:45:43.25,5XL|5XL:49.5:42.5:49.5:31:28:20.5:46.5:43.75' | split: ',' -%}
+      {%- assign suits_size-cm_data = 'XS|XS:94:72:90:70:60:43:86:103,S|S:98:76:94:72:61:44:90:104,M|M:102:80:98:72:63:44.5:94:105,L|L:106:84:102:74:63:45.5:98:106,XL|XL:110:88:106:74:64:46.5:102:109,2XL|2XL:114:93:111:76.5:67:47:106:109,3XL|3XL:118:98:116:77:69:48.5:110:110,4XL|4XL:122:103:121:78:70:50.5:114:110,5XL|5XL:126:108:126:79:71:52:118:111' | split: ',' -%}
+
+      {%- assign boy_suits_size-table_headers = 'Size,Age & Height,Bust,Waist,Length (Top),Length (Bottom)' | split: ',' -%}
+      {%- assign boy_suits_size-inch_data = 'BS100|BS100:2-3 Years (100cm):25.25:19:16.25:19.75,BS110|BS110:3-4 Years (110cm):26.75:19.75:17.25:21.75,BS120|BS120:4-5 Years (120cm):28.25:20.75:18.5:23.5,BS130|BS130:5-6 Years (130cm):30:22:19.75:26,BS140|BS140:7-8 Years (140cm):31.5:23.25:20.75:28.75,BS150|BS150:9-10 Years (150cm):33:24.5:22:31.5' | split: ',' -%}
+      {%- assign boy_suits_size-cm_data = 'BS100|BS100:2-3 Years (100cm):64.1:48.3:41.3:50.2,BS110|BS110:3-4 Years (110cm):67.9:50.2:43.8:55.2,BS120|BS120:4-5 Years (120cm):71.8:52.7:47:59.7,BS130|BS130:5-6 Years (130cm):76.2:55.9:50.2:66,BS140|BS140:7-8 Years (140cm):80:59.1:52.7:73,BS150|BS150:9-10 Years (150cm):83.8:62.2:55.9:80' | split: ',' -%}
+
+{% if template.name == 'page' %}
+  {%- assign default_unit = 'inch' -%}
+  <style>
+  .size-chart-section .size-table {
+	  width:100%;
+	  margin-bottom: 20px;
+	  max-width: 600px;
+      margin: 0 auto;
+  }
+  .size-chart-section {
+	  width: 100%;
+      font-size: 0.9em;
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+  .size-tabel-before {
+	  width: 100%;
+	  overflow-x: auto;
+	  -webkit-overflow-scrolling: touch;
+  }
+  .size-chart-header {
+    display: flex;
+    justify-content: center; 
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+.unit-toggle-container {
+    font-size: 0.8em;
+}
+.size-chart-section td, .size-chart-section th {
+    border: 1px solid #e6e3e3;
+}
+  .unit-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px 0;
+  }
+  .unit-toggle-label {
+    font-weight: 600;
+    font-size: 1em;
+  }
+  .unit-toggle-buttons {
+    display: flex;
+    gap: 5px;
+    border: 1px solid #e6e3e3;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .unit-toggle-btn {
+    padding: 8px 16px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    color: #333;
+  }
+  .unit-toggle-btn:hover {
+    background-color: #f5f5f5;
+  }
+  .unit-toggle-btn.active {
+    background-color: #333;
+    color: #fff;
+  }
+  </style>
+  
+  <div class="unit-toggle-container" id="pagetab-toggle-container">
+    <span class="unit-toggle-label">Unit:</span>
+    <div class="unit-toggle-buttons">
+      <button class="unit-toggle-btn" data-unit="inch" id="pagetab-toggle-inch">IN</button>
+      <button class="unit-toggle-btn" data-unit="cm" id="pagetab-toggle-cm">CM</button>
+    </div>
+  </div>
+  
+  <script>
+  (function() {
+    // Unique namespace for page size chart toggle
+    var sizeChartPageToggle = {
+      // Get saved unit preference or use default
+      savedUnit: localStorage.getItem('sizeChartUnit') || 'inch',
+      
+      // Function to toggle unit display
+      toggleUnit: function(unit) {
+        // Use specific container to scope the query
+        var container = document.getElementById('pagetab-toggle-container');
+        if (!container) return;
+        
+        // Hide all tables within size chart sections
+        var inchTables = container.parentElement.querySelectorAll('.inch-table');
+        var cmTables = container.parentElement.querySelectorAll('.cm-table');
+        
+        // Show/hide tables based on selected unit
+        if (unit === 'inch') {
+          inchTables.forEach(function(table) {
+            table.style.display = 'table';
+          });
+          cmTables.forEach(function(table) {
+            table.style.display = 'none';
+          });
+          // Update button states
+          var inchBtn = document.getElementById('pagetab-toggle-inch');
+          var cmBtn = document.getElementById('pagetab-toggle-cm');
+          if (inchBtn) inchBtn.classList.add('active');
+          if (cmBtn) cmBtn.classList.remove('active');
+        } else {
+          inchTables.forEach(function(table) {
+            table.style.display = 'none';
+          });
+          cmTables.forEach(function(table) {
+            table.style.display = 'table';
+          });
+          // Update button states
+          var inchBtn = document.getElementById('pagetab-toggle-inch');
+          var cmBtn = document.getElementById('pagetab-toggle-cm');
+          if (inchBtn) inchBtn.classList.remove('active');
+          if (cmBtn) cmBtn.classList.add('active');
+        }
+        
+        // Save preference
+        localStorage.setItem('sizeChartUnit', unit);
+      },
+      
+      // Initialize function
+      init: function() {
+        var self = this;
+        this.toggleUnit(this.savedUnit);
+        
+        // Add click handlers to toggle buttons
+        var inchBtn = document.getElementById('pagetab-toggle-inch');
+        var cmBtn = document.getElementById('pagetab-toggle-cm');
+        
+        if (inchBtn) {
+          inchBtn.addEventListener('click', function() {
+            self.toggleUnit('inch');
+          });
+        }
+        
+        if (cmBtn) {
+          cmBtn.addEventListener('click', function() {
+            self.toggleUnit('cm');
+          });
+        }
+      }
+    };
+    
+    // Initialize on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        sizeChartPageToggle.init();
+      });
+    } else {
+      // DOM already loaded
+      sizeChartPageToggle.init();
+    }
+  })();
+  </script>
+  {%- comment -%} General Size Table {%- endcomment -%}
+  <div class="size-chart-section">
+    <div class="size-chart-header">Dress Size (Made to Order)</div>
+    <div class="size-tabel-before">
+    {%- assign table_headers = general_size-table_headers -%}
+    {%- assign inch_data = general_size-inch_data -%}
+    {%- assign cm_data = general_size-cm_data -%}
+    
+    <table class="size-table inch-table" style="display:{% if default_unit == 'inch' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in inch_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    
+    <table class="size-table cm-table" style="display:{% if default_unit == 'cm' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in cm_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  {%- comment -%} Flower Girl Size Table {%- endcomment -%}
+  <div class="size-chart-section">
+    <div class="size-chart-header">Flower Girl Dress Size</div>
+    <div class="size-tabel-before">
+    {%- assign table_headers = flower_girl_size-table_headers -%}
+    {%- assign inch_data = flower_girl_size-inch_data -%}
+    {%- assign cm_data = flower_girl_size-cm_data -%}
+    
+    <table class="size-table inch-table" style="display:{% if default_unit == 'inch' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in inch_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    
+    <table class="size-table cm-table" style="display:{% if default_unit == 'cm' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in cm_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  {%- comment -%} Flower Girl New Size Table {%- endcomment -%}
+  {% comment %} <div class="size-chart-section">
+    <div class="size-chart-header">Flower Girl Dress Size (Same as size above)</div>
+    <div class="size-tabel-before">
+    {%- assign table_headers = flower_girl_new_size-table_headers -%}
+    {%- assign inch_data = flower_girl_new_size-inch_data -%}
+    {%- assign cm_data = flower_girl_new_size-cm_data -%}
+    
+    <table class="size-table inch-table" style="display:{% if default_unit == 'inch' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in inch_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    
+    <table class="size-table cm-table" style="display:{% if default_unit == 'cm' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in cm_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    </div>
+  </div> {% endcomment %}
+
+  {%- comment -%} Junior Bridesmaid Size Table {%- endcomment -%}
+  <div class="size-chart-section">
+    <div class="size-chart-header">Junior Bridesmaid Dress Size</div>
+    <div class="size-tabel-before">
+    {%- assign table_headers = junior_bridesmaid_size-table_headers -%}
+    {%- assign inch_data = junior_bridesmaid_size-inch_data -%}
+    {%- assign cm_data = junior_bridesmaid_size-cm_data -%}
+    
+    <table class="size-table inch-table" style="display:{% if default_unit == 'inch' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in inch_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    
+    <table class="size-table cm-table" style="display:{% if default_unit == 'cm' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in cm_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  {%- comment -%} Rings Size Table {%- endcomment -%}
+  <div class="size-chart-section">
+    <div class="size-chart-header">Rings Size</div>
+    <div class="size-tabel-before">
+    {%- assign table_headers = rings_size-table_headers -%}
+    {%- assign inch_data = rings_size-inch_data -%}
+    {%- assign cm_data = rings_size-cm_data -%}
+    
+    <table class="size-table inch-table" style="display:{% if default_unit == 'inch' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in inch_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    
+    <table class="size-table cm-table" style="display:{% if default_unit == 'cm' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in cm_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  {%- comment -%} Shoes Size Table {%- endcomment -%}
+  <div class="size-chart-section">
+    <div class="size-chart-header">Womens Shoes Size</div>
+    <div class="size-tabel-before">
+    {%- assign table_headers = shoes_size-table_headers -%}
+    {%- assign inch_data = shoes_size-inch_data -%}
+    {%- assign cm_data = shoes_size-cm_data -%}
+    
+    <table class="size-table inch-table" style="display:{% if default_unit == 'inch' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in inch_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    
+    <table class="size-table cm-table" style="display:{% if default_unit == 'cm' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in cm_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  {%- comment -%} Suits Size Table {%- endcomment -%}
+  <div class="size-chart-section">
+    <div class="size-chart-header">Mens Suits Size</div>
+    <div class="size-tabel-before">
+    {%- assign table_headers = suits_size-table_headers -%}
+    {%- assign inch_data = suits_size-inch_data -%}
+    {%- assign cm_data = suits_size-cm_data -%}
+    
+    <table class="size-table inch-table" style="display:{% if default_unit == 'inch' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in inch_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    
+    <table class="size-table cm-table" style="display:{% if default_unit == 'cm' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in cm_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  {%- comment -%} Boy Suits Size Table {%- endcomment -%}
+  <div class="size-chart-section">
+    <div class="size-chart-header">Boys Suits Size</div>
+    <div class="size-tabel-before">
+    {%- assign table_headers = boy_suits_size-table_headers -%}
+    {%- assign inch_data = boy_suits_size-inch_data -%}
+    {%- assign cm_data = boy_suits_size-cm_data -%}
+    
+    <table class="size-table inch-table" style="display:{% if default_unit == 'inch' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in inch_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    
+    <table class="size-table cm-table" style="display:{% if default_unit == 'cm' %}table{% else %}none{% endif %};">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in cm_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    </div>
+  </div>
+{% endif %}
+
+{% if template.name == 'product' %}
+<style>
+.size-chart-notice {
+  font-size: 0.85em;
+  color: #666;
+  margin-bottom: 15px;
+  padding: 10px;
+  line-height: 1.5;
+}
+.size-chart-notice a {
+  color: #5457c8;
+  text-decoration: underline;
+}
+.size-chart-notice a:hover {
+  color: #2025f7;
+}
+  .size-chart-section .size-table {
+	  width:100%;
+	  margin-bottom: 20px;
+	  max-width: 600px;
+      margin: 0 auto;
+  }
+  .size-chart-section {
+	  width: 100%;
+      font-size: 0.85em;
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+  .size-chart-section td, .size-chart-section th {
+    border: 1px solid #e6e3e3;
+}
+</style>
+{%- assign tags_lower = product.tags | handle -%}
+{%- assign size_type = '' -%}
+{%- assign default_unit = 'inch' -%}
+{%- if tags_lower contains 'womens-rings-size' or tags_lower contains 'women-s-rings-size' -%}
+  {%- assign size_type = 'womens_rings_size' -%}
+{%- elsif tags_lower contains 'mens-rings-size' or tags_lower contains 'men-s-rings-size' -%}
+  {%- assign size_type = 'mens_rings_size' -%}
+{%- elsif tags_lower contains 'flower-girl-new-size' or tags_lower contains 'flower-girl02' -%}
+  {%- assign size_type = 'flower_girl_new_size' -%}
+{%- elsif tags_lower contains 'flower-girl-size' -%}
+  {%- assign size_type = 'flower_girl_size' -%}
+{%- elsif tags_lower contains 'junior-bridesmaid-size' -%}
+  {%- assign size_type = 'junior_bridesmaid_size' -%}
+{%- elsif tags_lower contains 'shoes-size' or tags_lower contains 'shoes-size-for-women' -%}
+  {%- assign size_type = 'shoes_size' -%}
+{%- elsif tags_lower contains 'boy-suits-size' -%}
+  {%- assign size_type = 'boy_suits_size' -%}
+{%- elsif tags_lower contains 'jacket-size' or tags_lower contains 'jacket-wraps-size' -%}
+  {%- assign size_type = 'jacket_size' -%}
+{%- elsif tags_lower contains 'vest-size' -%}
+  {%- assign size_type = 'vest_size' -%}
+{%- elsif tags_lower contains 'mens-pants-size' or tags_lower contains 'men-s-pants-size' -%}
+  {%- assign size_type = 'mens_pants_size' -%}
+{%- elsif tags_lower contains 'shapewear-size' -%}
+  {%- assign size_type = 'shapewear_size' -%}
+{%- elsif tags_lower contains 'shirt-size' -%}
+  {%- assign size_type = 'shirt_size' -%}
+{%- elsif tags_lower contains 'instock-suits-size' -%}
+  {%- assign size_type = 'instock_suits_size' -%}
+{%- elsif tags_lower contains 'suits size' -%}
+  {%- assign size_type = 'suits_size' -%}
+{%- elsif tags_lower contains 'womens-dress-size' -%}
+  {%- assign size_type = 'womens_dress_size' -%}
+{%- elsif tags_lower contains 'general-plus-size' -%}
+  {%- assign size_type = 'general_plus_size' -%}
+{%- elsif tags_lower contains 'general-size' or tags_lower contains 'size-option' or tags_lower contains 'general-size-short' -%}
+  {%- assign size_type = 'general_size' -%}
+{%- endif -%}
+
+{%- if size_type != '' -%}
+
+    {%- if size_type == 'general_size' or size_type == 'general_plus_size' or size_type == 'jacket_size' -%}
+      {%- assign table_headers = general_size-table_headers -%}
+      {%- assign inch_data = general_size-inch_data -%}
+	  {%- assign cm_data = general_size-cm_data -%}
+    {%- elsif size_type == 'flower_girl_size' -%}
+      {%- assign table_headers = flower_girl_size-table_headers -%}
+      {%- assign inch_data = flower_girl_size-inch_data -%}
+      {%- assign cm_data = flower_girl_size-cm_data -%}
+    {%- elsif size_type == 'flower_girl_new_size' -%}
+      {%- assign table_headers = flower_girl_new_size-table_headers -%}
+      {%- assign inch_data = flower_girl_new_size-inch_data -%}
+      {%- assign cm_data = flower_girl_new_size-cm_data -%}
+    {%- elsif size_type == 'junior_bridesmaid_size' -%}
+      {%- assign table_headers = junior_bridesmaid_size-table_headers -%}
+      {%- assign inch_data = junior_bridesmaid_size-inch_data -%}
+      {%- assign cm_data = junior_bridesmaid_size-cm_data -%}
+    {%- elsif size_type == 'mens_rings_size' or size_type == 'womens_rings_size' -%}
+      {%- assign table_headers = rings_size-table_headers -%}
+      {%- assign inch_data = rings_size-inch_data -%}
+      {%- assign cm_data = rings_size-cm_data -%}
+    {%- elsif size_type == 'shoes_size' -%}
+      {%- assign table_headers = shoes_size-table_headers -%}
+      {%- assign inch_data = shoes_size-inch_data -%}
+      {%- assign cm_data = shoes_size-cm_data -%}
+    {%- elsif size_type == 'suits_size' -%}
+      {%- assign table_headers = suits_size-table_headers -%}
+      {%- assign inch_data = suits_size-inch_data -%}
+      {%- assign cm_data = suits_size-cm_data -%}
+    {%- elsif size_type == 'boy_suits_size' -%}
+      {%- assign table_headers = boy_suits_size-table_headers -%}
+      {%- assign inch_data = boy_suits_size-inch_data -%}
+      {%- assign cm_data = boy_suits_size-cm_data -%}
+    {%- endif -%}
+ 
+    <div class="size-chart-notice">
+      If the product images or description include a dedicated size chart, please refer to that one for accuracy. If no specific chart is provided, kindly use the general size chart below (<span style="text-transform: uppercase; font-weight: 700;">{{default_unit}}</span>). If this section is blank, feel free to visit our <a target="_blank" href="{{ size_chart_page }}">Size Guide</a>{% if measurement_guide_page != '' %} and <a target="_blank" href="{{ measurement_guide_page }}">Measurement Guide</a> {% endif %} page for more details.
+    </div>
+
+    <div class="size-chart-section">
+    <!-- INCH Table -->
+    <table class="size-table inch-table" id="prodtab-inch-table" style="display:{% if default_unit == 'inch' %}table{% else %}none{% endif %}; width:95%;">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in inch_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+
+    <!-- CM Table -->
+    <table class="size-table cm-table" id="prodtab-cm-table" style="display:{% if default_unit == 'cm' %}table{% else %}none{% endif %}; width:95%;">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in cm_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    </div>
+    {%- endif -%}
+{%- endif -%}

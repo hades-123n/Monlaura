@@ -1,0 +1,231 @@
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Check if the current page is the first page
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPage = urlParams.get('page') || '1';
+
+    // Only run SKU sorting and insertion if we're on the first page
+    if (currentPage === '1') {
+        let skusWithPosition = urlParams.get('sku');
+        skusWithPosition = skusWithPosition ? skusWithPosition.split(',') : [];
+
+        // Map to store SKU and its position (if any)
+        const skuPositionMap = {};
+
+        // Parse SKU and position from the URL
+        skusWithPosition = skusWithPosition.map((item, index) => {
+            let [sku, position] = item.split(':');
+            sku = sku.trim().toLowerCase();  // Normalize SKU by trimming and converting to lowercase
+            position = parseInt(position);  // Parse position as an integer
+            if (!isNaN(position)) {
+                skuPositionMap[sku] = position;  // Store position if valid
+            }
+            return sku;  // Return SKU only
+        });
+
+        // Get collection handle from URL path (remove query string first)
+        const pathname = window.location.pathname.split('?')[0];
+        const collectionHandle = pathname.split('/').pop() || pathname.split('/').filter(Boolean).pop() || 'default';
+
+        // Get the number of products per page from the section settings or use default
+        const maxProductsPerPage = {{ section.settings.products_per_page | default: 24 }};
+
+        // Function to get stored SKUs from localStorage based on the collectionHandle
+        function getStoredSkus(collectionHandle) {
+            try {
+                const storedData = localStorage.getItem('skus_' + collectionHandle);
+                if (storedData) {
+                    const parsedData = JSON.parse(storedData);
+
+                    // Check if the timestamp exists in the stored data (for backward compatibility)
+                    if (!parsedData.timestamp) {
+                        // If there's no timestamp, we assume the data is old and add a default timestamp (7 days ago)
+                        parsedData.timestamp = new Date().getTime() - 7 * 24 * 60 * 60 * 1000;  // 7 days ago
+                        localStorage.setItem('skus_' + collectionHandle, JSON.stringify(parsedData));  // Save updated data
+                    }
+
+                    const currentTime = new Date().getTime();
+                    // Check if the stored data is older than 7 days
+                    if (currentTime - parsedData.timestamp <= 7 * 24 * 60 * 60 * 1000) {
+                        // Return the data object, not an array
+                        return parsedData.data || null;  // Return stored data if within 7 days
+                    } else {
+                        localStorage.removeItem('skus_' + collectionHandle);  // Remove expired data
+                        return null;  // Return null if data is expired
+                    }
+                }
+                return null;  // Return null if no data found
+            } catch (error) {
+                console.error("Error retrieving data from localStorage: ", error);
+                return null;  // Return null on error
+            }
+        }
+
+        // Function to save SKUs and their positions to localStorage based on collectionHandle
+        function saveSkusToLocalStorage(collectionHandle, skus, skuPositionMap) {
+            try {
+                const dataToSave = {
+                    data: { skus, skuPositionMap },
+                    timestamp: new Date().getTime()  // Save current timestamp
+                };
+                localStorage.setItem('skus_' + collectionHandle, JSON.stringify(dataToSave));
+            } catch (error) {
+                console.error("Error saving data to localStorage: ", error);
+            }
+        }
+
+        // Function to sort the SKUs based on position and SKU order
+        function sortSkus(skus, skuPositionMap) {
+            const sortedSkus = new Array(maxProductsPerPage).fill(null);  // Array to store SKUs by position
+            const unpositionedSkus = [];  // SKUs that don't have a specified position
+
+            // First, place SKUs with a specific position
+            skus.forEach((sku, index) => {
+                const position = skuPositionMap[sku];
+                if (position && position <= maxProductsPerPage && !sortedSkus[position - 1]) {
+                    sortedSkus[position - 1] = sku;  // Place SKU at the correct position (0-based index)
+                } else {
+                    unpositionedSkus.push(sku);  // Collect SKUs that don't have a position or can't be placed yet
+                }
+            });
+
+            // Next, place SKUs without a specific position
+            let availableIndex = 0;
+            unpositionedSkus.forEach(sku => {
+                // Find the next available slot in the sortedSkus array
+                while (availableIndex < maxProductsPerPage && sortedSkus[availableIndex]) {
+                    availableIndex++;
+                }
+                if (availableIndex < maxProductsPerPage) {
+                    sortedSkus[availableIndex] = sku;
+                    availableIndex++;
+                }
+            });
+
+            // Filter out any null values (just in case)
+            return sortedSkus.filter(sku => sku !== null);
+        }
+
+        // Function to load product by SKU using an Ajax call
+        async function loadProductBySku(sku) {
+            try {
+                const response = await fetch(`/search?view=ajax_collection_results&q=${sku}&type=product`);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch SKU ${sku}: ${response.statusText}`);
+                }
+                const data = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+                const productElement = doc.querySelector('.collection__grid__item[data-sku]');
+                if (!productElement) {
+                    throw new Error(`Product for SKU ${sku} not found`);
+                }
+                return productElement;
+            } catch (error) {
+                console.error("Error loading product by SKU:", error);
+                return null;  // Return null to skip this product if loading fails
+            }
+        }
+
+        // Get products from the current page
+        const productGrid = document.querySelector('#product-grid') || document.querySelector('.collection-listing');
+        if (!productGrid) {
+            return;  // Exit if product grid not found
+        }
+
+        const productContainers = productGrid.querySelectorAll('.collection__grid__item[data-sku]');
+        const productList = Array.from(productContainers);
+
+        // If there are SKUs in the URL, update localStorage
+        if (skusWithPosition.length > 0) {
+            saveSkusToLocalStorage(collectionHandle, skusWithPosition, skuPositionMap);
+        } else {
+            // If no SKU parameter, fetch from localStorage
+            const storedData = getStoredSkus(collectionHandle);
+            if (storedData && typeof storedData === 'object' && storedData.skus) {
+                skusWithPosition = storedData.skus || [];
+                Object.assign(skuPositionMap, storedData.skuPositionMap || {});
+            }
+        }
+        
+        // Debug: Log localStorage data
+        {% comment %} console.log('Collection Handle:', collectionHandle);
+        console.log('URL SKUs:', skusWithPosition);
+        console.log('Stored Data:', getStoredSkus(collectionHandle));
+        console.log('Final SKUs:', skusWithPosition);
+        console.log('SKU Position Map:', skuPositionMap); {% endcomment %}
+
+        // Only proceed if we have SKUs to sort
+        if (skusWithPosition.length > 0) {
+            // Sort SKUs based on position (if provided) and SKU order
+            const sortedSkus = sortSkus(skusWithPosition, skuPositionMap);
+
+            // Ensure that we move products according to the sorted SKUs
+            sortedSkus.forEach(async (sku, index) => {
+                let productContainer = productList.find(product => {
+                    const productSku = product.getAttribute('data-sku');
+                    return productSku && productSku.trim().toLowerCase() === sku;
+                });
+
+                if (!productContainer) {
+                    // If the product is not on the current page, load it via Ajax
+                    productContainer = await loadProductBySku(sku);
+                    if (productContainer) {
+                        productGrid.appendChild(productContainer);  // Append if loaded via Ajax
+                    }
+                }
+
+                if (productContainer) {
+                    let targetPosition = skuPositionMap[sku] || index + 1;
+
+                    // If target position exceeds the maximum products per page, set to last
+                    if (targetPosition > maxProductsPerPage) {
+                        targetPosition = maxProductsPerPage;
+                    }
+
+                    const targetElement = productGrid.querySelector(`.collection__grid__item:nth-child(${targetPosition})`);
+                    if (targetElement) {
+                        targetElement.parentNode.insertBefore(productContainer, targetElement);
+                    } else {
+                        // If no specific position is available, append to the end
+                        productGrid.appendChild(productContainer);
+                    }
+                }
+            });
+
+            // Function to remove duplicates and keep the Ajax-fetched product
+            function removeDuplicateSkus() {
+                const products = Array.from(productGrid.querySelectorAll('.collection__grid__item[data-sku]'));
+
+                const seenSkus = new Set();
+
+                products.forEach(product => {
+                    const sku = product.getAttribute('data-sku')?.trim().toLowerCase();
+
+                    if (seenSkus.has(sku)) {
+                        // Remove the product if it's a duplicate
+                        product.remove();
+                    } else {
+                        // Mark the SKU as seen
+                        seenSkus.add(sku);
+                    }
+                });
+            }
+
+            // After sorting and appending products, remove duplicates
+            setTimeout(function() {
+                removeDuplicateSkus();
+            }, 500);  // Delay to allow async operations to complete
+        }
+
+        // Handle errors gracefully (e.g., missing SKUs, invalid positions)
+        try {
+            // Custom logic for graceful degradation or error handling can go here
+        } catch (error) {
+            console.error("An error occurred while processing SKUs:", error);
+        }
+    } else {
+        console.log("Not on the first page, skipping SKU sorting logic.");
+    }
+});
+</script>

@@ -1,0 +1,278 @@
+{% doc %}
+  @prompt
+    back to collection if the the product link has collection handle, The link text is the collection name, Why it is not shown?
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% liquid
+  assign collection_handle = ''
+  assign show_link = false
+  assign collection_obj = null
+  
+  if product.collections.size > 0
+
+    if request.path contains '/collections/'
+      assign url_parts = request.path | split: '/collections/'
+      if url_parts.size > 1
+        assign collection_part = url_parts[1] | split: '/'
+        assign collection_handle = collection_part[0]
+        assign collection_obj = collections[collection_handle]
+      endif
+    endif
+    
+    unless collection_obj
+      assign product_type_handle = product.type | handleize
+      assign found_collection = null
+      assign collection_found = false
+      
+      for collection in product.collections
+        unless collection_found
+          if collection.handle == product_type_handle
+            assign found_collection = collection
+            assign collection_found = true
+          endif
+        endunless
+      endfor
+      
+      if found_collection
+        assign collection_obj = found_collection
+      else
+        assign collection_obj = product.collections.first
+      endif
+    endunless
+    
+    if collection_obj
+      assign show_link = true
+    endif
+  endif
+%}
+
+{% if show_link %}
+<div class="backtocollection">
+  {% style %}
+    .backtolink {
+        background-color: #fff;
+        box-shadow: 0 4px 16px #0000001a;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .backtolink a {
+        text-decoration: underline;
+    }
+    .backtocollection {
+        margin: 10px;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+    }
+    .ai-back-collection-{{ ai_gen_id }} {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: {{ block.settings.padding_vertical }}px {{ block.settings.padding_horizontal }}px;
+      background-color: {{ block.settings.background_color }};
+      color: {{ block.settings.text_color }};
+      text-decoration: none;
+      border-radius: {{ block.settings.border_radius }}px;
+      font-size: {{ block.settings.font_size }}px;
+      transition: all 0.3s ease;
+      border: {{ block.settings.border_thickness }}px solid {{ block.settings.border_color }};
+      height: 46px;
+    }
+
+    .ai-back-collection-{{ ai_gen_id }}:hover {
+      background-color: {{ block.settings.hover_background_color }};
+      color: {{ block.settings.hover_text_color }};
+      border-color: {{ block.settings.hover_border_color }};
+    }
+
+    .ai-back-collection-icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size }}px;
+      height: {{ block.settings.icon_size }}px;
+      flex-shrink: 0;
+      display: flex;
+    }
+
+    .ai-back-collection-icon-{{ ai_gen_id }} svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+    }
+
+    .ai-back-collection-text-{{ ai_gen_id }} {
+      line-height: 1.2;
+    }
+
+    @media screen and (max-width: 749px) {
+      .ai-back-collection-{{ ai_gen_id }} {
+        font-size: {{ block.settings.font_size | times: 0.9 }}px;
+        padding: {{ block.settings.padding_vertical | times: 0.8 }}px {{ block.settings.padding_horizontal | times: 0.8 }}px;
+      }
+
+      .ai-back-collection-icon-{{ ai_gen_id }} {
+        width: {{ block.settings.icon_size | times: 0.9 }}px;
+        height: {{ block.settings.icon_size | times: 0.9 }}px;
+      }
+    }
+  {% endstyle %}
+  <a
+    href="{{ collection_obj.url }}"
+    class="ai-back-collection-{{ ai_gen_id }}"
+    {{ block.shopify_attributes }}
+  >
+    {% if block.settings.show_icon %}
+      <span class="ai-back-collection-icon-{{ ai_gen_id }}">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </span>
+    {% endif %}
+    <span class="ai-back-collection-text-{{ ai_gen_id }}">
+      {% if block.settings.prefix_text != blank %}{{ block.settings.prefix_text }} {% endif %}{{ collection_obj.title }}
+    </span>
+  </a>
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Back to collection",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "prefix_text",
+      "label": "Prefix text",
+      "default": "Back to"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show arrow icon",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "hover_background_color",
+      "label": "Hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "hover_text_color",
+      "label": "Hover text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "hover_border_color",
+      "label": "Hover border",
+      "default": "#cccccc"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Back to collection"
+    }
+  ]
+}
+{% endschema %}

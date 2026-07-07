@@ -1,0 +1,1884 @@
+{% comment %}Updated at 20251224{% endcomment %}
+{%- assign product_form_id = 'product-form-' | append: section.id -%}
+{%- assign measurement_img_small = 'how-to-measure-01.jpg' -%}
+{%- assign measurement_img_large = 'how-to-measure-02.jpg' -%}
+
+{%- assign tags_lower = product.tags | handle -%}
+{%- assign size_type = '' -%}
+{%- assign default_unit = 'inch' -%}
+{%- if tags_lower contains 'womens-rings-size' or tags_lower contains 'women-s-rings-size' -%}
+  {%- assign size_type = 'womens_rings_size' -%}
+{%- elsif tags_lower contains 'mens-rings-size' or tags_lower contains 'men-s-rings-size' -%}
+  {%- assign size_type = 'mens_rings_size' -%}
+{%- elsif tags_lower contains 'flower-girl-new-size' or tags_lower contains 'flower-girl02' -%}
+  {%- assign size_type = 'flower_girl_new_size' -%}
+  {%- assign default_unit = 'inch' -%}
+{%- elsif tags_lower contains 'flower-girl-size' -%}
+  {%- assign size_type = 'flower_girl_size' -%}
+{%- elsif tags_lower contains 'junior-bridesmaid-size' -%}
+  {%- assign size_type = 'junior_bridesmaid_size' -%}
+{%- elsif tags_lower contains 'shoes-size' or tags_lower contains 'shoes-size-for-women' -%}
+  {%- assign size_type = 'shoes_size' -%}
+{%- elsif tags_lower contains 'boy-suits-size' -%}
+  {%- assign size_type = 'boy_suits_size' -%}
+{%- elsif tags_lower contains 'jacket-size' or tags_lower contains 'jacket-wraps-size' -%}
+  {%- assign size_type = 'jacket_size' -%}
+{%- elsif tags_lower contains 'vest-size' -%}
+  {%- assign size_type = 'vest_size' -%}
+{%- elsif tags_lower contains 'mens-pants-size' or tags_lower contains 'men-s-pants-size' -%}
+  {%- assign size_type = 'mens_pants_size' -%}
+{%- elsif tags_lower contains 'shapewear-size' -%}
+  {%- assign size_type = 'shapewear_size' -%}
+{%- elsif tags_lower contains 'shirt-size' -%}
+  {%- assign size_type = 'shirt_size' -%}
+{%- elsif tags_lower contains 'instock-suits-size' -%}
+  {%- assign size_type = 'instock_suits_size' -%}
+{%- elsif tags_lower contains 'suits size' -%}
+  {%- assign size_type = 'suits_size' -%}
+{%- elsif tags_lower contains 'womens-dress-size' -%}
+  {%- assign size_type = 'womens_dress_size' -%}
+{%- elsif tags_lower contains 'general-plus-size' -%}
+  {%- assign size_type = 'general_plus_size' -%}
+{%- elsif tags_lower contains 'general-size' or tags_lower contains 'size-option' or tags_lower contains 'general-size-short' -%}
+  {%- assign size_type = 'general_size' -%}
+{%- endif -%}
+
+{%- if size_type != '' -%}
+<div class="shopify-size-selector" data-size-type="{{ size_type }}">
+  <div class="size-option-name">
+    <span class="size-label"><strong>Size:</strong> <span id="size-select-size">Select Size</span></span>
+    <span id="size-chart-label" class="pretty-modal" data-modal-id="size-chart-value">Size Chart</span>
+  </div>
+  <div class="style-select-item-container">
+    {%- if size_type == 'general_size' -%}
+      {%- assign sizes = "Custom Size,US00,US0,US2,US4,US6,US8,US10,US12,US14,US16,US16W,US18W,US20W,US22W,US24W,US26W,US28W" | split: ',' -%}
+    {%- elsif size_type == 'general_plus_size' -%}
+      {%- assign sizes = "US12,US14,US16,US16W,US18W,US20W,US22W,US24W,US26W,US28W,Custom Size" | split: ',' -%}
+    {%- elsif size_type == 'flower_girl_size' -%}
+      {%- assign sizes = "Custom Size,C2,C3,C4,C5,C6,C7,C8,C10,C12,C14" | split: ',' -%}
+    {%- elsif size_type == 'flower_girl_new_size' -%}
+      {%- assign sizes = "Custom Size,2Y,3Y,4Y,5Y,6Y,7Y,8Y,10Y,12Y,14Y" | split: ',' -%}
+    {%- elsif size_type == 'junior_bridesmaid_size' -%}
+      {%- assign sizes = "Custom Size,J4,J6,J8,J10,J12,J14,J16" | split: ',' -%}
+    {%- elsif size_type == 'shoes_size' -%}
+      {%- assign sizes = "S36,S37,S38,S39,S40,S41,S42" | split: ',' -%}
+    {%- elsif size_type == 'womens_dress_size' -%}
+      {%- assign sizes = "XXXS,XXS,XS,S,M,L,XL,2XL,3XL,4XL" | split: ',' -%}
+    {%- elsif size_type == 'instock_suits_size' -%}
+      {%- assign sizes = "2XS,S,M,L,XL,2XL,3XL,4XL,5XL" | split: ',' -%}
+    {%- elsif size_type == 'suits_size' -%}
+      {%- assign sizes = "Custom Size,XS,S,M,L,XL,2XL,3XL,4XL,5XL" | split: ',' -%}
+    {%- elsif size_type == 'womens_rings_size' -%}
+      {%- assign sizes = "R5,R5.5,R6,R6.5,R7,R7.5,R8,R8.5,R9,R9.5,R10,R10.5,R11" | split: ',' -%}
+    {%- elsif size_type == 'mens_rings_size' -%}
+      {%- assign sizes = "R7,R7.5,R8,R8.5,R9,R9.5,R10,R10.5,R11,R11.5,R12,R12.5,R13" | split: ',' -%}
+    {%- elsif size_type == 'jacket_size' -%}
+      {%- assign sizes = "Custom Size,US2,US4,US6,US8,US10,US12,US14,US16,US16W,US18W,US20W,US22W,US24W,US26W" | split: ',' -%}
+    {%- elsif size_type == 'vest_size' -%}
+      {%- assign sizes = "XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL" | split: ',' -%}
+    {%- elsif size_type == 'mens_pants_size' -%}
+      {%- assign sizes = "XS,S,M,L,XL,2XL,3XL,4XL,5XL" | split: ',' -%}
+    {%- elsif size_type == 'boy_suits_size' -%}
+      {%- assign sizes = "BS100,BS110,BS120,BS130,BS140,BS150" | split: ',' -%}
+    {%- elsif size_type == 'shapewear_size' -%}
+      {%- assign sizes = "S,M,L,XL,2XL" | split: ',' -%}
+    {%- elsif size_type == 'shirt_size' -%}
+      {%- assign sizes = "S,M,L,XL,2XL" | split: ',' -%}
+    {%- endif -%}
+    {% for sz in sizes %}
+      <label class="style-select-item {{ sz | handle }}-select-item">
+        <input type="radio" name="properties[Size]" value="{{ sz }}" form="{{ product_form_id }}" hidden>
+        <span>{{ sz }}</span>
+      </label>
+    {% endfor %}
+  </div>
+
+  <!-- Size Chart -->
+  <div id="size-chart-table" style="display:none; margin-top:10px;">
+    <!-- Chart Unit Toggle Switch -->
+    <div class="unit-toggle-container" style="margin-bottom:10px;">
+      <input type="radio" name="chart-unit" value="inch" id="chart-unit-in" hidden {% if default_unit == 'inch' %}checked{% endif %}>
+      <input type="radio" name="chart-unit" value="cm" id="chart-unit-cm" hidden {% if default_unit == 'cm' %}checked{% endif %}>
+      <div class="unit-toggle-switch chart-unit-toggle">
+        <label class="unit-toggle-label" for="chart-unit-in">INCH</label>
+        <span class="unit-toggle-slider"></span>
+        <label class="unit-toggle-label" for="chart-unit-cm">CM</label>
+      </div>
+    </div>
+
+    {%- comment -%} Define table data once for each size type {%- endcomment -%}
+    {%- if size_type == 'general_size' or size_type == 'general_plus_size' or size_type == 'jacket_size' -%}
+      {%- assign table_headers = "Size,Bust,Waist,Hips,Hollow to Floor" | split: ',' -%}
+      {%- assign inch_data = "US00|US00:30.5:23.5:33.75:57,US0|US0:31.5:24.5:34.75:57,US2|US2:32.5:25.5:35.75:57.75,US4|US4:33.5:26.5:36.75:57.75,US6|US6:34.5:27.5:37.75:59,US8|US8:35.5:28.5:38.75:59,US10|US10:36.5:29.5:39.75:59.75,US12|US12:38:31:41.25:59.75,US14|US14:39.5:32.5:42.75:61,US16|US16:41:34:44.25:61,US16W|US16W:43:36.25:45.5:61,US18W|US18W:45:38.5:47.5:61,US20W|US20W:47:40.75:49.5:61,US22W|US22W:49:43:51.5:61,US24W|US24W:51:45.25:53.5:61,US26W|US26W:53:47.5:55.5:61,US28W|US28W:55:49.5:57.5:61,US30W|US30W:57.5:52:60:61,US32W|US32W:60.5:55:63:61" | split: ',' -%}
+      {%- assign cm_data = "US00|US00:77.5:59.5:85.5:145,US0|US0:80:62:88.5:145,US2|US2:82.5:65:91:147,US4|US4:85:67.5:93.5:147,US6|US6:87.5:70:96:150,US8|US8:90:72.5:98.5:150,US10|US10:92.5:75:101:152,US12|US12:96.5:78.5:105:152,US14|US14:100.5:82.5:108.5:155,US16|US16:104:86.5:112.5:155,US16W|US16W:109:92:115.5:155,US18W|US18W:114.5:98:120.5:155,US20W|US20W:119.5:103.5:125.5:155,US22W|US22W:124.5:109:131:155,US24W|US24W:129.5:115:136:155,US26W|US26W:134.5:120.5:141:155,US28W|US28W:139.5:125.5:146:155,US30W|US30W:146:132:152.5:155,US32W|US32W:153.5:139.5:160:155" | split: ',' -%}
+    {%- elsif size_type == 'flower_girl_size' -%}
+      {%- assign table_headers = "Size,Chest,Waist,Hips,Hollow to Floor,Age" | split: ',' -%}
+      {%- assign inch_data = "C1|C1:20:19:19:26.8:1-2,C2|C2:21:20:20:29.5:2-3,C3|C3:22:21:21:32.3:2-3,C4|C4:23:22:22:34.6:4-5,C5|C5:24:23:23:36.6:4-5,C6|C6:25:24:25:38.6:6-7,C7|C7:26:25:27:40.2:6-7,C8|C8:27:26:28:42:8-9,C9|C9:28:27:29:43.7:8-9,C10|C10:29:28:31:45.3:10-11,C11|C11:30.5:29:33:47.2:10-11,C12|C12:32:30:34:49.2:12-13,C13|C13:33:31:34.5:50.8:12-13,C14|C14:34:32:35:52:14-15" | split: ',' -%}
+      {%- assign cm_data = "C1|C1:51:48.5:48.5:68:1-2,C2|C2:53.5:51:51:75:2-3,C3|C3:56:53.5:53.5:82:2-3,C4|C4:58.5:56:56:88:4-5,C5|C5:61:58.5:58.5:93:4-5,C6|C6:63.5:61:63.5:98:6-7,C7|C7:66:63.5:68.5:102:6-7,C8|C8:68.5:66:71:107:8-9,C9|C9:71:68.5:74:111:8-9,C10|C10:74:71:79:115:10-11,C11|C11:77.5:74:84:120:10-11,C12|C12:81:76:86.5:125:12-13,C13|C13:84:79:87.5:129:12-13,C14|C14:86.5:81:89:132:14-15" | split: ',' -%}
+    {%- elsif size_type == 'flower_girl_new_size' -%}
+      {%- assign table_headers = "Size,Chest,Waist,Hips,Hollow to Floor,Age" | split: ',' -%}
+      {%- assign inch_data = "1Y|1Y:20:19:19:26.8:1-2,2Y|2Y:21:20:20:29.5:2-3,3Y|3Y:22:21:21:32.3:2-3,4Y|4Y:23:22:22:34.6:4-5,5Y|5Y:24:23:23:36.6:4-5,6Y|6Y:25:24:25:38.6:6-7,7Y|7Y:26:25:27:40.2:6-7,8Y|8Y:27:26:28:42:8-9,9Y|9Y:28:27:29:43.7:8-9,10Y|10Y:29:28:31:45.3:10-11,11Y|11Y:30.5:29:33:47.2:10-11,12Y|12Y:32:30:34:49.2:12-13,13Y|13Y:33:31:34.5:50.8:12-13,14Y|14Y:34:32:35:52:14-15" | split: ',' -%}
+      {%- assign cm_data = "1Y|1Y:51:48.5:48.5:68:1-2,2Y|2Y:53.5:51:51:75:2-3,3Y|3Y:56:53.5:53.5:82:2-3,4Y|4Y:58.5:56:56:88:4-5,5Y|5Y:61:58.5:58.5:93:4-5,6Y|6Y:63.5:61:63.5:98:6-7,7Y|7Y:66:63.5:68.5:102:6-7,8Y|8Y:68.5:66:71:107:8-9,9Y|9Y:71:68.5:74:111:8-9,10Y|10Y:74:71:79:115:10-11,11Y|11Y:77.5:74:84:120:10-11,12Y|12Y:81:76:86.5:125:12-13,13Y|13Y:84:79:87.5:129:12-13,14Y|14Y:86.5:81:89:132:14-15" | split: ',' -%}
+    {%- elsif size_type == 'junior_bridesmaid_size' -%}
+      {%- assign table_headers = "Size,Chest,Waist,Hips,Hollow to Floor" | split: ',' -%}
+      {%- assign inch_data = "J4|J4:22:20:25:42,J6|J6:24:22:27:45,J8|J8:26:24:29:48,J10|J10:28:26:31:50,J12|J12:30:28:33:51,J14|J14:32:30:35:53,J16|J16:34:32:37:55" | split: ',' -%}
+      {%- assign cm_data = "J4|J4:56:51:63.5:107,J6|J6:61:56:68.5:114.5,J8|J8:66:61:74:122,J10|J10:71:66:79:127,J12|J12:76:71:84:129.5,J14|J14:81:76:89:134.5,J16|J16:86.5:81:94:139.5" | split: ',' -%}
+    {%- elsif size_type == 'mens_rings_size' or size_type == 'womens_rings_size' -%}
+      {%- assign table_headers = "Our Size,US Size,Circumference,Diameter" | split: ',' -%}
+      {%- assign inch_data = "R5|R5:US5:19.42:6.18,R6|R6:US6:20.41:6.5,R7|R7:US7:21.39:6.81,R8|R8:US8:22.51:7.17,R9|R9:US9:23.37:7.44,R10|R10:US10:24.49:7.8,R11|R11:US11:25.48:8.11,R12|R12:US12:26.34:8.39,R13|R13:US13:27.46:8.74" | split: ',' -%}
+      {%- assign cm_data = "R5|R5:US5:49.32:15.7,R6|R6:US6:51.83:16.5,R7|R7:US7:54.34:17.3,R8|R8:US8:57.17:18.2,R9|R9:US9:59.37:18.9,R10|R10:US10:62.2:19.8,R11|R11:US11:64.71:20.6,R12|R12:US12:66.91:21.3,R13|R13:US13:69.74:22.2" | split: ',' -%}
+    {%- elsif size_type == 'shoes_size' -%}
+      {%- assign table_headers = "Our Size,EU,US,UK,CN,Foot Length,Foot Width" | split: ',' -%}
+      {%- assign inch_data = "S35|S35:35:5:3:225:8.7-8.8:3.3,S36|S36:36:6:4:230:9.0-9.1:3.3-3.5,S37|S37:37:6.5-7:4.5-5:235:9.2-9.3:3.5,S38|S38:38:7.5:5.5:240:9.5-9.6:3.5-3.7,S39|S39:39:8.5:6.5:250:9.7-9.8:3.7,S40|S40:40:9:7.5-8:255:10.0-10.1:3.7-3.9,S41|S41:41:9.5-10:8.5:260:10.3-10.4:3.9,S42|S42:42:10.5:9.5:270:10.6-10.7:3.9-4.1,S43|S43:43:11.5-12:10:275:10.8-11:4.1-4.3" | split: ',' -%}
+      {%- assign cm_data = "S35|S35:35:5:3:225:22.1-22.3:8.5,S36|S36:36:6:4:230:22.8-23.1:8.5-9.0,S37|S37:37:6.5-7:4.5-5:235:23.4-23.7:9.0,S38|S38:38:7.5:5.5:240:24.1-24.3:9.0-9.5,S39|S39:39:8.5:6.5:250:24.7-25.0:9.5,S40|S40:40:9:7.5-8:255:25.3-25.6:9.5-10.0,S41|S41:41:9.5-10:8.5:260:26.2-26.4:10.0,S42|S42:42:10.5:9.5:270:26.9-27.1:10.0-10.5,S43|S43:43:11-11.5:10:275:27.5-27.8:10.5-11" | split: ',' -%}  
+    {%- elsif size_type == 'suits_size' -%}
+      {%- assign table_headers = "Size,Chest,Waist,Hips,Jacket Length,Sleeve Length,Shoulder Width,Jacket Waist,Pant Length" | split: ',' -%}
+      {%- assign inch_data = "XS|XS:37:28.25:35.5:27.5:23.5:17:33.75:40.5,S|S:38.5:30:37:28.25:24:17.25:35.5:41,M|M:40.25:31.5:38.5:28.25:24.75:17.5:37:41.25,L|L:41.75:33:40:29.25:24.75:18:38.5:41.75,XL|XL:43.25:34.5:41.75:29.25:25.25:18.25:40.25:43,2XL|2XL:45:36.5:43.5:30:26.25:18.5:41.75:43,3XL|3XL:46.5:38.5:45.5:30.25:27.25:19:43.25:43.25,4XL|4XL:48:40.5:47.5:30.75:27.5:20:45:43.25,5XL|5XL:49.5:42.5:49.5:31:28:20.5:46.5:43.75" | split: ',' -%}
+      {%- assign cm_data = "XS|XS:94:72:90:70:60:43:86:103,S|S:98:76:94:72:61:44:90:104,M|M:102:80:98:72:63:44.5:94:105,L|L:106:84:102:74:63:45.5:98:106,XL|XL:110:88:106:74:64:46.5:102:109,2XL|2XL:114:93:111:76.5:67:47:106:109,3XL|3XL:118:98:116:77:69:48.5:110:110,4XL|4XL:122:103:121:78:70:50.5:114:110,5XL|5XL:126:108:126:79:71:52:118:111" | split: ',' -%}
+    {%- elsif size_type == 'boy_suits_size' -%}
+      {%- assign table_headers = "Size,Age & Height,Bust,Waist,Length (Top),Length (Bottom)" | split: ',' -%}
+      {%- assign inch_data = "BS100|BS100:2-3 Years (100cm):25.25:19:16.25:19.75,BS110|BS110:3-4 Years (110cm):26.75:19.75:17.25:21.75,BS120|BS120:4-5 Years (120cm):28.25:20.75:18.5:23.5,BS130|BS130:5-6 Years (130cm):30:22:19.75:26,BS140|BS140:7-8 Years (140cm):31.5:23.25:20.75:28.75,BS150|BS150:9-10 Years (150cm):33:24.5:22:31.5" | split: ',' -%}
+      {%- assign cm_data = "BS100|BS100:2-3 Years (100cm):64.1:48.3:41.3:50.2,BS110|BS110:3-4 Years (110cm):67.9:50.2:43.8:55.2,BS120|BS120:4-5 Years (120cm):71.8:52.7:47:59.7,BS130|BS130:5-6 Years (130cm):76.2:55.9:50.2:66,BS140|BS140:7-8 Years (140cm):80:59.1:52.7:73,BS150|BS150:9-10 Years (150cm):83.8:62.2:55.9:80" | split: ',' -%}
+    {%- endif -%}
+
+    <!-- INCH Table -->
+    <table class="size-table inch-table" style="display:{% if default_unit == 'inch' %}table{% else %}none{% endif %}; width:100%;">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in inch_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+
+    <!-- CM Table -->
+    <table class="size-table cm-table" style="display:{% if default_unit == 'cm' %}table{% else %}none{% endif %}; width:100%;">
+      <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in cm_data -%}
+          {%- assign cells = row | split: ':' -%}
+          {%- assign size_cell = cells[0] -%}
+          {%- assign size_parts = size_cell | split: '|' -%}
+          {%- if size_parts.size > 1 -%}
+            {%- assign size_identifier = size_parts[0] -%}
+            {%- assign size_display = size_parts[1] -%}
+          {%- else -%}
+            {%- assign size_identifier = size_cell -%}
+            {%- assign size_display = size_cell -%}
+          {%- endif -%}
+          <tr data-size="{{ size_identifier }}">
+            <td>{{ size_display }}</td>
+            {%- for i in (1..cells.size) -%}
+              {%- assign idx = forloop.index -%}
+              {%- if idx < cells.size -%}
+                <td>{{ cells[idx] }}</td>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Custom Size Form -->
+  <div id="custom-size-form" style="display:none; margin-top:10px;">
+    <!-- Measurement Unit Toggle Switch -->
+    <div class="unit-toggle-container" style="margin-bottom:10px;">
+      <input type="radio" name="properties[Measurement Unit]" value="in" form="{{ product_form_id }}" id="unit-in" hidden checked disabled="disabled">
+      <input type="radio" name="properties[Measurement Unit]" value="cm" form="{{ product_form_id }}" id="unit-cm" hidden disabled="disabled">
+      <div class="unit-toggle-switch">
+        <label class="unit-toggle-label" for="unit-in">INCH</label>
+        <span class="unit-toggle-slider"></span>
+        <label class="unit-toggle-label" for="unit-cm">CM</label>
+      </div>
+    </div>
+    <div class="custom-two-panel">
+    <div class="custom-fields value-fields left-panel">
+      {%- if size_type == 'general_size' or size_type == 'general_plus_size' or size_type == 'jacket_size' -%}
+        {%- comment -%} American Adult Women: Bust 25-65in (28-60 + buffer), Waist 20-55in (22-50 + buffer), Hips 28-65in (32-60 + buffer), Hollow to Floor 35-70in (40-65 + buffer), Height 45-82in (48-78 + buffer) {%- endcomment -%}
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="25" max="65" data-min-unit="in" data-max-unit="in" name="properties[Bust]" placeholder="Bust" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="20" max="55" data-min-unit="in" data-max-unit="in" name="properties[Waist]" placeholder="Waist" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="28" max="65" data-min-unit="in" data-max-unit="in" name="properties[Hips]" placeholder="Hips" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="35" max="70" data-min-unit="in" data-max-unit="in" name="properties[Hollow to Floor]" placeholder="Hollow to Floor" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="45" max="82" data-min-unit="in" data-max-unit="in" name="properties[Height]" placeholder="Height" form="{{ product_form_id }}" disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        {%- elsif size_type == 'flower_girl_size' or size_type == 'flower_girl_new_size' or size_type == 'junior_bridesmaid_size' -%}
+        {%- comment -%} Children: Bust 15-40in (18-36 + buffer), Waist 14-35in (16-30 + buffer), Hips 18-42in (20-38 + buffer), Hollow to Floor 22-60in (25-55 + buffer), Height 33-70in (36-66 + buffer) {%- endcomment -%}
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="15" max="40" data-min-unit="in" data-max-unit="in" name="properties[Bust]" placeholder="Bust" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="14" max="35" data-min-unit="in" data-max-unit="in" name="properties[Waist]" placeholder="Waist" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="18" max="42" data-min-unit="in" data-max-unit="in" name="properties[Hips]" placeholder="Hips" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="22" max="60" data-min-unit="in" data-max-unit="in" name="properties[Hollow to Floor]" placeholder="Hollow to Floor" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="33" max="70" data-min-unit="in" data-max-unit="in" name="properties[Height]" placeholder="Height" form="{{ product_form_id }}" disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+      {%- elsif size_type == 'suits_size' -%}
+        {%- comment -%} American Adult Men (Suits): Bust/Chest 28-60in (32-56 + buffer), Waist 24-55in (26-50 + buffer), Hips 30-55in (34-50 + buffer), Shoulder Width 12-25in (14-22 + buffer), Sleeve Length 28-40in (30-36 + buffer), Wrist 4-10in (5-8 + buffer), Pants Length 24-40in (26-36 + buffer), Height 56-82in (60-78 + buffer) {%- endcomment -%}
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="28" max="60" data-min-unit="in" data-max-unit="in" name="properties[Bust]" placeholder="Bust" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="24" max="55" data-min-unit="in" data-max-unit="in" name="properties[Waist]" placeholder="Waist" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="30" max="55" data-min-unit="in" data-max-unit="in" name="properties[Hips]" placeholder="Hips" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="12" max="25" data-min-unit="in" data-max-unit="in" name="properties[Shoulder Width]" placeholder="Shoulder Width" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="28" max="40" data-min-unit="in" data-max-unit="in" name="properties[Sleeve Length]" placeholder="Sleeve Length" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="4" max="10" data-min-unit="in" data-max-unit="in" name="properties[Wrist Circumference]" placeholder="Wrist Circumference" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="24" max="40" data-min-unit="in" data-max-unit="in" name="properties[Pants Length]" placeholder="Pants Length" form="{{ product_form_id }}" required disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+        <label class="input-with-unit">
+          <input type="number" step="0.5" min="56" max="82" data-min-unit="in" data-max-unit="in" name="properties[Height]" placeholder="Height" form="{{ product_form_id }}" disabled="disabled">
+          <span class="input-unit" data-unit-in="in" data-unit-cm="cm">in</span>
+        </label>
+      {%- endif -%}
+    </div>
+    <div class="right-panel pretty-modal" data-modal-id="measurement-large-img"><img loading="lazy" src="{{ measurement_img_small | file_img_url: '300x' }}"></div>
+  </div>
+  </div>
+</div>
+  <!--  Measurement Modal -->
+  <div id="measurement-large-img" style="display:none;">
+    <img loading="lazy" style="max-height: 80vh; max-width: 100%;" src="{{ measurement_img_large | file_img_url: '800x' }}">
+  </div>
+  <!-- Size Chart Modal -->
+  <div id="size-chart-value" style="display:none;">
+    <div class="size-chart-modal-content">
+      <h3>Size Chart</h3>
+      <div class="size-chart-tables-container">
+        <div class="size-chart-table-wrapper">
+          <h4>Inches (in)</h4>
+          <table class="size-chart-modal-table">
+            <thead>
+              <tr>
+                {% for header in table_headers %}
+                  <th>{{ header }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {%- for row in inch_data -%}
+                {%- assign cells = row | split: ':' -%}
+                {%- assign size_cell = cells[0] -%}
+                {%- assign size_parts = size_cell | split: '|' -%}
+                {%- if size_parts.size > 1 -%}
+                  {%- assign size_display = size_parts[1] -%}
+                {%- else -%}
+                  {%- assign size_display = size_cell -%}
+                {%- endif -%}
+                <tr>
+                  <td>{{ size_display }}</td>
+                  {%- for i in (1..cells.size) -%}
+                    {%- assign idx = forloop.index -%}
+                    {%- if idx < cells.size -%}
+                      <td>{{ cells[idx] }}</td>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+        <div class="size-chart-table-wrapper">
+          <h4>Centimeters (cm)</h4>
+          <table class="size-chart-modal-table">
+            <thead>
+              <tr>
+                {% for header in table_headers %}
+                  <th>{{ header }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {%- for row in cm_data -%}
+                {%- assign cells = row | split: ':' -%}
+                {%- assign size_cell = cells[0] -%}
+                {%- assign size_parts = size_cell | split: '|' -%}
+                {%- if size_parts.size > 1 -%}
+                  {%- assign size_display = size_parts[1] -%}
+                {%- else -%}
+                  {%- assign size_display = size_cell -%}
+                {%- endif -%}
+                <tr>
+                  <td>{{ size_display }}</td>
+                  {%- for i in (1..cells.size) -%}
+                    {%- assign idx = forloop.index -%}
+                    {%- if idx < cells.size -%}
+                      <td>{{ cells[idx] }}</td>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<style>
+  .size-option-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .size-option-name .size-label {
+    flex: 1;
+  }
+  .size-option-name #size-chart-label {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #666;
+    font-size: 14px;
+  }
+  .size-option-name #size-chart-label:hover {
+    color: #000;
+  }
+  .custom-two-panel input::placeholder {
+      font-size: 0.9em;
+      color: #666;
+  }
+  .custom-two-panel input::-webkit-input-placeholder {
+      font-size: 0.9em;
+      color: #666;
+  }
+  .custom-two-panel input::-moz-placeholder {
+      font-size: 0.9em;
+      color: #666;
+  }
+  .custom-two-panel input::-ms-input-placeholder {
+      font-size: 0.9em;
+      color: #666;
+  }
+  #custom-size-form, .unit-toggle-container {
+    font-size: 0.85rem;
+  }
+  /* Size Chart Modal Styles */
+  .size-chart-modal-content {
+    padding: 10px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .size-chart-modal-content h3 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .size-chart-tables-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .size-chart-table-wrapper {
+    flex: 1;
+    min-width: 300px;
+  }
+  .size-chart-table-wrapper h4 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .size-chart-modal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  .size-chart-modal-table th,
+  .size-chart-modal-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .size-chart-modal-table th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+  }
+  .size-chart-modal-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }  
+  .custom-two-panel {
+      display: flex;
+      gap: 10px;
+  }
+  .right-panel {
+      max-width: 200px;
+      margin: auto 0;
+  }
+  .right-panel img {
+      max-height: 260px;
+  }
+  .left-panel {
+      min-width: 150px;
+  }
+  .style-select-item-container { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 5px; 
+    margin: 10px 0;
+    font-size: 0.95em;
+  }
+  .style-select-item, .custom-size-select-item {
+    padding: 7px 5px;
+    border: 1.5px solid #ddd;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff;
+  }
+
+  .style-select-item.selected,
+  .custom-size-select-item.selected {
+    background: #000 !important;
+    color: #fff !important;
+    border-color: #000 !important;
+  }
+  .style-select-item.selected span,
+  .custom-size-select-item.selected span {
+    font-weight: bold;
+  }
+
+  #size-chart-table table { 
+    width:100% !important; 
+    border-collapse:collapse; 
+    margin-top:12px; 
+    table-layout: fixed;
+  }
+  #size-chart-table th, #size-chart-table td { 
+    border:1px solid #ddd; 
+    padding:5px; 
+    text-align:center; 
+    font-size:13px; 
+  }
+  {% comment %} #size-chart-table th:first-child,
+  #size-chart-table td:first-child {
+    width: 20%;
+  }
+  #size-chart-table th:nth-child(2),
+  #size-chart-table td:nth-child(2) {
+    width: 20%;
+  }
+  #size-chart-table th:nth-child(3),
+  #size-chart-table td:nth-child(3) {
+    width: 20%;
+  }
+  #size-chart-table th:nth-child(4),
+  #size-chart-table td:nth-child(4) {
+    width: 20%;
+  }
+  #size-chart-table th:nth-child(5),
+  #size-chart-table td:nth-child(5) {
+    width: 20%;
+  } {% endcomment %}
+  #size-chart-table tr.highlight {
+    background: #000000;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  .custom-fields label { display:block; margin:7px 0; font-weight:500; }
+  .custom-fields input { width:100%; padding:12px 6px; border:1px solid #ddd; border-radius:6px; font-size:15px; }
+  .custom-fields.value-fields {
+    max-width: 160px;
+  }
+  .input-with-unit {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .input-with-unit input {
+    padding-right: 35px;
+  }
+  .input-with-unit input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  .input-with-unit input[type="number"]::-webkit-outer-spin-button,
+  .input-with-unit input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .input-unit {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 14px;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+  
+  /* Error highlight styles */
+  .error-highlight {
+    border: 1px solid #ff0000 !important;
+    background-color: #fff5f5 !important;
+    animation: shake 0.3s;
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+  }
+  #custom-size-form .unit-toggle-switch.error-highlight {
+    border: 2px solid #ff0000 !important;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+
+  /* Payment Button Overlay Styles */
+  .payment-button-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: not-allowed;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+  }
+  
+  .payment-button-disabled {
+    position: relative;
+  }
+  
+  /* Error Notification Styles */
+  .size-validation-error {
+    position: fixed;
+    top: 30%;
+    right: 20px;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 16px 10px;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.50);
+    z-index: 10;
+    max-width: 400px;
+    animation: slideInRight 0.3s ease-out, fadeOut 0.3s ease-in 4.7s;
+    opacity: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .size-validation-error-content {
+    flex: 1;
+  }
+  .size-validation-error-close {
+    background: none;
+    border: none;
+    color: #000000;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 4px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+    height: unset;
+    margin-bottom: unset;
+    padding: unset !important;
+  }
+  .size-validation-error-close:hover {
+    opacity: 1;
+  }
+  .size-validation-error.hide {
+    animation: fadeOut 0.3s ease-in;
+    opacity: 0;
+  }
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* Unit Toggle Switch Styles */
+  .unit-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .unit-toggle-switch {
+    position: relative;
+    display: inline-flex;
+    width: 120px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1.5px solid #e0e0e0;
+    overflow: visible;
+  }
+  .unit-toggle-label {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    z-index: 3;
+    cursor: pointer;
+    user-select: none;
+    pointer-events: auto;
+  }
+  .unit-toggle-label:first-child {
+    left: 0;
+    color: #999;
+  }
+  .unit-toggle-label:last-child {
+    right: 0;
+    color: #666;
+  }
+  .unit-toggle-slider {
+    position: absolute;
+    width: 50px;
+    height: 32px;
+    background-color: #000000;
+    border-radius: 40px;
+    transition: all 0.3s ease;
+    z-index: 1;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  /* When CM is selected, move slider to right */
+  #unit-cm:checked ~ .unit-toggle-switch .unit-toggle-slider {
+    left: calc(100% - 54px);
+  }
+  /* When INCH is selected (default) */
+  #unit-in:checked ~ .unit-toggle-switch .unit-toggle-label:first-child {
+    color: #fff;
+  }
+  #unit-in:checked ~ .unit-toggle-switch .unit-toggle-label:last-child {
+    color: #999;
+  }
+  /* When CM is selected */
+  #unit-cm:checked ~ .unit-toggle-switch .unit-toggle-label:first-child {
+    color: #999;
+  }
+  #unit-cm:checked ~ .unit-toggle-switch .unit-toggle-label:last-child {
+    color: #fff;
+  }
+  
+  /* Disabled state for unit toggle switch */
+  #custom-size-form .unit-toggle-switch.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  /* Chart Unit Toggle Switch - same styles apply */
+  #chart-unit-cm:checked ~ .unit-toggle-switch .unit-toggle-slider {
+    left: calc(100% - 54px);
+  }
+  #chart-unit-in:checked ~ .unit-toggle-switch .unit-toggle-label:first-child {
+    color: #fff;
+  }
+  #chart-unit-in:checked ~ .unit-toggle-switch .unit-toggle-label:last-child {
+    color: #999;
+  }
+  #chart-unit-cm:checked ~ .unit-toggle-switch .unit-toggle-label:first-child {
+    color: #999;
+  }
+  #chart-unit-cm:checked ~ .unit-toggle-switch .unit-toggle-label:last-child {
+    color: #fff;
+  }
+  @media (max-width: 768px) {
+    .size-chart-tables-container {
+      flex-direction: column;
+    }
+    .size-chart-table-wrapper {
+      min-width: 100%;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const radios = document.querySelectorAll('input[name="properties[Size]"]');
+  const chart = document.getElementById('size-chart-table');
+  const customForm = document.getElementById('custom-size-form');
+  const productForm = document.querySelector('#{{product_form_id}}');
+
+  // Initialize payment buttons state based on form validation
+  function updatePaymentButtonsState() {
+    const selectedSize = document.querySelector('input[name="properties[Size]"]:checked');
+    if (!selectedSize) {
+      disablePaymentButtons();
+      return;
+    }
+    
+    if (selectedSize.value === 'Custom Size') {
+      // Check if custom form is valid
+      const unitRadio = document.querySelector('input[name="properties[Measurement Unit]"]:checked');
+      const customInputs = document.querySelectorAll('#custom-size-form input[type="number"][required]');
+      let isValid = true;
+      
+      if (!unitRadio) {
+        isValid = false;
+      } else {
+        customInputs.forEach(input => {
+          if (!input.disabled && (!input.value || input.value.trim() === '' || parseFloat(input.value) <= 0)) {
+            isValid = false;
+          }
+        });
+      }
+      
+      if (!isValid) {
+        disablePaymentButtons();
+      } else {
+        enablePaymentButtons();
+      }
+    } else {
+      enablePaymentButtons();
+    }
+  }
+
+  // begin url param selected size
+  // Function to normalize size value for comparison (ignore case, handle spaces, _, -)
+  function normalizeSize(size) {
+    if (!size) return '';
+    // Convert to lowercase and replace spaces, underscores, and hyphens with a single space
+    let normalized = size.toLowerCase().trim().replace(/[\s_-]+/g, ' ');
+    // Remove leading "us" prefix before numeric size (e.g. "us2", "us 2" -> "2")
+    normalized = normalized.replace(/^us\s*(\d)/, '$1');
+    return normalized;
+  }
+  
+  // Function to check if two sizes match (ignoring case, spaces, _, -)
+  function sizesMatch(size1, size2) {
+    const normalized1 = normalizeSize(size1);
+    const normalized2 = normalizeSize(size2);
+    return normalized1 === normalized2;
+  }
+  
+  // Check URL parameter for size and auto-select if found
+  function selectSizeFromURL() {
+    try {
+      // Try to get size from URL - check both search and full href
+      let urlSize = null;
+      
+      // Method 1: Use URLSearchParams (standard way)
+      if (window.location.search) {
+        const urlParams = new URLSearchParams(window.location.search);
+        urlSize = urlParams.get('size');
+      }
+      
+      // Method 2: Parse from full URL if search params didn't work
+      if (!urlSize) {
+        const fullUrl = window.location.href;
+        const match = fullUrl.match(/[?&]size=([^&]*)/i);
+        if (match && match[1]) {
+          urlSize = decodeURIComponent(match[1].replace(/\+/g, ' '));
+        }
+      }
+      
+      // Method 3: Also check hash if present
+      if (!urlSize && window.location.hash) {
+        const hashMatch = window.location.hash.match(/[?&]size=([^&]*)/i);
+        if (hashMatch && hashMatch[1]) {
+          urlSize = decodeURIComponent(hashMatch[1].replace(/\+/g, ' '));
+        }
+      }
+      
+      if (!urlSize) {
+        return false;
+      }
+      
+      // Trim and clean the size value
+      urlSize = urlSize.trim();
+      
+      // Find matching size in available options
+      for (const radio of radios) {
+        if (sizesMatch(radio.value, urlSize)) {
+          // Select the radio button
+          radio.checked = true;
+          // Trigger change event to update UI
+          radio.dispatchEvent(new Event('change', { bubbles: true }));
+          return true;
+        }
+      }
+    } catch (e) {
+      console.error('Error selecting size from URL:', e);
+    }
+    
+    return false;
+  }
+  
+  // Function to attempt size selection from URL
+  function trySelectSizeFromURL() {
+    if (radios.length > 0) {
+      const alreadySelected = document.querySelector('input[name="properties[Size]"]:checked');
+      if (!alreadySelected) {
+        return selectSizeFromURL();
+      }
+    }
+    return false;
+  }
+  
+  // Try to select size from URL parameter first (only if no size is already selected)
+  // Use setTimeout to ensure DOM is fully ready
+  setTimeout(function() {
+    trySelectSizeFromURL();
+  }, 100);
+  
+  // Also try after window load (in case of async content loading)
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      trySelectSizeFromURL();
+    }, 50);
+  });
+  // end url param selected size  
+
+  // Initialize size display if a size is already selected
+  const defaultSize = document.querySelector('input[name="properties[Size]"]:checked');
+  if (defaultSize) {
+    const sizeDisplay = document.getElementById('size-select-size');
+    if (sizeDisplay) {
+      sizeDisplay.textContent = defaultSize.value;
+    }
+    // Initialize disabled state for custom-size-form inputs
+    const isCustom = defaultSize.value === 'Custom Size';
+    const customFormInputs = document.querySelectorAll('#custom-size-form input[type="number"]');
+    const unitRadios = document.querySelectorAll('input[name="properties[Measurement Unit]"]');
+    
+    customFormInputs.forEach(input => {
+      if (isCustom) {
+        input.removeAttribute('disabled');
+      } else {
+        input.setAttribute('disabled', 'disabled');
+      }
+    });
+    
+    // Initialize disabled state for unit toggle radios
+    const unitToggleSwitch = document.querySelector('#custom-size-form .unit-toggle-switch');
+    unitRadios.forEach(radio => {
+      if (isCustom) {
+        radio.removeAttribute('disabled');
+      } else {
+        radio.setAttribute('disabled', 'disabled');
+      }
+    });
+    
+    // Initialize disabled class for toggle switch
+    if (unitToggleSwitch) {
+      if (isCustom) {
+        unitToggleSwitch.classList.remove('disabled');
+      } else {
+        unitToggleSwitch.classList.add('disabled');
+      }
+    }
+    
+    // Update payment buttons state on initialization
+    updatePaymentButtonsState();
+  } else {
+    // No size selected, disable payment buttons
+    disablePaymentButtons();
+  }
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      // 清除所有 selected
+      document.querySelectorAll('.style-select-item, .custom-size-select-item').forEach(el => {
+        el.classList.remove('selected');
+      });
+      // 给当前 label 添加 selected
+      this.closest('label').classList.add('selected');
+
+      // Update size display text
+      const sizeDisplay = document.getElementById('size-select-size');
+      if (sizeDisplay) {
+        sizeDisplay.textContent = this.value;
+      }
+
+      const isCustom = this.value === 'Custom Size';
+      if (chart) {
+        chart.style.display = isCustom ? 'none' : 'block';
+      }
+      customForm.style.display = isCustom ? 'block' : 'none';
+
+      // Enable/disable inputs in custom-size-form based on selection
+      const customFormInputs = document.querySelectorAll('#custom-size-form input[type="number"]');
+      const unitRadios = document.querySelectorAll('input[name="properties[Measurement Unit]"]');
+      
+      customFormInputs.forEach(input => {
+        if (isCustom) {
+          input.removeAttribute('disabled');
+        } else {
+          input.setAttribute('disabled', 'disabled');
+        }
+      });
+      
+      // Enable/disable unit toggle radios
+      const unitToggleSwitch = document.querySelector('#custom-size-form .unit-toggle-switch');
+      unitRadios.forEach(radio => {
+        if (isCustom) {
+          radio.removeAttribute('disabled');
+        } else {
+          radio.setAttribute('disabled', 'disabled');
+        }
+      });
+      
+      // Add/remove disabled class to toggle switch for visual feedback
+      if (unitToggleSwitch) {
+        if (isCustom) {
+          unitToggleSwitch.classList.remove('disabled');
+        } else {
+          unitToggleSwitch.classList.add('disabled');
+        }
+      }
+      
+      // Update payment buttons state when size changes
+      updatePaymentButtonsState();
+
+      if (!isCustom && chart) {
+        // Dynamically get all sizes from DOM (excluding "Custom Size")
+        const allSizes = Array.from(document.querySelectorAll('input[name="properties[Size]"]'))
+          .map(radio => radio.value)
+          .filter(size => size !== 'Custom Size');
+        const idx = allSizes.indexOf(this.value);
+        const show = idx <= 1 ? allSizes.slice(0, 3) :
+                    idx >= allSizes.length - 2 ? allSizes.slice(-3) :
+                    allSizes.slice(idx-1, idx+2);
+
+        document.querySelectorAll('#size-chart-table tr[data-size]').forEach(row => {
+          const size = row.dataset.size;
+          row.style.display = show.includes(size) ? 'table-row' : 'none';
+          row.classList.toggle('highlight', size === this.value);
+        });
+      }
+    });
+  });
+
+  // Chart Unit toggle switch handler
+  const chartUnitRadios = document.querySelectorAll('input[name="chart-unit"]');
+  if (chartUnitRadios.length > 0) {
+    // Initialize table display based on default checked radio
+    const defaultChartUnit = document.querySelector('input[name="chart-unit"]:checked');
+    if (defaultChartUnit) {
+      const unit = defaultChartUnit.value.toUpperCase();
+      const inchTable = document.querySelector('.inch-table');
+      const cmTable = document.querySelector('.cm-table');
+      if (inchTable) inchTable.style.display = unit === 'INCH' ? 'table' : 'none';
+      if (cmTable) cmTable.style.display = unit === 'CM' ? 'table' : 'none';
+    }
+    
+    chartUnitRadios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        const unit = this.value.toUpperCase();
+        const inchTable = document.querySelector('.inch-table');
+        const cmTable = document.querySelector('.cm-table');
+        if (inchTable) inchTable.style.display = unit === 'INCH' ? 'table' : 'none';
+        if (cmTable) cmTable.style.display = unit === 'CM' ? 'table' : 'none';
+      });
+    });
+  }
+  
+  // Allow clicking on chart toggle switch background to toggle
+  const chartToggleSwitch = document.querySelector('.chart-unit-toggle');
+  if (chartToggleSwitch) {
+    chartToggleSwitch.addEventListener('click', function(e) {
+      // Only handle clicks on the switch background or slider, not on labels
+      // Labels will trigger their associated radio buttons automatically via 'for' attribute
+      if (e.target === chartToggleSwitch || e.target.classList.contains('unit-toggle-slider')) {
+        e.preventDefault();
+        e.stopPropagation();
+        const currentChecked = document.querySelector('input[name="chart-unit"]:checked');
+        if (currentChecked && currentChecked.id === 'chart-unit-in') {
+          document.getElementById('chart-unit-cm').checked = true;
+          document.getElementById('chart-unit-cm').dispatchEvent(new Event('change', { bubbles: true }));
+        } else {
+          document.getElementById('chart-unit-in').checked = true;
+          document.getElementById('chart-unit-in').dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+    });
+  }
+
+  // Measurement Unit toggle switch handler (for custom-size-form)
+  const unitRadios = document.querySelectorAll('input[name="properties[Measurement Unit]"]');
+  
+  // Conversion constants
+  const INCH_TO_CM = 2.54;
+  const CM_TO_INCH = 1 / 2.54;
+  
+  // Function to convert value between units
+  function convertValue(value, fromUnit, toUnit) {
+    if (fromUnit === toUnit || isNaN(value)) return value;
+    if (fromUnit === 'in' && toUnit === 'cm') {
+      return parseFloat((value * INCH_TO_CM).toFixed(2));
+    } else if (fromUnit === 'cm' && toUnit === 'in') {
+      return parseFloat((value * CM_TO_INCH).toFixed(2));
+    }
+    return value;
+  }
+  
+  // Store original min/max values and current unit for each input
+  const inputDataMap = new Map();
+  const numberInputs = document.querySelectorAll('#custom-size-form input[type="number"]');
+  numberInputs.forEach(input => {
+    const minUnit = input.getAttribute('data-min-unit') || 'in';
+    const maxUnit = input.getAttribute('data-max-unit') || 'in';
+    const originalMin = parseFloat(input.getAttribute('min'));
+    const originalMax = parseFloat(input.getAttribute('max'));
+    
+    inputDataMap.set(input, {
+      originalMin: originalMin,
+      originalMax: originalMax,
+      minUnit: minUnit,
+      maxUnit: maxUnit,
+      currentUnit: 'in' // Will be updated
+    });
+  });
+  
+  // Function to update input unit display and convert values
+  function updateInputUnits() {
+    const checkedUnit = document.querySelector('input[name="properties[Measurement Unit]"]:checked');
+    const unitValue = checkedUnit ? checkedUnit.value : 'in';
+    const unitDisplay = unitValue === 'in' ? 'in' : 'cm';
+    
+    // Update unit display
+    document.querySelectorAll('.input-unit').forEach(unitSpan => {
+      unitSpan.textContent = unitDisplay;
+    });
+    
+    // Convert input values and min/max
+    numberInputs.forEach(input => {
+      if (!input.disabled) {
+        const data = inputDataMap.get(input);
+        if (!data) return;
+        
+        const previousUnit = data.currentUnit;
+        
+        // Only convert if unit actually changed
+        if (previousUnit !== unitValue) {
+          // Convert min value
+          if (!isNaN(data.originalMin)) {
+            const convertedMin = convertValue(data.originalMin, data.minUnit, unitValue);
+            input.setAttribute('min', convertedMin);
+          }
+          
+          // Convert max value
+          if (!isNaN(data.originalMax)) {
+            const convertedMax = convertValue(data.originalMax, data.maxUnit, unitValue);
+            input.setAttribute('max', convertedMax);
+          }
+          
+          // Convert current input value
+          if (input.value && input.value.trim() !== '') {
+            const currentValue = parseFloat(input.value);
+            if (!isNaN(currentValue)) {
+              const convertedValue = convertValue(currentValue, previousUnit, unitValue);
+              input.value = convertedValue;
+            }
+          }
+          
+          // Update stored current unit
+          data.currentUnit = unitValue;
+        }
+      }
+    });
+  }
+  
+  // Initialize: set current unit based on default checked radio
+  const defaultUnitRadio = document.querySelector('input[name="properties[Measurement Unit]"]:checked');
+  const defaultUnit = defaultUnitRadio ? defaultUnitRadio.value : 'in';
+  numberInputs.forEach(input => {
+    const data = inputDataMap.get(input);
+    if (data) {
+      data.currentUnit = defaultUnit;
+      // Set initial min/max based on default unit
+      if (!isNaN(data.originalMin)) {
+        const convertedMin = convertValue(data.originalMin, data.minUnit, defaultUnit);
+        input.setAttribute('min', convertedMin);
+      }
+      if (!isNaN(data.originalMax)) {
+        const convertedMax = convertValue(data.originalMax, data.maxUnit, defaultUnit);
+        input.setAttribute('max', convertedMax);
+      }
+    }
+  });
+  
+  // Initialize unit display
+  updateInputUnits();
+  
+  // Handle radio change - visual update is handled by CSS and unit display
+  unitRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      updateInputUnits();
+      // Update payment buttons state when unit changes
+      updatePaymentButtonsState();
+    });
+  });
+  
+  // Allow clicking on the switch background or slider to toggle (for custom-size-form)
+  const unitToggleSwitch = document.querySelector('#custom-size-form .unit-toggle-switch');
+  if (unitToggleSwitch) {
+    unitToggleSwitch.addEventListener('click', function(e) {
+      // Only handle clicks on the switch background or slider, not on labels
+      // Labels will trigger their associated radio buttons automatically via 'for' attribute
+      if (e.target === unitToggleSwitch || e.target.classList.contains('unit-toggle-slider')) {
+        e.preventDefault();
+        e.stopPropagation();
+        const currentChecked = document.querySelector('input[name="properties[Measurement Unit]"]:checked');
+        if (currentChecked && currentChecked.id === 'unit-in') {
+          document.getElementById('unit-cm').checked = true;
+          document.getElementById('unit-cm').dispatchEvent(new Event('change', { bubbles: true }));
+        } else {
+          document.getElementById('unit-in').checked = true;
+          document.getElementById('unit-in').dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+    });
+  }
+
+  // Prevent entering 'e', 'E', '+', '-' in number inputs and enforce min/max
+  numberInputs.forEach(input => {
+    input.addEventListener('keydown', function(e) {
+      // Block 'e', 'E', '+', '-' keys
+      if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') {
+        e.preventDefault();
+      }
+    });
+    
+    // Also prevent paste of invalid characters
+    input.addEventListener('paste', function(e) {
+      const paste = (e.clipboardData || window.clipboardData).getData('text');
+      if (/[eE+\-]/.test(paste)) {
+        e.preventDefault();
+      }
+    });
+    
+    // Validate min and max values on input and blur (show error, don't auto-correct)
+    input.addEventListener('input', function() {
+      this.classList.remove('error-highlight');
+      validateMinMax(this, false); // false = don't show notification while typing
+      // Update payment buttons state when input changes
+      updatePaymentButtonsState();
+    });
+    
+    input.addEventListener('blur', function() {
+      validateMinMax(this, true); // true = show notification on blur
+      // Update payment buttons state when input loses focus
+      updatePaymentButtonsState();
+    });
+  });
+  
+  // Function to validate min and max values (show error instead of auto-correcting)
+  function validateMinMax(input, showNotification) {
+    const min = parseFloat(input.getAttribute('min'));
+    const max = parseFloat(input.getAttribute('max'));
+    const value = parseFloat(input.value);
+    
+    if (input.value && input.value.trim() !== '' && !isNaN(value)) {
+      const placeholder = input.placeholder || input.name.replace('properties[', '').replace(']', '');
+      const checkedUnit = document.querySelector('input[name="properties[Measurement Unit]"]:checked');
+      const unitDisplay = checkedUnit && checkedUnit.value === 'cm' ? 'cm' : 'in';
+      
+      if ((!isNaN(min) && value < min) || (!isNaN(max) && value > max)) {
+        input.classList.add('error-highlight');
+        if (showNotification) {
+          let errorMessage = `<strong>${placeholder}</strong>`;
+          if (!isNaN(min) && !isNaN(max)) {
+            // Both min and max exist, show range
+            errorMessage += ` must be between <strong>${min} ${unitDisplay}</strong> and <strong>${max} ${unitDisplay}</strong>.`;
+          } else if (!isNaN(min)) {
+            // Only min exists
+            errorMessage += ` must be at least <strong>${min} ${unitDisplay}</strong>.`;
+          } else if (!isNaN(max)) {
+            // Only max exists
+            errorMessage += ` must be at most <strong>${max} ${unitDisplay}</strong>.`;
+          }
+          showErrorNotification(errorMessage);
+        }
+        return false;
+      } else {
+        input.classList.remove('error-highlight');
+        return true;
+      }
+    }
+    return true;
+  }
+  
+  // Remove error highlight from unit toggle when user selects a unit
+  const unitRadiosForValidation = document.querySelectorAll('input[name="properties[Measurement Unit]"]');
+  unitRadiosForValidation.forEach(radio => {
+    radio.addEventListener('change', function() {
+      const unitToggle = document.querySelector('#custom-size-form .unit-toggle-switch');
+      if (unitToggle) {
+        unitToggle.classList.remove('error-highlight');
+      }
+      // Update payment buttons state when unit changes
+      updatePaymentButtonsState();
+    });
+  });
+
+  // Show error notification function
+  function showErrorNotification(message) {
+    // Remove existing error notification
+    const existingError = document.querySelector('.size-validation-error');
+    if (existingError) {
+      existingError.remove();
+    }
+
+    // Create error notification element
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'size-validation-error';
+    
+    // Create content wrapper
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'size-validation-error-content';
+    contentDiv.innerHTML = message;
+    errorDiv.appendChild(contentDiv);
+    
+    // Create close button
+    const closeButton = document.createElement('button');
+    closeButton.className = 'size-validation-error-close';
+    closeButton.innerHTML = '<svg t="1764224110077" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4702" width="24" height="24"><path d="M872.802928 755.99406 872.864326 755.99406 872.864326 755.624646Z" fill="#000000" p-id="4703"></path><path d="M927.846568 511.997953c0-229.315756-186.567139-415.839917-415.838893-415.839917-229.329059 0-415.85322 186.524161-415.85322 415.839917 0 229.300406 186.524161 415.84094 415.85322 415.84094C741.278405 927.838893 927.846568 741.29836 927.846568 511.997953M512.007675 868.171955c-196.375529 0-356.172979-159.827125-356.172979-356.174002 0-196.374506 159.797449-356.157629 356.172979-356.157629 196.34483 0 356.144326 159.783123 356.144326 356.157629C868.152001 708.34483 708.352505 868.171955 512.007675 868.171955" fill="#000000" p-id="4704"></path><path d="M682.378947 642.227993 553.797453 513.264806 682.261267 386.229528c11.661597-11.514241 11.749602-30.332842 0.234337-41.995463-11.514241-11.676947-30.362518-11.765975-42.026162-0.222057L511.888971 471.195665 385.223107 344.130711c-11.602246-11.603269-30.393217-11.661597-42.025139-0.059352-11.603269 11.618619-11.603269 30.407544-0.059352 42.011836l126.518508 126.887922L342.137823 639.104863c-11.662621 11.543917-11.780301 30.305213-0.23536 41.96988 5.830799 5.89015 13.429871 8.833179 21.086248 8.833179 7.53972 0 15.136745-2.8847 20.910239-8.569166l127.695311-126.311801L640.293433 684.195827c5.802146 5.8001 13.428847 8.717546 21.056572 8.717546 7.599072 0 15.165398-2.917446 20.968567-8.659217C693.922864 672.681586 693.950494 653.889591 682.378947 642.227993" fill="#000000" p-id="4705"></path></svg>';
+    closeButton.setAttribute('aria-label', 'Close');
+    closeButton.onclick = function() {
+      errorDiv.classList.add('hide');
+      setTimeout(() => {
+        if (errorDiv.parentNode) {
+          errorDiv.parentNode.removeChild(errorDiv);
+        }
+      }, 300);
+    };
+    errorDiv.appendChild(closeButton);
+    
+    // Add to page
+    document.body.appendChild(errorDiv);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+      if (errorDiv.parentNode) {
+        errorDiv.classList.add('hide');
+        setTimeout(() => {
+          if (errorDiv.parentNode) {
+            errorDiv.parentNode.removeChild(errorDiv);
+          }
+        }, 300);
+      }
+    }, 5000);
+  }
+
+  // Validation function
+  function validateForm(event) {
+    // Remove previous error highlights
+    document.querySelectorAll('.error-highlight').forEach(el => {
+      el.classList.remove('error-highlight');
+    });
+
+    // Check if size is selected
+    const selectedSize = document.querySelector('input[name="properties[Size]"]:checked');
+    
+    if (!selectedSize) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+      }
+      const sizeContainer = document.querySelector('.style-select-item-container');
+      if (sizeContainer) {
+        sizeContainer.style.border = '1px solid #ff0000';
+        sizeContainer.style.borderRadius = '8px';
+        sizeContainer.style.padding = '8px';
+        setTimeout(() => {
+          sizeContainer.style.border = '';
+          sizeContainer.style.borderRadius = '';
+          sizeContainer.style.padding = '';
+        }, 3000);
+      }
+      showErrorNotification('Please select a <strong>size</strong>.');
+      return false;
+    }
+
+    // If Custom Size is selected, validate all required custom inputs
+    if (selectedSize.value === 'Custom Size') {
+      const customInputs = document.querySelectorAll('#custom-size-form input[type="number"]');
+      const unitRadio = document.querySelector('input[name="properties[Measurement Unit]"]:checked');
+      
+      let isValid = true;
+      let missingFields = [];
+      let invalidInputs = [];
+
+      // Check measurement unit
+      if (!unitRadio) {
+        isValid = false;
+        missingFields.push('Measurement Unit');
+        const unitToggle = document.querySelector('#custom-size-form .unit-toggle-switch');
+        if (unitToggle) {
+          unitToggle.classList.add('error-highlight');
+        }
+      }
+
+      // Check all number inputs (required and optional)
+      customInputs.forEach(input => {
+        if (!input.disabled) {
+          const isRequired = input.hasAttribute('required');
+          const value = parseFloat(input.value);
+          const min = parseFloat(input.getAttribute('min'));
+          const max = parseFloat(input.getAttribute('max'));
+          
+          // Check required fields
+          if (isRequired && (!input.value || input.value.trim() === '' || isNaN(value) || value <= 0)) {
+            isValid = false;
+            const placeholder = input.placeholder || input.name.replace('properties[', '').replace(']', '');
+            missingFields.push(placeholder);
+            invalidInputs.push(input);
+            input.classList.add('error-highlight');
+          }
+          // Check min/max for fields with values (both required and optional)
+          else if (input.value && input.value.trim() !== '' && !isNaN(value)) {
+            if ((!isNaN(min) && value < min) || (!isNaN(max) && value > max)) {
+              isValid = false;
+              const placeholder = input.placeholder || input.name.replace('properties[', '').replace(']', '');
+              const checkedUnit = document.querySelector('input[name="properties[Measurement Unit]"]:checked');
+              const unitDisplay = checkedUnit && checkedUnit.value === 'cm' ? 'cm' : 'in';
+              
+              let rangeText = '';
+              if (!isNaN(min) && !isNaN(max)) {
+                // Both min and max exist, show range
+                rangeText = `must be between ${min} and ${max} ${unitDisplay}`;
+              } else if (!isNaN(min)) {
+                // Only min exists
+                rangeText = `must be at least ${min} ${unitDisplay}`;
+              } else if (!isNaN(max)) {
+                // Only max exists
+                rangeText = `must be at most ${max} ${unitDisplay}`;
+              }
+              
+              missingFields.push(`${placeholder} (${rangeText})`);
+              invalidInputs.push(input);
+              input.classList.add('error-highlight');
+            }
+          }
+        }
+      });
+
+      if (!isValid) {
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+        }
+        // Scroll to first invalid input
+        if (invalidInputs.length > 0) {
+          invalidInputs[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        // Format missing fields list
+        let missingList;
+        if (missingFields.length === 1) {
+          missingList = missingFields[0];
+        } else if (missingFields.length === 2) {
+          missingList = missingFields.join(' and ');
+        } else {
+          missingList = missingFields.slice(0, -1).join(', ') + ', and ' + missingFields[missingFields.length - 1];
+        }
+        showErrorNotification(`Please fill in all required fields: <strong>${missingList}</strong>`);
+        return false;
+      }
+    }
+    
+    return true;
+  }
+
+  // Form submission validation
+  if (productForm) {
+    productForm.addEventListener('submit', function(e) {
+      if (!validateForm(e)) {
+        // Prevent animation by removing any added classes and stopping fly-to-cart animation
+        const addToCartButton = productForm.querySelector('button[ref="addToCartButton"]');
+        if (addToCartButton) {
+          addToCartButton.classList.remove('atc-added');
+        }
+        
+        // Remove any fly-to-cart elements that might have been created
+        const flyToCartElements = document.querySelectorAll('fly-to-cart');
+        flyToCartElements.forEach(el => el.remove());
+        
+        return false;
+      }
+    });
+  }
+
+  // Function to add overlay to payment buttons
+  function addPaymentButtonOverlay(button) {
+    // Check if overlay already exists
+    if (button.querySelector('.payment-button-overlay')) {
+      return;
+    }
+    
+    // Create overlay element
+    const overlay = document.createElement('div');
+    overlay.className = 'payment-button-overlay';
+    overlay.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.05);
+      cursor: not-allowed;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    `;
+    
+    // Make button container relative if not already
+    const computedStyle = window.getComputedStyle(button);
+    if (computedStyle.position === 'static') {
+      button.style.position = 'relative';
+    }
+    
+    // Add overlay to button
+    button.appendChild(overlay);
+    
+    // Add click handler to overlay to show error
+    overlay.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      
+      // Show error notification
+      const fakeEvent = { preventDefault: function() {}, stopPropagation: function() {}, stopImmediatePropagation: function() {} };
+      validateForm(fakeEvent);
+    }, true);
+  }
+  
+  // Function to remove overlay from payment buttons
+  function removePaymentButtonOverlay(button) {
+    const overlay = button.querySelector('.payment-button-overlay');
+    if (overlay) {
+      overlay.remove();
+    }
+  }
+  
+  // Function to disable payment buttons (including PayPal iframes)
+  function disablePaymentButtons() {
+    // Disable all dynamic checkout buttons
+    const paymentButtons = document.querySelectorAll(
+      '.shopify-payment-button, ' +
+      '.sp-dynamic-checkout-button, ' +
+      '.dynamic-checkout__content, ' +
+      '[data-shopify="payment-button"], ' +
+      'iframe[src*="paypal"], ' +
+      'iframe[src*="checkout"], ' +
+      '.shopify-paypal-button'
+    );
+    
+    paymentButtons.forEach(btn => {
+      // Add disabled class
+      btn.classList.add('payment-button-disabled');
+      // Add overlay to capture clicks and show errors
+      addPaymentButtonOverlay(btn);
+      // Visual feedback
+      btn.style.opacity = '0.5';
+      btn.style.cursor = 'not-allowed';
+      
+      // If it's an iframe, try to disable it
+      if (btn.tagName === 'IFRAME') {
+        try {
+          btn.setAttribute('disabled', 'disabled');
+        } catch (e) {
+          // Cross-origin iframe, can't access
+        }
+      }
+    });
+  }
+  
+  // Function to enable payment buttons
+  function enablePaymentButtons() {
+    const paymentButtons = document.querySelectorAll('.payment-button-disabled');
+    paymentButtons.forEach(btn => {
+      btn.classList.remove('payment-button-disabled');
+      // Remove overlay
+      removePaymentButtonOverlay(btn);
+      btn.style.opacity = '';
+      btn.style.cursor = '';
+      if (btn.tagName === 'IFRAME') {
+        btn.removeAttribute('disabled');
+      }
+    });
+  }
+
+  // Function to check if element is a payment/checkout button
+  function isPaymentOrCheckoutButton(element) {
+    if (!element) return false;
+    
+    // Check if it's inside an iframe (PayPal buttons are often in iframes)
+    if (element.tagName === 'IFRAME' || 
+        (element.closest && element.closest('iframe'))) {
+      const iframe = element.tagName === 'IFRAME' ? element : element.closest('iframe');
+      if (iframe && iframe.src && (
+          iframe.src.includes('paypal') || 
+          iframe.src.includes('checkout') ||
+          iframe.src.includes('payment'))) {
+        return true;
+      }
+    }
+    
+    // Check element itself and all parents
+    let current = element;
+    while (current && current !== document.body) {
+      // Check class names
+      const classList = current.classList || [];
+      if (classList.contains('shopify-payment-button__button') ||
+          classList.contains('shopify-payment-button__button--unbranded') ||
+          classList.contains('sp-dynamic-checkout-button') ||
+          classList.contains('sp-dynamic-checkout-button-secondary') ||
+          classList.contains('sp-dynamic-checkout-button-primary') ||
+          classList.contains('shopify-paypal-button') ||
+          classList.contains('dynamic-checkout__content') ||
+          classList.contains('shopify-payment-button') ||
+          classList.contains('buy-now-button') ||
+          classList.contains('checkout-button')) {
+        return true;
+      }
+      
+      // Check data attributes
+      if (current.getAttribute && (
+          current.getAttribute('data-shopify') === 'payment-button' ||
+          current.getAttribute('data-testid') === 'shopify-payment-button' ||
+          current.getAttribute('data-testid') === 'dynamic-checkout-button')) {
+        return true;
+      }
+      
+      // Check if inside dynamic checkout container
+      if (current.id && typeof current.id === 'string' && (
+          current.id.includes('dynamic-checkout') ||
+          current.id.includes('shopify-payment-button'))) {
+        return true;
+      }
+      
+      current = current.parentElement;
+    }
+    
+    return false;
+  }
+
+  // Function to check if element is an add to cart button
+  function isAddToCartButton(element) {
+    if (!element) return false;
+    
+    let current = element;
+    while (current && current !== document.body) {
+      const classList = current.classList || [];
+      if (classList.contains('add-to-cart-button') ||
+          classList.contains('add-to-cart-text--added') ||
+          classList.contains('add-to-cart-icon--added') ||
+          classList.contains('atc-button')) {
+        return true;
+      }
+      
+      if (current.id === 'addToCart' ||
+          (current.id && typeof current.id === 'string' && current.id.includes('add-to-cart')) ||
+          current.getAttribute('ref') === 'addToCartButton') {
+        return true;
+      }
+      
+      if (current.tagName === 'BUTTON' && current.type === 'submit' && 
+          current.closest && current.closest('form.shopify-product-form')) {
+        return true;
+      }
+      
+      current = current.parentElement;
+    }
+    
+    return false;
+  }
+
+  // Track if we've already shown error for this interaction to avoid duplicates
+  let errorShownForInteraction = false;
+  let lastInteractionTime = 0;
+  
+  // Intercept pointerdown events first (earliest possible)
+  document.addEventListener('pointerdown', function(event) {
+    const target = event.target;
+    if (!target) return;
+    
+    const isPaymentButton = isPaymentOrCheckoutButton(target);
+    const isAddToCart = isAddToCartButton(target);
+    
+    if (isPaymentButton || isAddToCart) {
+      const currentTime = Date.now();
+      // Reset error flag if it's a new interaction (more than 500ms since last)
+      if (currentTime - lastInteractionTime > 500) {
+        errorShownForInteraction = false;
+      }
+      lastInteractionTime = currentTime;
+      
+      // For payment buttons, show error immediately since click might not fire
+      if (isPaymentButton && !errorShownForInteraction) {
+        if (!validateForm(event)) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          disablePaymentButtons();
+          errorShownForInteraction = true;
+          return false;
+        } else {
+          enablePaymentButtons();
+        }
+      } else if (isAddToCart) {
+        // For add to cart, just prevent but don't show error (will show on click)
+        const fakeEvent = { preventDefault: function() {}, stopPropagation: function() {}, stopImmediatePropagation: function() {} };
+        if (!validateForm(fakeEvent)) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          return false;
+        }
+      }
+    }
+  }, true);
+  
+  // Intercept touchstart events (for mobile)
+  document.addEventListener('touchstart', function(event) {
+    const target = event.target;
+    if (!target) return;
+    
+    const isPaymentButton = isPaymentOrCheckoutButton(target);
+    const isAddToCart = isAddToCartButton(target);
+    
+    if (isPaymentButton || isAddToCart) {
+      const currentTime = Date.now();
+      if (currentTime - lastInteractionTime > 500) {
+        errorShownForInteraction = false;
+      }
+      lastInteractionTime = currentTime;
+      
+      // For payment buttons, show error immediately since click might not fire
+      if (isPaymentButton && !errorShownForInteraction) {
+        if (!validateForm(event)) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          disablePaymentButtons();
+          errorShownForInteraction = true;
+          return false;
+        } else {
+          enablePaymentButtons();
+        }
+      } else if (isAddToCart) {
+        const fakeEvent = { preventDefault: function() {}, stopPropagation: function() {}, stopImmediatePropagation: function() {} };
+        if (!validateForm(fakeEvent)) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          return false;
+        }
+      }
+    }
+  }, true);
+  
+  // Also intercept mousedown events (some buttons use mousedown instead of click)
+  document.addEventListener('mousedown', function(event) {
+    const target = event.target;
+    if (!target) return;
+    
+    const isPaymentButton = isPaymentOrCheckoutButton(target);
+    const isAddToCart = isAddToCartButton(target);
+    
+    if (isPaymentButton || isAddToCart) {
+      const currentTime = Date.now();
+      if (currentTime - lastInteractionTime > 500) {
+        errorShownForInteraction = false;
+      }
+      lastInteractionTime = currentTime;
+      
+      // For payment buttons, show error immediately since click might not fire
+      if (isPaymentButton && !errorShownForInteraction) {
+        if (!validateForm(event)) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          disablePaymentButtons();
+          errorShownForInteraction = true;
+          return false;
+        } else {
+          enablePaymentButtons();
+        }
+      } else if (isAddToCart) {
+        const fakeEvent = { preventDefault: function() {}, stopPropagation: function() {}, stopImmediatePropagation: function() {} };
+        if (!validateForm(fakeEvent)) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          return false;
+        }
+      }
+    }
+  }, true);
+  
+  // Button click validation - use capture phase with higher priority
+  // This is where we show error messages for Add to Cart buttons
+  // Payment buttons show error in mousedown/pointerdown to ensure it's shown
+  document.addEventListener('click', function(event) {
+    const target = event.target;
+    if (!target) return;
+    
+    // Check if it's a payment/checkout button or add to cart button
+    const isPaymentButton = isPaymentOrCheckoutButton(target);
+    const isAddToCart = isAddToCartButton(target);
+    
+    if (isAddToCart) {
+      // Validate form - this will show error notification if validation fails
+      if (!validateForm(event)) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        
+        // Prevent animation by removing any added classes and stopping fly-to-cart animation
+        const addToCartButton = document.querySelector('button[ref="addToCartButton"]') ||
+                               document.querySelector('.add-to-cart-button') ||
+                               document.querySelector('#addToCart');
+        if (addToCartButton) {
+          addToCartButton.classList.remove('atc-added');
+        }
+        
+        // Remove any fly-to-cart elements that might have been created
+        const flyToCartElements = document.querySelectorAll('fly-to-cart');
+        flyToCartElements.forEach(el => el.remove());
+        
+        // Use requestAnimationFrame to ensure cleanup happens after any potential animation start
+        requestAnimationFrame(() => {
+          if (addToCartButton) {
+            addToCartButton.classList.remove('atc-added');
+          }
+          const flyToCartElements = document.querySelectorAll('fly-to-cart');
+          flyToCartElements.forEach(el => el.remove());
+        });
+        
+        return false;
+      }
+    } else if (isPaymentButton) {
+      // For payment buttons, validate again in case click event fired
+      // But don't show error again if we already showed it
+      const currentTime = Date.now();
+      if (currentTime - lastInteractionTime > 500) {
+        errorShownForInteraction = false;
+      }
+      
+      if (!errorShownForInteraction && !validateForm(event)) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        disablePaymentButtons();
+        errorShownForInteraction = true;
+        return false;
+      } else if (validateForm(event)) {
+        enablePaymentButtons();
+      }
+    }
+  }, true); // Use capture phase to catch events early
+  
+  // Intercept form submissions from dynamic checkout (they might submit directly)
+  if (productForm) {
+    // Override submit method
+    const originalSubmit = productForm.submit;
+    productForm.submit = function() {
+      const fakeEvent = { preventDefault: function() {}, stopPropagation: function() {}, stopImmediatePropagation: function() {} };
+      if (!validateForm(fakeEvent)) {
+        return false;
+      }
+      return originalSubmit.call(this);
+    };
+    
+    // Also listen for submit events (in case they use dispatchEvent)
+    productForm.addEventListener('submit', function(e) {
+      if (!validateForm(e)) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        return false;
+      }
+    }, true); // Use capture phase
+  }
+});
+</script>
+{% endif %}

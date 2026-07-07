@@ -1,0 +1,196 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "custom_liquid_WbDYY9": {
+      "type": "custom-liquid",
+      "name": "Custom Liquid",
+      "settings": {
+        "full_width": false,
+        "show_space": false,
+        "code": "{% render 'pretty-modal' %}"
+      }
+    },
+    "cross-page-promos": {
+      "type": "cross-page-promos",
+      "blocks": {
+        "1478526632862": {
+          "type": "icon",
+          "settings": {
+            "icon": "world",
+            "text": "Worldwide shipping",
+            "link_url": ""
+          }
+        },
+        "1478526645605": {
+          "type": "icon",
+          "settings": {
+            "icon": "price_tag",
+            "text": "New styles",
+            "link_url": ""
+          }
+        },
+        "1478526647261": {
+          "type": "icon",
+          "settings": {
+            "icon": "gift",
+            "text": "Affordable price",
+            "link_url": ""
+          }
+        },
+        "1478527611164": {
+          "type": "icon",
+          "settings": {
+            "icon": "star",
+            "text": "4.5+ stars",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "1478526632862",
+        "1478526645605",
+        "1478526647261",
+        "1478527611164"
+      ],
+      "disabled": true,
+      "settings": {
+        "cross_page_promo_bg": "#fbf9f4",
+        "cross_page_promo_color": "#232323",
+        "show_on_home_page": true
+      }
+    },
+    "collection_list_4pLgDj": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_gVgXyp": {
+          "type": "collection",
+          "settings": {
+            "collection": "prom-dresses",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_XPNRrk": {
+          "type": "collection",
+          "settings": {
+            "collection": "evening-dresses",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_7U9NrC": {
+          "type": "collection",
+          "settings": {
+            "collection": "mother-of-the-bride-dresses",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_WG676V": {
+          "type": "collection",
+          "settings": {
+            "collection": "wedding-guest-dresses",
+            "subheading": "",
+            "button_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_gVgXyp",
+        "collection_XPNRrk",
+        "collection_7U9NrC",
+        "collection_WG676V"
+      ],
+      "disabled": true,
+      "name": "Collection list",
+      "settings": {
+        "title": "Best Selling",
+        "enable_carousel": true,
+        "grid": 4,
+        "color_scheme": "default",
+        "full_width": true,
+        "coll_grid_image_shape": "tallest",
+        "coll_grid_image_position": "center center",
+        "coll_thumb_mob_per_row": "2",
+        "coll_grid_show_count": false,
+        "coll_text_position": "below",
+        "coll_text_position_under_mobile": true,
+        "coll_thumb_text_align_x": "center",
+        "coll_thumb_text_align_y": "center",
+        "coll_button_style": "primary"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu_x3ky7M": {
+          "type": "menu",
+          "settings": {
+            "title": "Services",
+            "menu": "customer-account-main-menu",
+            "link_layout": "collapse"
+          }
+        },
+        "1601374621546": {
+          "type": "menu",
+          "settings": {
+            "title": "Policies",
+            "menu": "footer",
+            "link_layout": "collapse"
+          }
+        },
+        "text_BxT3kF": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "title": "Email: service@monlaura.com",
+            "text": "<p>Tel: +86-19962841606<br/><br/>Lu'an Shayixuan Clothing Co., Ltd.<br/></p><p>1st Floor, Building 4, Futai Wedding Dress Industrial Park, Dingji Town, Yu'an District, Lu'an City, 237146, Anhui, CN<br/><br/><br/></p>",
+            "image_width": 100,
+            "show_social_icons": true,
+            "soc_icons_large": false,
+            "enable_follow_on_shop": false
+          }
+        },
+        "1601374580731": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Newsletter",
+            "text": "<p>Sign up for exclusive offers, original stories, events and more.</p>",
+            "button_style": "inherit",
+            "show_social_icons": true,
+            "soc_icons_large": true
+          }
+        }
+      },
+      "block_order": [
+        "menu_x3ky7M",
+        "1601374621546",
+        "text_BxT3kF",
+        "1601374580731"
+      ],
+      "settings": {
+        "lower_menu": "",
+        "show_powered_by": false,
+        "show_payment_icons": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_WbDYY9",
+    "cross-page-promos",
+    "collection_list_4pLgDj",
+    "footer"
+  ]
+}

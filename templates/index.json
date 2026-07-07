@@ -1,0 +1,580 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_yFaybj": {
+      "type": "slideshow",
+      "blocks": {
+        "image_8aJ3d4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Monlaura_banner_3.png",
+            "mobile_image": "shopify://shop_images/Monlaura_banner_1.png",
+            "slide_link": "shopify://collections/mother-of-the-bride-dresses",
+            "subheading": "",
+            "title": "",
+            "heading_max_width": 10,
+            "title_size": 60,
+            "title_size_mobile": 30,
+            "use_h1": true,
+            "text": "",
+            "enlarge_text": false,
+            "button_label_1": "",
+            "button_url_1": "",
+            "button_label_2": "",
+            "button_url_2": "",
+            "text_alignment": "center right"
+          }
+        },
+        "image_7Fyba9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Monlaura_cocktail_banner_3.jpg",
+            "mobile_image": "shopify://shop_images/Monlaura_cocktail_banner_3_a30e905e-7dca-442e-93a5-6ebbec58af75.jpg",
+            "slide_link": "shopify://collections/cocktail-dresses",
+            "subheading": "",
+            "title": "",
+            "heading_max_width": 6,
+            "title_size": 60,
+            "title_size_mobile": 40,
+            "use_h1": false,
+            "text": "",
+            "enlarge_text": false,
+            "button_label_1": "",
+            "button_url_1": "",
+            "button_label_2": "",
+            "button_url_2": "",
+            "text_alignment": "bottom center"
+          }
+        },
+        "image_TJxXp6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Monlaura_evening_banner-2_1.jpg",
+            "mobile_image": "shopify://shop_images/Monlaura_evening_banner.jpg",
+            "slide_link": "shopify://collections/evening-dresses",
+            "subheading": "",
+            "title": "",
+            "heading_max_width": 6,
+            "title_size": 60,
+            "title_size_mobile": 40,
+            "use_h1": false,
+            "text": "",
+            "enlarge_text": false,
+            "button_label_1": "",
+            "button_url_1": "",
+            "button_label_2": "",
+            "button_url_2": "",
+            "text_alignment": "bottom center"
+          }
+        },
+        "image_P3m47x": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/3TH.jpg",
+            "mobile_image": "shopify://shop_images/banner-new01MB.jpg",
+            "slide_link": "shopify://collections/evening-dresses",
+            "subheading": "",
+            "title": "",
+            "heading_max_width": 6,
+            "title_size": 60,
+            "title_size_mobile": 40,
+            "use_h1": false,
+            "text": "",
+            "enlarge_text": false,
+            "button_label_1": "",
+            "button_url_1": "",
+            "button_label_2": "",
+            "button_url_2": "",
+            "text_alignment": "bottom center"
+          }
+        },
+        "image_hxX6UJ": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/evening.jpg",
+            "mobile_image": "shopify://shop_images/evening.app.jpg",
+            "slide_link": "shopify://collections/all-occasion-dresses",
+            "subheading": "",
+            "title": "",
+            "heading_max_width": 6,
+            "title_size": 60,
+            "title_size_mobile": 40,
+            "use_h1": false,
+            "text": "",
+            "enlarge_text": false,
+            "button_label_1": "",
+            "button_url_1": "",
+            "button_label_2": "",
+            "button_url_2": "",
+            "text_alignment": "center left"
+          }
+        }
+      },
+      "block_order": [
+        "image_8aJ3d4",
+        "image_7Fyba9",
+        "image_TJxXp6",
+        "image_P3m47x",
+        "image_hxX6UJ"
+      ],
+      "settings": {
+        "height": "adapt",
+        "height_desktop": 500,
+        "height_mobile": 500,
+        "full_width": true,
+        "mobile_overlay_under": false,
+        "overlay_style": "shadow",
+        "transition": "slide-fade",
+        "navigation": "dots",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "accessibility_info": ""
+      }
+    },
+    "collection_list_tGzj47": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_7RzpyJ": {
+          "type": "collection",
+          "settings": {
+            "collection": "mother-of-the-bride-dresses",
+            "image": "shopify://shop_images/MRA461602-01.jpg",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_zztitL": {
+          "type": "collection",
+          "settings": {
+            "collection": "evening-dresses",
+            "image": "shopify://shop_images/MRA468601-01.jpg",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_UG4Xmf": {
+          "type": "collection",
+          "settings": {
+            "collection": "wedding-guest-dresses",
+            "image": "shopify://shop_images/MRA350612-01.png",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_6m9xHg": {
+          "type": "collection",
+          "settings": {
+            "collection": "homecoming-dresses",
+            "image": "shopify://shop_images/MRA464604-01.jpg",
+            "subheading": "",
+            "button_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_7RzpyJ",
+        "collection_zztitL",
+        "collection_UG4Xmf",
+        "collection_6m9xHg"
+      ],
+      "name": "Collection list",
+      "settings": {
+        "title": "2026 Trending",
+        "enable_carousel": false,
+        "grid": 4,
+        "color_scheme": "default",
+        "full_width": true,
+        "coll_grid_image_shape": "shortest",
+        "coll_grid_image_position": "bottom right",
+        "coll_thumb_mob_per_row": "2",
+        "coll_grid_show_count": false,
+        "coll_text_position": "below",
+        "coll_text_position_under_mobile": true,
+        "coll_thumb_text_align_x": "center",
+        "coll_thumb_text_align_y": "center",
+        "coll_button_style": "secondary"
+      }
+    },
+    "featured_collection_THPJ3f": {
+      "type": "featured-collection",
+      "name": "Moms",
+      "settings": {
+        "title": "Mother Of The Bride Dresses",
+        "collection": "mother-of-the-bride-dresses",
+        "show_vendor": false,
+        "enable_carousel": false,
+        "grid": 4,
+        "rows": 3,
+        "color_scheme": "default",
+        "show_view_all": true,
+        "full_width": true
+      }
+    },
+    "featured_collection_c6PJ9n": {
+      "type": "featured-collection",
+      "name": "Cocktail Dresses",
+      "settings": {
+        "title": "Cocktail Dresses",
+        "collection": "cocktail-dresses",
+        "show_vendor": false,
+        "enable_carousel": false,
+        "grid": 4,
+        "rows": 3,
+        "color_scheme": "default",
+        "show_view_all": true,
+        "full_width": true
+      }
+    },
+    "featured_collection_Lnc4Fn": {
+      "type": "featured-collection",
+      "name": "Evening Dresses",
+      "settings": {
+        "title": "Evening Dresses",
+        "collection": "evening-dresses",
+        "show_vendor": false,
+        "enable_carousel": false,
+        "grid": 4,
+        "rows": 1,
+        "color_scheme": "default",
+        "show_view_all": true,
+        "full_width": true
+      }
+    },
+    "featured_collection_Gzfcmf": {
+      "type": "featured-collection",
+      "name": "Wedding Guest Dresses",
+      "settings": {
+        "title": "Wedding Guest Dresses",
+        "collection": "wedding-guest-dresses",
+        "show_vendor": false,
+        "enable_carousel": false,
+        "grid": 4,
+        "rows": 1,
+        "color_scheme": "default",
+        "show_view_all": true,
+        "full_width": true
+      }
+    },
+    "featured_collection2_jtmT9e": {
+      "type": "featured-collection2",
+      "name": "Homecoming Dresses",
+      "settings": {
+        "title": "Homecoming Dresses",
+        "cover_image": "shopify://shop_images/MRA467404-01.jpg",
+        "cover_image_mobile": "shopify://shop_images/Image_1_15.jpg",
+        "cover_link": "shopify://collections/homecoming-dresses",
+        "collection": "homecoming-dresses",
+        "enable_carousel": true,
+        "grid": 4,
+        "rows": 1,
+        "color_scheme": "default",
+        "show_view_all": true,
+        "full_width": true
+      }
+    },
+    "featured_collection_ytYEff": {
+      "type": "featured-collection",
+      "disabled": true,
+      "name": "New Arrivals",
+      "settings": {
+        "title": "2026 New Arrivals",
+        "collection": "new-arrival",
+        "show_vendor": false,
+        "enable_carousel": false,
+        "grid": 4,
+        "rows": 1,
+        "color_scheme": "default",
+        "show_view_all": true,
+        "full_width": true
+      }
+    },
+    "pop_up_VKpBVw": {
+      "type": "pop-up",
+      "blocks": {
+        "heading_tcrziH": {
+          "type": "heading",
+          "settings": {
+            "heading": "Sign up and save",
+            "heading_size": "h4"
+          }
+        },
+        "text_eHkJbd": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Entice customers to sign up for your mailing list with discounts or exclusive offers.</p>",
+            "text_size": ""
+          }
+        },
+        "newsletter_signup_x8n8EQ": {
+          "type": "newsletter-signup",
+          "settings": {
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_tcrziH",
+        "text_eHkJbd",
+        "newsletter_signup_x8n8EQ"
+      ],
+      "disabled": true,
+      "name": "Pop-up",
+      "settings": {
+        "trigger": "delay",
+        "delay": 5,
+        "show_to_guests_only": true,
+        "show_on_mobile": true,
+        "dismiss_days": 30,
+        "position": "justify-center items-center",
+        "text_align": "text-center",
+        "bg_image": "shopify://shop_images/Image_1_15_-1.jpg",
+        "heading_color": "#070707",
+        "text_color": "#070707",
+        "bg_color": "#ffffff",
+        "bg_grad": "",
+        "tint_opacity": 0
+      }
+    },
+    "key_features_whW8CU": {
+      "type": "key-features",
+      "blocks": {
+        "feature_fH6PgR": {
+          "type": "feature",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/MRA468004-04.jpg",
+            "bg_color": "#e3e3e3",
+            "bg_gradient": "",
+            "text_color": "#505050",
+            "heading": "Cocktail Dresses",
+            "text": "<p>Tell your customers a few important details about your products or practices.</p>",
+            "show_segments": true,
+            "segments": 5,
+            "active_segment": "4",
+            "fill_segments": true,
+            "show_labels": true,
+            "label_left": "",
+            "label_middle": "",
+            "label_right": "",
+            "show_icon": false,
+            "icon": "star"
+          }
+        },
+        "feature_Rjyj9t": {
+          "type": "feature",
+          "settings": {
+            "bg_color": "#c3c3c3",
+            "bg_gradient": "",
+            "text_color": "#505050",
+            "heading": "Wedding Dresses",
+            "text": "<p>Tell your customers a few important details about your products or practices.</p>",
+            "show_segments": true,
+            "segments": 5,
+            "active_segment": "2",
+            "fill_segments": true,
+            "show_labels": true,
+            "label_left": "",
+            "label_middle": "",
+            "label_right": "",
+            "show_icon": false,
+            "icon": "star"
+          }
+        },
+        "feature_RNjXwx": {
+          "type": "feature",
+          "settings": {
+            "bg_color": "#e3e3e3",
+            "bg_gradient": "",
+            "text_color": "#505050",
+            "heading": "Water resistance",
+            "text": "<p>Tell your customers a few important details about your products or practices.</p>",
+            "show_segments": true,
+            "segments": 5,
+            "active_segment": "3",
+            "fill_segments": true,
+            "show_labels": true,
+            "label_left": "",
+            "label_middle": "",
+            "label_right": "",
+            "show_icon": false,
+            "icon": "star"
+          }
+        }
+      },
+      "block_order": [
+        "feature_fH6PgR",
+        "feature_Rjyj9t",
+        "feature_RNjXwx"
+      ],
+      "disabled": true,
+      "name": "Key features",
+      "settings": {
+        "heading": "Key features",
+        "image_max_width": 700,
+        "button_label": "Shop now",
+        "button_link": "shopify://collections",
+        "button_style": "primary",
+        "media_aspect_ratio": "1",
+        "image_position": "left",
+        "segment_position": "over-text"
+      }
+    },
+    "rich_text_U4GdNF": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_xqPpxH": {
+          "type": "heading",
+          "settings": {
+            "title": "Customer Moment",
+            "use_h1": true
+          }
+        },
+        "button_aHpMxC": {
+          "type": "button",
+          "settings": {
+            "button_label": "View More",
+            "button_link": "shopify://pages/style-gallery",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_xqPpxH",
+        "button_aHpMxC"
+      ],
+      "custom_css": [
+        ".title,.majortitle {margin: 0;}",
+        ".button-row {margin-top: 0;}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "height": "small",
+        "text_alignment": "center",
+        "full_width": false,
+        "color_scheme": "default"
+      }
+    },
+    "17667599263e49cd59": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_aTYEVB": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": false,
+            "reviews_selection": "product_reviews",
+            "products": [],
+            "star_rating": "4_to_5_star",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "large",
+            "text_size": "small",
+            "image_ratio": "1.33",
+            "reviews_shown": 5,
+            "show_reviewer_name": false,
+            "show_product_name": false,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1600,
+            "corner_styling": "square",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#f9f9f9",
+            "stars_color": "#600000",
+            "arrows_color": "#000000",
+            "transition_speed": 3,
+            "header_text": "",
+            "show_average_rating": false
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_aTYEVB"
+      ],
+      "custom_css": [
+        ".jdgm-widget.jdgm-cards-carousel {margin-top: -3em;}"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_space": false
+      }
+    },
+    "featured_collection3_X3iPM9": {
+      "type": "featured-collection3",
+      "blocks": {
+        "collection_PkKnyy": {
+          "type": "collection",
+          "settings": {
+            "collection": "mother-of-the-bride-dresses",
+            "title": "",
+            "focal_point": "center center"
+          }
+        },
+        "collection_FTNtqh": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": "",
+            "focal_point": "center center"
+          }
+        },
+        "collection_mRTHTR": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": "",
+            "focal_point": "center center"
+          }
+        },
+        "collection_QmEf7B": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": "",
+            "focal_point": "center center"
+          }
+        }
+      },
+      "block_order": [
+        "collection_PkKnyy",
+        "collection_FTNtqh",
+        "collection_mRTHTR",
+        "collection_QmEf7B"
+      ],
+      "disabled": true,
+      "name": "Collection list Circle",
+      "settings": {
+        "title": "Collection list Circle",
+        "divider": false,
+        "per_row": 4,
+        "enable_gutter": true
+      }
+    }
+  },
+  "order": [
+    "slideshow_yFaybj",
+    "collection_list_tGzj47",
+    "featured_collection_THPJ3f",
+    "featured_collection_c6PJ9n",
+    "featured_collection_Lnc4Fn",
+    "featured_collection_Gzfcmf",
+    "featured_collection2_jtmT9e",
+    "featured_collection_ytYEff",
+    "pop_up_VKpBVw",
+    "key_features_whW8CU",
+    "rich_text_U4GdNF",
+    "17667599263e49cd59",
+    "featured_collection3_X3iPM9"
+  ]
+}

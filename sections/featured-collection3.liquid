@@ -1,0 +1,227 @@
+{%- liquid
+  assign is_empty = true
+  if section.blocks.size > 0
+    assign is_empty = false
+  endif
+-%}
+
+<style>
+  .section-id-{{ section.id }} {
+    .container {
+      padding: 20px 0;
+    }
+
+    .hometitle {
+      margin-bottom: 30px !important;
+    }
+
+    .mygrid {
+      display: grid;
+      grid-template-columns: repeat({{ section.settings.per_row }}, minmax(0, 1fr));
+      gap: {% if section.settings.enable_gutter %}20px{% else %}0{% endif %};
+    }
+  }
+
+  .section-id-{{ section.id }}.collection-list-circle {
+    overflow: hidden;
+  }
+
+  @media screen and (max-width: 767px) {
+    .section-id-{{ section.id }} {
+      .container {
+        padding: 20px 0;
+      }
+
+      .hometitle {
+        margin-bottom: 20px !important;
+      }
+
+      .mygrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: {% if section.settings.enable_gutter %}16px{% else %}0{% endif %};
+      }
+    }
+  }
+</style>
+
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+
+<div class="section-id-{{ section.id }} collection-list-circle">
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <div
+        class="hometitle align-center"
+        {%- render 'animation-attrs', attrs: 'data-cc-animate data-cc-animate-delay="0.3s"' -%}
+      >
+        <h2 class="h4 m-0">{{ section.settings.title | escape }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div
+      class="mygrid"
+      {%- render 'animation-attrs', attrs: 'data-cc-animate' -%}
+    >
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign collection = collections[block.settings.collection]
+          assign background_position = block.settings.focal_point
+
+          capture gridView
+            if section.blocks.size < section.settings.per_row
+              assign products_per_row = section.blocks.size
+            else
+              assign products_per_row = section.settings.per_row
+            endif
+            render 'products_per_row', products_per_row: products_per_row, style: 'fractions'
+          endcapture
+        -%}
+
+        {%- render 'collection-grid-item2',
+          collection: collection,
+          block: block,
+          gridView: gridView,
+          background_position: background_position,
+          per_row: section.settings.per_row,
+          sizeVariable: gridView,
+          fallback: 'variable'
+        -%}
+      {%- endfor -%}
+
+      {%- if is_empty -%}
+        <div class="page-width">
+          <div class="grid">
+            <div class="grid__item">
+              <div class="rte">
+                {{ 'home_page.onboarding.no_content' | t }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+{% schema %}
+{
+  "name": "Collection list Circle",
+  "class": "index-section",
+  "max_blocks": 15,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection list Circle"
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "Show divider",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "per_row",
+      "label": "Collections per row",
+      "default": 4,
+      "min": 2,
+      "max": 10,
+      "step": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gutter",
+      "label": "Enable spacing",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection list Circle",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "select",
+          "id": "focal_point",
+          "label": "Image focal point",
+          "info": "Choose which part of the collection image should stay visible.",
+          "default": "center center",
+          "options": [
+            {
+              "value": "20% 0",
+              "label": "Top left"
+            },
+            {
+              "value": "top center",
+              "label": "Top center"
+            },
+            {
+              "value": "80% 0",
+              "label": "Top right"
+            },
+            {
+              "value": "20% 50%",
+              "label": "Left"
+            },
+            {
+              "value": "center center",
+              "label": "Center"
+            },
+            {
+              "value": "80% 50%",
+              "label": "Right"
+            },
+            {
+              "value": "20% 100%",
+              "label": "Bottom left"
+            },
+            {
+              "value": "bottom center",
+              "label": "Bottom center"
+            },
+            {
+              "value": "80% 100%",
+              "label": "Bottom right"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  }
+}
+{% endschema %}

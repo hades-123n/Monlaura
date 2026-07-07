@@ -1,0 +1,797 @@
+<div class="page-width page-content ordertracking">
+  <header class="section-header">
+    <h1 class="main-page-title page-title h0 scroll-trigger animate--fade-in" style="text-align: center; margin-top: 20px;">{{ page.title }}</h1>
+  </header>
+<style>
+  .ordertracking .ot-tracking-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 1em;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .ordertracking .ot-tracking-title {
+    font-weight: 700;
+    font-size: clamp(1.5em, 4vw, 2.5em);
+    margin-bottom: 2.5em;
+    text-align: center;
+    color: #1a1a1a;
+  }
+  .ordertracking .ot-tracking-card {
+    width: 100%;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 1em;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    transition: all 0.3s ease;
+  }
+  @media (min-width: 768px) {
+    .ordertracking .ot-tracking-card {
+      flex-direction: row;
+      padding: 3em;
+      gap: 3em;
+    }
+  }
+  .ordertracking .ot-tracking-section {
+    flex: 1;
+    min-width: 0;
+  }
+  .ordertracking .ot-form-group {
+    margin-bottom: 1em;
+  }
+  .ordertracking .ot-form-label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5em;
+    font-size: 0.95em;
+  }
+  .ordertracking .ot-form-input {
+    width: 100%;
+    padding: 0.75em 1em;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5em;
+    font-size: 1em;
+    transition: all 0.2s ease;
+    background-color: #f9fafb;
+  }
+  .ordertracking .ot-form-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    background-color: white;
+  }
+  .ordertracking .ot-form-input::placeholder {
+    color: #9ca3af;
+  }
+  .ordertracking .ot-tracking-button {
+    width: 100%;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 0.875em;
+    border-radius: 0.5em;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+  .ordertracking .ot-tracking-button:hover:not(:disabled) {
+    background-color: #2d2d2d;
+    transform: translateY(-1px);
+  }
+  .ordertracking .ot-tracking-button:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  .ordertracking .ot-tracking-button:disabled {
+    background-color: #d1d5db;
+    cursor: not-allowed;
+  }
+  .ordertracking .ot-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 2px 0;
+  }
+  @media (min-width: 768px) {
+    .ordertracking .ot-divider {
+      margin: 0;
+      width: 1px;
+      background-color: #e5e7eb;
+    }
+    .ordertracking .ot-divider-text {
+      position: absolute;
+      background-color: white;
+      padding: 0 1em;
+      color: #6b7280;
+      font-weight: 500;
+      font-size: 0.875em;
+    }
+  }
+  .ordertracking .ot-error-message {
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 2em;
+    background-color: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: 0.75em;
+    padding: 1.25em;
+    color: #dc2626;
+    font-weight: 500;
+  }
+  .ordertracking .ot-tracking-info {
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 1em;
+    background-color: white;
+    border-radius: 1em;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    padding: 1em;
+  }
+  .ordertracking .ot-info-title {
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: #1a1a1a;
+    border-bottom: 2px solid #f3f4f6;
+    padding-bottom: 1em;
+  }
+  .ordertracking .ot-info-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1em;
+    margin-bottom: 2em;
+  }
+  @media (min-width: 640px) {
+    .ordertracking .ot-info-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .ordertracking .ot-info-item {
+    background-color: #f9fafb;
+    padding: 0.75em;
+    border-radius: 0.75em;
+    border: 1px solid #f3f4f6;
+  }
+  .ordertracking .ot-info-label {
+    color: #6b7280;
+    display: block;
+    font-size: 0.875em;
+    margin-bottom: 0.5em;
+  }
+  .ordertracking .ot-info-value {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 1.125em;
+  }
+  .ordertracking .ot-timeline {
+    margin-top: 2em;
+  }
+  .ordertracking .ot-timeline-title {
+    font-weight: 700;
+    font-size: 1.25em;
+    margin-bottom: 1.5em;
+    color: #1a1a1a;
+  }
+  .ordertracking .ot-timeline-container {
+    position: relative;
+    padding-left: 3.5em;
+  }
+  .ordertracking .ot-timeline-line {
+    position: absolute;
+    left: 1.4em;
+    top: 4px;
+    bottom: 0;
+    width: 3px;
+    background: #e5e7eb;
+    z-index: 0;
+    content: '';
+    display: block;
+  }
+  .ordertracking .ot-timeline-events {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  .ordertracking .ot-timeline-event {
+    position: relative;
+    margin-bottom: 2em;
+    min-height: 2.5em;
+  }
+  .ordertracking .ot-timeline-event:last-child {
+    margin-bottom: 0;
+  }
+  .ordertracking .ot-timeline-event::marker,
+  .ordertracking .ot-timeline-event::before {
+    display: none;
+    content: '';
+  }
+  .ordertracking .ot-timeline-dot {
+    position: absolute;
+    left: -3.1em;
+    top: 0.2em;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+  .ordertracking .ot-timeline-dot-inner {
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 50%;
+    background: #2563eb;
+    display: block;
+  }
+  .ordertracking .ot-timeline-content {
+    background-color: #f9fafb;
+    border-radius: 0.75em;
+    padding: 1.25em;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #f3f4f6;
+  }
+  .ordertracking .ot-timeline-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-bottom: 0.75em;
+  }
+  @media (min-width: 640px) {
+    .ordertracking .ot-timeline-header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1em;
+    }
+  }   
+  .ordertracking .ot-timeline-status {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 1.125em;
+  }
+  .ordertracking .ot-timeline-date {
+    color: #6b7280;
+    font-size: 0.875em;
+  }
+  .ordertracking .ot-timeline-location {
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    font-size: 0.875em;
+    margin-top: 0.5em;
+  }
+  .ordertracking .ot-location-icon {
+    width: 1em;
+    height: 1em;
+    margin-right: 0.5em;
+    color: #9ca3af;
+    flex-shrink: 0;
+  }
+
+  /* 暗色模式支持 */
+  @media (prefers-color-scheme: dark) {
+    .ordertracking .ot-tracking-card,
+    .ordertracking .ot-tracking-info {
+      background-color: #1a1a1a;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2), 0 2px 4px -1px rgba(0,0,0,0.1);
+    }
+    .ordertracking .ot-form-input {
+      background-color: #2d2d2d;
+      border-color: #404040;
+      color: #e5e7eb;
+    }
+    .ordertracking .ot-form-input:focus {
+      background-color: #2d2d2d;
+      border-color: #3b82f6;
+    }
+    .ordertracking .ot-form-label {
+      color: #e5e7eb;
+    }
+    .ordertracking .ot-info-item {
+      background-color: #2d2d2d;
+      border-color: #404040;
+    }
+    .ordertracking .ot-info-label {
+      color: #9ca3af;
+    }
+    .ordertracking .ot-info-value {
+      color: #e5e7eb;
+    }
+    .ordertracking .ot-timeline-content {
+      background-color: #2d2d2d;
+      border-color: #404040;
+    }
+    .ordertracking .ot-timeline-status {
+      color: #e5e7eb;
+    }
+    .ordertracking .ot-timeline-location {
+      color: #9ca3af;
+    }
+    .ordertracking .ot-divider-text {
+      background-color: #1a1a1a;
+    }
+  }
+  @media (max-width: 767px) {
+      label.ot-form-label {
+          display: none !important;
+      }
+    }
+</style>
+  <div class="rte rte--nomargin">
+    {{ page.content }}
+
+  <div id="trackmyorder" class="ot-tracking-container">
+    <h1 class="ot-tracking-title" style="display:none;">Track Your Order</h1>
+    <div class="ot-tracking-card">
+      <!-- Left section: Order Number + Email/Phone -->
+      <div class="ot-tracking-section">
+        <div class="ot-form-group">
+          <label class="ot-form-label">Order Number</label>
+          <input type="text" id="orderId" class="ot-form-input" placeholder="Enter Order Number">
+        </div>
+        <div class="ot-form-group">
+          <label class="ot-form-label">Email or Phone Number</label>
+          <input type="text" id="emailOrPhone" class="ot-form-input" placeholder="Enter Email or Phone">
+        </div>
+        <button id="trackOrderBtn" class="ot-tracking-button" disabled>Track</button>
+      </div>
+
+      <!-- Divider -->
+      <div class="ot-divider">
+        <span class="ot-divider-text">OR</span>
+      </div>
+
+      <!-- Right section: Tracking Number -->
+      <div class="ot-tracking-section">
+        <div class="ot-form-group">
+          <label class="ot-form-label">Tracking Number</label>
+          <input type="text" id="trackingNumber" class="ot-form-input" placeholder="Enter Tracking Number">
+        </div>
+        <button id="trackNumberBtn" class="ot-tracking-button" disabled>Track</button>
+      </div>
+    </div>
+
+    <!-- Error message display area -->
+    <div id="errorMessage" class="ot-error-message" style="display: none;"></div>
+
+    <!-- Tracking information display area -->
+    <div id="trackingInfo" class="ot-tracking-info" style="display: none;">
+      <h2 class="ot-info-title">Details</h2>
+      <div class="ot-info-grid">
+        <div id="orderIdInfo" class="ot-info-item" style="display: none;">
+          <span class="ot-info-label">Order Number</span>
+          <span class="ot-info-value"></span>
+        </div>
+        <div class="ot-info-item">
+          <span class="ot-info-label">Tracking Number</span>
+          <span class="ot-info-value"></span>
+        </div>
+        <div class="ot-info-item">
+          <span class="ot-info-label">Status</span>
+          <span class="ot-info-value" style="color: #2563eb;"></span>
+        </div>
+        <div class="ot-info-item">
+          <span class="ot-info-label">Last Update</span>
+          <span class="ot-info-value"></span>
+        </div>
+      </div>
+
+      <div id="timeline" class="ot-timeline" style="display: none;">
+        <h3 class="ot-timeline-title">Updates</h3>
+        <div class="ot-timeline-container">
+          <div class="ot-timeline-line"></div>
+          <ul id="timelineEvents" class="ot-timeline-events"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Constants configuration
+    const CONFIG = {
+      domainAlias: 'monlaura.com',
+      sellerBrand: 'Monlaura.com',
+      sellerEmail: 'service@monlaura.com',
+      lang: 'en',
+      translations: {
+        en: {
+          trackYourOrder: 'Track Your Order',
+          orderNumber: 'Order Number',
+          enterOrderNumber: 'Enter Order Number',
+          emailOrPhone: 'Email or Phone Number',
+          enterEmailOrPhone: 'Enter Email or Phone',
+          trackingNumber: 'Tracking Number',
+          enterTrackingNumber: 'Enter Tracking Number',
+          track: 'Track',
+          loading: 'Loading...',
+          or: 'OR',
+          details: 'Details',
+          status: 'Status',
+          lastUpdate: 'Last Update',
+          updates: 'Updates',
+          errorOccurred: 'An error occurred. Please try again.',
+          failedToFetch: 'Failed to fetch tracking information'
+        },
+        fr: {
+          trackYourOrder: 'Suivre Votre Commande',
+          orderNumber: 'Numéro de Commande',
+          enterOrderNumber: 'Entrez le Numéro de Commande',
+          emailOrPhone: 'Email ou Numéro de Téléphone',
+          enterEmailOrPhone: 'Entrez Email ou Téléphone',
+          trackingNumber: 'Numéro de Suivi',
+          enterTrackingNumber: 'Entrez le Numéro de Suivi',
+          track: 'Suivre',
+          loading: 'Chargement...',
+          or: 'OU',
+          details: 'Détails',
+          status: 'Statut',
+          lastUpdate: 'Dernière Mise à Jour',
+          updates: 'Mises à Jour',
+          errorOccurred: 'Une erreur est survenue. Veuillez réessayer.',
+          failedToFetch: 'Échec de la récupération des informations de suivi'
+        },
+        de: {
+          trackYourOrder: 'Bestellung Verfolgen',
+          orderNumber: 'Bestellnummer',
+          enterOrderNumber: 'Bestellnummer Eingeben',
+          emailOrPhone: 'E-Mail oder Telefonnummer',
+          enterEmailOrPhone: 'E-Mail oder Telefonnummer Eingeben',
+          trackingNumber: 'Sendungsnummer',
+          enterTrackingNumber: 'Sendungsnummer Eingeben',
+          track: 'Verfolgen',
+          loading: 'Wird Geladen...',
+          or: 'ODER',
+          details: 'Details',
+          status: 'Status',
+          lastUpdate: 'Letzte Aktualisierung',
+          updates: 'Aktualisierungen',
+          errorOccurred: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.',
+          failedToFetch: 'Fehler beim Abrufen der Tracking-Informationen'
+        },
+        pt: {
+          trackYourOrder: 'Acompanhar Pedido',
+          orderNumber: 'Número do Pedido',
+          enterOrderNumber: 'Digite o Número do Pedido',
+          emailOrPhone: 'Email ou Número de Telefone',
+          enterEmailOrPhone: 'Digite Email ou Telefone',
+          trackingNumber: 'Número de Rastreamento',
+          enterTrackingNumber: 'Digite o Número de Rastreamento',
+          track: 'Rastrear',
+          loading: 'Carregando...',
+          or: 'OU',
+          details: 'Detalhes',
+          status: 'Status',
+          lastUpdate: 'Última Atualização',
+          updates: 'Atualizações',
+          errorOccurred: 'Ocorreu um erro. Por favor, tente novamente.',
+          failedToFetch: 'Falha ao buscar informações de rastreamento'
+        },
+        ar: {
+          trackYourOrder: 'تتبع طلبك',
+          orderNumber: 'رقم الطلب',
+          enterOrderNumber: 'أدخل رقم الطلب',
+          emailOrPhone: 'البريد الإلكتروني أو رقم الهاتف',
+          enterEmailOrPhone: 'أدخل البريد الإلكتروني أو رقم الهاتف',
+          trackingNumber: 'رقم التتبع',
+          enterTrackingNumber: 'أدخل رقم التتبع',
+          track: 'تتبع',
+          loading: 'جاري التحميل...',
+          or: 'أو',
+          details: 'التفاصيل',
+          status: 'الحالة',
+          lastUpdate: 'آخر تحديث',
+          updates: 'التحديثات',
+          errorOccurred: 'حدث خطأ. يرجى المحاولة مرة أخرى.',
+          failedToFetch: 'فشل في جلب معلومات التتبع'
+        },
+        it: {
+          trackYourOrder: 'Traccia il Tuo Ordine',
+          orderNumber: 'Numero d\'Ordine',
+          enterOrderNumber: 'Inserisci il Numero d\'Ordine',
+          emailOrPhone: 'Email o Numero di Telefono',
+          enterEmailOrPhone: 'Inserisci Email o Numero di Telefono',
+          trackingNumber: 'Numero di Tracciamento',
+          enterTrackingNumber: 'Inserisci il Numero di Tracciamento',
+          track: 'Traccia',
+          loading: 'Caricamento...',
+          or: 'OPPURE',
+          details: 'Dettagli',
+          status: 'Stato',
+          lastUpdate: 'Ultimo Aggiornamento',
+          updates: 'Aggiornamenti',
+          errorOccurred: 'Si è verificato un errore. Si prega di riprovare.',
+          failedToFetch: 'Impossibile recuperare le informazioni di tracciamento'
+        }
+      },
+      apiEndpoints: {
+        track: 'https://api.lightintek.com/tracks/track',
+        trackByNumber: 'https://api.lightintek.com/tracks/track-by-number'
+      }
+    };
+
+    // Helper function to get translated text
+    function t(key) {
+      return CONFIG.translations[CONFIG.lang]?.[key] || CONFIG.translations['en'][key];
+    }
+
+    // DOM elements
+    const elements = {
+      orderId: document.getElementById('orderId'),
+      emailOrPhone: document.getElementById('emailOrPhone'),
+      trackingNumber: document.getElementById('trackingNumber'),
+      trackOrderBtn: document.getElementById('trackOrderBtn'),
+      trackNumberBtn: document.getElementById('trackNumberBtn'),
+      errorMessage: document.getElementById('errorMessage'),
+      trackingInfo: document.getElementById('trackingInfo'),
+      orderIdInfo: document.getElementById('orderIdInfo'),
+      timeline: document.getElementById('timeline'),
+      timelineEvents: document.getElementById('timelineEvents')
+    };
+
+    // State management
+    let state = {
+      orderLoading: false,
+      trackingLoading: false
+    };
+
+    // Event listeners
+    function setupEventListeners() {
+      // Input validation
+      [elements.orderId, elements.emailOrPhone].forEach(input => {
+        input.addEventListener('input', validateOrderInputs);
+      });
+      elements.trackingNumber.addEventListener('input', validateTrackingInput);
+
+      // Button click events
+      elements.trackOrderBtn.addEventListener('click', handleOrderTrack);
+      elements.trackNumberBtn.addEventListener('click', handleTrackingNumberTrack);
+    }
+
+    // Input validation
+    function validateOrderInputs() {
+      const isValid = elements.orderId.value.trim() && elements.emailOrPhone.value.trim();
+      elements.trackOrderBtn.disabled = state.orderLoading || state.trackingLoading || !isValid;
+    }
+
+    function validateTrackingInput() {
+      const isValid = elements.trackingNumber.value.trim();
+      elements.trackNumberBtn.disabled = state.orderLoading || state.trackingLoading || !isValid;
+    }
+
+    // API calls
+    async function handleOrderTrack() {
+      if (state.orderLoading || state.trackingLoading) return;
+      
+      state.orderLoading = true;
+      setLoadingState(elements.trackOrderBtn, true);
+      elements.trackOrderBtn.disabled = true;
+      hideMessages();
+
+      try {
+        const response = await fetch(CONFIG.apiEndpoints.track, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderId: elements.orderId.value.trim(),
+            emailOrPhone: elements.emailOrPhone.value.trim(),
+            domain_alias: CONFIG.domainAlias,
+            seller_brand: CONFIG.sellerBrand,
+            seller_email: CONFIG.sellerEmail,
+            seller_lang: CONFIG.lang
+          })
+        });
+
+        const data = await response.json();
+        if (data.response_code === 200) {
+          displayTrackingInfo(data.data);
+        } else {
+          showError(data.response_message || 'Failed to fetch tracking information');
+        }
+      } catch (err) {
+        showError('An error occurred. Please try again.');
+      } finally {
+        state.orderLoading = false;
+        setLoadingState(elements.trackOrderBtn, false);
+        validateOrderInputs();
+      }
+    }
+
+    async function handleTrackingNumberTrack() {
+      if (state.orderLoading || state.trackingLoading) return;
+      
+      state.trackingLoading = true;
+      setLoadingState(elements.trackNumberBtn, true);
+      elements.trackNumberBtn.disabled = true;
+      hideMessages();
+
+      try {
+        const response = await fetch(CONFIG.apiEndpoints.trackByNumber, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            trackingNumber: elements.trackingNumber.value.trim(),
+            domain_alias: CONFIG.domainAlias,
+            seller_brand: CONFIG.sellerBrand,
+            seller_email: CONFIG.sellerEmail,
+            seller_lang: CONFIG.lang
+          })
+        });
+
+        const data = await response.json();
+        if (data.response_code === 200) {
+          displayTrackingInfo(data.data);
+        } else {
+          showError(data.response_message || 'Failed to fetch tracking information');
+        }
+      } catch (err) {
+        showError('An error occurred. Please try again.');
+      } finally {
+        state.trackingLoading = false;
+        setLoadingState(elements.trackNumberBtn, false);
+        validateTrackingInput();
+      }
+    }
+
+    // UI update functions
+    function hideMessages() {
+      elements.errorMessage.style.display = 'none';
+      elements.trackingInfo.style.display = 'none';
+    }
+
+    function showError(message) {
+      elements.errorMessage.textContent = message === 'An error occurred. Please try again.' ? 
+        t('errorOccurred') : 
+        (message === 'Failed to fetch tracking information' ? t('failedToFetch') : message);
+      elements.errorMessage.style.display = 'block';
+    }
+
+    function displayTrackingInfo(data) {
+      // Update basic information
+      if (data.orderId) {
+        elements.orderIdInfo.style.display = 'block';
+        elements.orderIdInfo.querySelector('.ot-info-value').textContent = data.orderId;
+      } else {
+        elements.orderIdInfo.style.display = 'none';
+      }
+
+      elements.trackingInfo.querySelector('.ot-info-item:nth-child(2) .ot-info-value').textContent = data.trackingNumber;
+      elements.trackingInfo.querySelector('.ot-info-item:nth-child(3) .ot-info-value').textContent = data.status;
+      elements.trackingInfo.querySelector('.ot-info-item:nth-child(4) .ot-info-value').textContent = 
+        new Date(data.lastUpdated).toLocaleString();
+
+      // Update timeline
+      if (data.events && data.events.length > 0) {
+        elements.timeline.style.display = 'block';
+        elements.timelineEvents.innerHTML = data.events.map(event => `
+          <li class="ot-timeline-event">
+            <div class="ot-timeline-dot">
+              <div class="ot-timeline-dot-inner"></div>
+            </div>
+            <div class="ot-timeline-content">
+              <div class="ot-timeline-header">
+                <span class="ot-timeline-status">${event.status}</span>
+                <span class="ot-timeline-date">
+                  ${new Date(event.date.datetime).toLocaleString()} (${event.date.timezone})
+                </span>
+              </div>
+              ${event.location ? `
+                <div class="ot-timeline-location">
+                  <svg class="ot-location-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  ${event.location}
+                </div>
+              ` : ''}
+            </div>
+          </li>
+        `).join('');
+      } else {
+        elements.timeline.style.display = 'none';
+      }
+
+      elements.trackingInfo.style.display = 'block';
+    }
+
+    // Function to update all UI texts based on current language
+    function updateUITexts() {
+      // Helper function to safely update text content
+      function safeUpdateText(selector, text) {
+        const element = document.querySelector(selector);
+        if (element) {
+          element.textContent = text;
+        }
+      }
+
+      // Helper function to safely update placeholder
+      function safeUpdatePlaceholder(id, text) {
+        const element = document.getElementById(id);
+        if (element) {
+          element.placeholder = text;
+        }
+      }
+
+      // Update all text content with null checks
+      safeUpdateText('.ot-tracking-title', t('trackYourOrder'));
+      
+      // Update form labels in the tracking card
+      const formLabels = document.querySelectorAll('.ot-tracking-card .ot-form-label');
+      formLabels.forEach((label, index) => {
+        if (index === 0) label.textContent = t('orderNumber');
+        else if (index === 1) label.textContent = t('emailOrPhone');
+        else if (index === 2) label.textContent = t('trackingNumber');
+      });
+
+      // Update info labels in the tracking info section
+      const infoLabels = document.querySelectorAll('.ot-info-grid .ot-info-label');
+      infoLabels.forEach((label, index) => {
+        if (label.textContent === 'Order Number') label.textContent = t('orderNumber');
+        else if (label.textContent === 'Tracking Number') label.textContent = t('trackingNumber');
+        else if (label.textContent === 'Status') label.textContent = t('status');
+        else if (label.textContent === 'Last Update') label.textContent = t('lastUpdate');
+      });
+
+      // Update placeholders
+      safeUpdatePlaceholder('orderId', t('enterOrderNumber'));
+      safeUpdatePlaceholder('emailOrPhone', t('enterEmailOrPhone'));
+      safeUpdatePlaceholder('trackingNumber', t('enterTrackingNumber'));
+
+      // Update other elements
+      safeUpdateText('#trackOrderBtn', t('track'));
+      safeUpdateText('#trackNumberBtn', t('track'));
+      safeUpdateText('.ot-divider-text', t('or'));
+      safeUpdateText('.ot-info-title', t('details'));
+      safeUpdateText('.ot-timeline-title', t('updates'));
+    }
+
+    // Function to set loading state text for buttons
+    function setLoadingState(button, isLoading) {
+      if (button) {
+        button.textContent = isLoading ? t('loading') : t('track');
+      }
+    }
+
+    // Function to handle error messages with translations
+    function showError(message) {
+      if (elements.errorMessage) {
+        elements.errorMessage.textContent = message === 'An error occurred. Please try again.' ? 
+          t('errorOccurred') : 
+          (message === 'Failed to fetch tracking information' ? t('failedToFetch') : message);
+        elements.errorMessage.style.display = 'block';
+      }
+    }
+
+    // Initialize
+    setupEventListeners();
+    updateUITexts(); // Update UI texts on initialization
+
+    // Function to change language
+    function setLanguage(lang) {
+      if (CONFIG.translations[lang]) {
+        CONFIG.lang = lang;
+        updateUITexts();
+      }
+    }
+
+    // Expose language switching function to global scope
+    window.setOrderTrackingLanguage = setLanguage;
+  </script>
+
+    
+  </div>
+</div>
