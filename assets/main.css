@@ -3803,7 +3803,7 @@ body:not(.reveal-mobile-nav) .mobile-navigation-drawer .mobile-navigation-drawer
 .price-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
 }
 @media (min-width: 768px) {
   .price-container {
@@ -8807,6 +8807,7 @@ carousel-slider[inactive] .slider-nav__btn {
 .product-price--large .price__default,
 .product-price--large .price__no-variant {
   font-size: calc(3 * var(--font-scale) + var(--base-text-size));
+  margin: -5px 0 !important;
 }
 .product-price--large .price__was {
   margin-left: 8px;

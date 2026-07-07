@@ -315,12 +315,12 @@
               {%- if block.settings.enable_product_reviews_by_price and product.metafields.reviews.rating_count != blank -%}
                 {%- assign rating_count = product.metafields.reviews.rating_count | plus: 0 -%}
                 {%- if rating_count > 0 -%}
-                  <div class="theme-product-reviews">
+                  {% comment %} <div class="theme-product-reviews">
                     {% render 'rating', rating_value: product.metafields.reviews.rating.value %}
                     <span class="cc-rating-custom-caption">
                       {{- 'products.product.reviews_count' | t: count: rating_count -}}
                     </span>
-                  </div>
+                  </div> {% endcomment %}
                 {%- endif -%}
               {%- endif -%}
             </div>
